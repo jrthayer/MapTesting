@@ -1,0 +1,50 @@
+html,body{
+    margin: 0;
+    height: 100%;
+}
+
+.container{
+    
+}
+
+.map{
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+
+
+    transition: 800ms;
+    height: 100vh;
+
+    min-height: 100vh;
+    max-height: 2000px;
+    width: fit-content;
+
+    z-index: 1;
+}
+
+.map img{
+    height: 100%;
+    
+}
+
+.container .point{
+    position: absolute;
+    top: 55%;
+    right: 13%;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border-radius: 25%;
+}
+
+.sidePanel{
+    position: fixed;
+
+    height: 100vh;
+    width: 300px;
+
+    z-index: 10;
+}
