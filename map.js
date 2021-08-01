@@ -1,9 +1,9 @@
 let mapInfo = {
-    translate: {x: 0, y: 0},
+    translate: {startX: 0, startY:0, x: 0, y: 0},
     prevMouse: {x: 0, y: 0},
     scale: 1,
     edges: {top: 0, bottom: 0 , left: 0, right: 0},
-    map: {height: 0, width: 0},
+    map: {baseH: 0, baseW: 0, height: 0, width: 0},
     larger: {height: false, width: false}
 }
 
@@ -28,13 +28,11 @@ let maxHeight = compStyles.getPropertyValue('max-height');
 maxHeight =  parseInt(maxHeight.slice(0, -2));
 
 window.addEventListener('load', function(){
-    pos.top = parseInt(compStyles.getPropertyValue('top'));
-    el.style.top = pos.top+"px";
+    mapInfo.map.height = mapInfo.map.baseH = parseInt(compStyles.getPropertyValue('height'));
+    mapInfo.map.width = mapInfo.map.baseW = parseInt(compStyles.getPropertyValue('width'));
 
-    pos.left = parseInt(compStyles.getPropertyValue('left'));
-    el.style.left = pos.left+"px";
-    mapImage.style.transform = `scale(${mapInfo.scale})`;
-    el.style.transform += `translate3d(0, 0, 0)`;
+    // mapInfo.translate.startY = mapInfo.translate.y = (window.innerHeight - navHeight)/2 - mapInfo.map.height/2;
+    el.style.transform += `scale(1) translate(0px, 0px)`;
     zoom(0);
 });
 
@@ -66,18 +64,15 @@ function zoom(increment = 0){
     if(mapInfo.scale * intViewportHeight > maxHeight) mapInfo.scale -= increment;
 
     //scale map img
-    mapImage.style.transform = `scale(${mapInfo.scale})`;
-    //scale points
-    for(point of points){
-        point.style.transform = `scale(${mapInfo.scale})`;
-    }
+    el.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    // mapImage.style.transform = `scale(${mapInfo.scale})`;
 
     //calculate img dimensions for moving boundries
     mapInfo.map.width = parseInt(window.getComputedStyle(mapImage).getPropertyValue('width')) * mapInfo.scale;
     mapInfo.map.height = parseInt(window.getComputedStyle(mapImage).getPropertyValue('height')) * mapInfo.scale;
 
     mapInfo.larger.width = mapInfo.map.width > innerWidth;
-    mapInfo.larger.height = mapInfo.map.height > innerHeight;
+    mapInfo.larger.height = mapInfo.map.height > innerHeight - navHeight;
     
     //set edges
     mapInfo.edges.top = (innerHeight - navHeight - mapInfo.map.height)/2 * -1;
@@ -92,7 +87,7 @@ function zoom(increment = 0){
             mapInfo.translate.y = mapInfo.edges.top; 
         }
 
-        if(mapInfo.translate.y < mapInfo.edges.bottom){
+        if(mapInfo.translate.y  < mapInfo.edges.bottom){
             mapInfo.translate.y = mapInfo.edges.bottom; 
         }
     }
@@ -126,8 +121,14 @@ function zoom(increment = 0){
         }
     }
 
+    //el.style.transform = `scale(${mapInfo.scale}) translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
+    el.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
 
-    el.style.transform = `translate3d(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}, 0)`;
+    console.log("===========");
+    console.log(`BaseWidth: ${mapInfo.map.baseW}, BaseHeight: ${mapInfo.map.baseH}, Scale: ${mapInfo.scale}`);
+    console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
+    console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
+    console.log(`innerHeight: ${window.innerHeight}`);
 }
 
 ele.addEventListener('mousedown', (e) => mouseDownHandler(e));
@@ -140,11 +141,14 @@ const mouseDownHandler = function(e) {
     mapInfo.prevMouse.x = e.clientX;
     mapInfo.prevMouse.y = e.clientY;
 
+    console.log("mouseDown");
+
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
 }
 
 const mouseMoveHandler = function(e){
+    console.log("mouseMoving");
     // How far the mouse has been moved
     const dx = e.clientX - mapInfo.prevMouse.x;
     const dy = e.clientY - mapInfo.prevMouse.y;
@@ -177,7 +181,8 @@ const mouseMoveHandler = function(e){
     }
     
     //update transform with new value
-    el.style.transform = `translate3d(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}, 0)`;
+    //el.style.transform = `scale(${mapInfo.scale}) translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
+    el.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
 
     //update prevMouse to currentMouse
     mapInfo.prevMouse.x = e.clientX;
