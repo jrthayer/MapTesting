@@ -32,6 +32,8 @@ window.addEventListener('load', function(){
     mapInfo.map.width = mapInfo.map.baseW = parseInt(compStyles.getPropertyValue('width'));
 
     el.style.transform += `scale(1) translate(0px, 0px)`;
+    el.style.left = `${window.innerWidth/2 - mapInfo.map.width/2}px`;
+
     zoom(0);
 });
 
