@@ -61,6 +61,7 @@ header{
     -webkit-user-drag: none;
     display: block;
     transition: height 1s;
+    pointer-events: none;
     /* filter: invert(1) contrast(.85); */
 }
 

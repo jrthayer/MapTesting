@@ -31,7 +31,6 @@ window.addEventListener('load', function(){
     mapInfo.map.height = mapInfo.map.baseH = parseInt(compStyles.getPropertyValue('height'));
     mapInfo.map.width = mapInfo.map.baseW = parseInt(compStyles.getPropertyValue('width'));
 
-    // mapInfo.translate.startY = mapInfo.translate.y = (window.innerHeight - navHeight)/2 - mapInfo.map.height/2;
     el.style.transform += `scale(1) translate(0px, 0px)`;
     zoom(0);
 });
@@ -131,9 +130,10 @@ function zoom(increment = 0){
     console.log(`innerHeight: ${window.innerHeight}`);
 }
 
-ele.addEventListener('mousedown', (e) => mouseDownHandler(e));
+ele.addEventListener('pointerdown', (e) => mouseDownHandler(e));
 
 const mouseDownHandler = function(e) {
+    e.preventDefault();
     ele.classList.add('grabbing');
     ele.style.userSelect = 'none';
 
@@ -143,11 +143,12 @@ const mouseDownHandler = function(e) {
 
     console.log("mouseDown");
 
-    document.addEventListener('mousemove', mouseMoveHandler);
-    document.addEventListener('mouseup', mouseUpHandler);
+    document.addEventListener('pointermove', mouseMoveHandler);
+    document.addEventListener('pointerup', mouseUpHandler);
 }
 
 const mouseMoveHandler = function(e){
+    e.preventDefault();
     console.log("mouseMoving");
     // How far the mouse has been moved
     const dx = e.clientX - mapInfo.prevMouse.x;
@@ -190,9 +191,10 @@ const mouseMoveHandler = function(e){
 }
 
 const mouseUpHandler = function() {
+    console.log("mouseIp");
     ele.classList.remove('grabbing');
     ele.style.removeProperty('user-select');
 
-    document.removeEventListener('mousemove', mouseMoveHandler);
-    document.removeEventListener('mouseup', mouseUpHandler);
+    document.removeEventListener('pointermove', mouseMoveHandler);
+    document.removeEventListener('pointerup', mouseUpHandler);
 }
