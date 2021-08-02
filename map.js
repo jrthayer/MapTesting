@@ -10,6 +10,7 @@ let mapInfo = {
 let intViewportHeight = window.innerHeight;
 let intViewportWidth = window.innerWidth;
 let navHeight = parseInt("50px");
+let footerHeight = parseInt('50px');
 
 let pos = {left: 0, top: 0, x: 0, y: 0};
 const el = document.querySelector('.map');
@@ -76,8 +77,8 @@ function zoom(increment = 0){
     mapInfo.larger.height = mapInfo.map.height > innerHeight - navHeight;
     
     //set edges
-    mapInfo.edges.top = (innerHeight - navHeight - mapInfo.map.height)/2 * -1;
-    mapInfo.edges.bottom = (innerHeight - navHeight - mapInfo.map.height)/2;
+    mapInfo.edges.top = (innerHeight - navHeight -footerHeight - mapInfo.map.height)/2 * -1;
+    mapInfo.edges.bottom = (innerHeight - navHeight -footerHeight - mapInfo.map.height)/2;
     mapInfo.edges.left = (innerWidth - mapInfo.map.width)/2 * -1;
     mapInfo.edges.right = (innerWidth - mapInfo.map.width)/2;
 
@@ -125,17 +126,16 @@ function zoom(increment = 0){
     //el.style.transform = `scale(${mapInfo.scale}) translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
     el.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
 
-    console.log("===========");
-    console.log(`BaseWidth: ${mapInfo.map.baseW}, BaseHeight: ${mapInfo.map.baseH}, Scale: ${mapInfo.scale}`);
-    console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
-    console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
-    console.log(`innerHeight: ${window.innerHeight}`);
+    // console.log("===========");
+    // console.log(`BaseWidth: ${mapInfo.map.baseW}, BaseHeight: ${mapInfo.map.baseH}, Scale: ${mapInfo.scale}`);
+    // console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
+    // console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
+    // console.log(`innerHeight: ${window.innerHeight}`);
 }
 
 ele.addEventListener('pointerdown', (e) => mouseDownHandler(e));
 
 const mouseDownHandler = function(e) {
-    e.preventDefault();
     ele.classList.add('grabbing');
     ele.style.userSelect = 'none';
 
@@ -143,15 +143,11 @@ const mouseDownHandler = function(e) {
     mapInfo.prevMouse.x = e.clientX;
     mapInfo.prevMouse.y = e.clientY;
 
-    console.log("mouseDown");
-
     document.addEventListener('pointermove', mouseMoveHandler);
     document.addEventListener('pointerup', mouseUpHandler);
 }
 
 const mouseMoveHandler = function(e){
-    e.preventDefault();
-    console.log("mouseMoving");
     // How far the mouse has been moved
     const dx = e.clientX - mapInfo.prevMouse.x;
     const dy = e.clientY - mapInfo.prevMouse.y;
@@ -184,7 +180,6 @@ const mouseMoveHandler = function(e){
     }
     
     //update transform with new value
-    //el.style.transform = `scale(${mapInfo.scale}) translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
     el.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
 
     //update prevMouse to currentMouse
