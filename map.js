@@ -7,7 +7,8 @@ let mapInfo = {
     larger: {height: false, width: false}
 }
 
-let intViewportHeight = window.innerHeight;
+//need for mobile
+let intViewportHeight = window.screen.availHeight;
 let intViewportWidth = window.innerWidth;
 let navHeight = parseInt("50px");
 let footerHeight = parseInt('50px');
@@ -77,8 +78,8 @@ function zoom(increment = 0){
     mapInfo.larger.height = mapInfo.map.height > innerHeight - navHeight;
     
     //set edges
-    mapInfo.edges.top = (innerHeight - navHeight -footerHeight - mapInfo.map.height)/2 * -1;
-    mapInfo.edges.bottom = (innerHeight - navHeight -footerHeight - mapInfo.map.height)/2;
+    mapInfo.edges.top = (innerHeight - navHeight - footerHeight - mapInfo.map.height)/2 * -1;
+    mapInfo.edges.bottom = (innerHeight - navHeight - footerHeight - mapInfo.map.height)/2;
     mapInfo.edges.left = (innerWidth - mapInfo.map.width)/2 * -1;
     mapInfo.edges.right = (innerWidth - mapInfo.map.width)/2;
 
