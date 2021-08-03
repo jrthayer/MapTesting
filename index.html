@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <script src="jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css?v=0.02">
-    <link rel="preload" as="image" href="kalkatesh.jpg" media="(min-height: 2000px)"/>
     <title>Document</title>
 </head>
 <body>
@@ -14,17 +13,23 @@
         <nav></nav>
     </header>
     <div id="mapWidth">Test String</div>
+  
     <div class="map">
-        <img src="kalkatesh.jpg" alt="">
-        <div class="point" style="top: 55%; right: 13%;"></div>
-        <div class="point" style="top: 50%; right: 50%;"></div>
+        <img src="" alt="">
+    </div>
+
+    
+    <div id="sidePanel">
+        <button>X</button>
+        <div id="panelInfo">
+
+        </div>
     </div>
     
     <div id="settingsBar">
         <button>+</button>
         <button>-</button>
     </div>
-    <script src="map.js?v=0.02"></script>
-    <footer></footer>
+    <script src="map.js?v=0.02" id="mapScript" mapJSON="/kalkatesh.json"></script>
 </body>
 </html>

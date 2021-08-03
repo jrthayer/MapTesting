@@ -3,6 +3,10 @@
     touch-action: none;
 }
 
+:root {
+    --navHeight: 50px;
+  }
+
 nav{
     background-color: white;
     height: 50px;
@@ -34,37 +38,41 @@ header{
     z-index: 2;
 }
 
-footer{
+#sidePanel{
     position: fixed;
-    bottom: 0;
-    
-    background-color: rgb(21, 145, 58);
-    height: 50px;
-    width: 100vw;
-    z-index: 2;
-}
+    z-index: 100;
+    top: var(--navHeight);
+    height: calc(100vh - var(--navHeight));
+    width: calc(100vw);
+    background-color: tomato;
+    right: calc(100vw);
+    transition: 1s right;
 
-#mapWidth{
-    position: fixed;
-    top: 0;
-    height: 50px;
-    z-index: 3;
+    overflow: auto;
+}
+    #sidePanel button{
+        position: absolute;
+        margin: 1rem;
+        top: 0;
+        right: 0;
+    }
+
+.active{
+    right: 0 !important;
 }
 
 .map{
     position: absolute;
-    left:0;
-    /* right:0; */
-    margin-left:auto;
-    margin-right:auto;
-    top: 50px;
+    top: var(--navHeight);
 
-    height: calc(100vh - 50px - 50px);
-    min-height: calc(100vh - 50px - 50px);
+    height: calc(100vh - var(--navHeight));
+    min-height: calc(100vh - var(--navHeight));
     max-height: 2000px;
     width: fit-content;
 
     z-index: 1;
+
+    /* transition: transform 1s; */
 }
 
 .map img{
@@ -73,39 +81,53 @@ footer{
     display: block;
     transition: height 1s;
     pointer-events: none;
+    
     /* filter: invert(1) contrast(.85); */
 }
 
 .point{
     position: absolute;
     
-    width: calc(5vh);
+    width: calc(4vh);
     min-width: 10px;
-    max-width: 30px;
-    height: calc(5vh);
-    max-height: 30px;
+    height: calc(4vh);
     
     /* Makes it look like a pin */
-    border-radius: 50% 50% 50% 0;
+    border-radius: 90% 90% 90% 0;
     transform: rotate(-45deg);
-
     
-    background-color: red;
-
-    /* transition: 1s linear; */
-
-  /* width 30px
-  height 30px
-  
-  background #89849b
-  position absolute
-  
-  left 50%
-  top 50%
-  margin -20px 0 0 -20px */
-}
+    background-color: rgb(126, 10, 10);
+}   
     .point:hover{
         cursor: pointer;
+    }
+    .point::after{
+        content: "";
+        background: white;
+        width: 50%;
+        height: 50%;
+        border-radius: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Awesome CSS tooltip from SO */
+    [data-tooltip]:before {            
+        position : absolute;
+        top: -15px;
+        left: 10px;
+        content : attr(data-tooltip);
+        opacity : 0;
+        transform: rotate(45deg);
+        background-color: rgb(39, 39, 39);
+        color: white;
+        padding: .2rem;
+    }
+
+    [data-tooltip]:hover:before {        
+        opacity : 1;
     }
 
 #settingsBar{
@@ -117,7 +139,7 @@ footer{
 
 
     position: fixed;
-    z-index: 3;
+    z-index: 99;
     bottom: 0;
     right: 0;
     
@@ -132,15 +154,6 @@ footer{
     flex-grow: 1;
     padding: 1rem;
     margin: .5rem;
-}
-
-.sidePanel{
-    position: fixed;
-
-    height: 100vh;
-    width: 300px;
-
-    z-index: 10;
 }
 
 .grabbing{

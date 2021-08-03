@@ -1,47 +1,143 @@
-let mapInfo = {
-    translate: {startX: 0, startY:0, x: 0, y: 0},
-    prevMouse: {x: 0, y: 0},
+//data for map markers
+let pointsData = [];
+
+//map dimensions and moving variables
+const mapInfo = {
     scale: 1,
+    translate: {x: 0, y: 0},
+    prevMouse: {x: 0, y: 0},
     edges: {top: 0, bottom: 0 , left: 0, right: 0},
-    map: {baseH: 0, baseW: 0, height: 0, width: 0},
+    map: {baseHeight:0, baseWidth:0, height: 0, width: 0},
     larger: {height: false, width: false}
 }
 
-//need for mobile
+//html elements
+const htmlElements = {
+    map: document.querySelector('.map'),
+    mapImage: document.querySelector('.map img'),
+    container: document.querySelector('html'),
+    settingsBar: document.querySelector('#settingsBar'),
+    sidePanel: document.querySelector('#sidePanel'),
+    panelInfo: document.querySelector("#panelInfo")
+}
+
+//variables for screen dimensions
 let intViewportHeight = window.screen.availHeight;
 let intViewportWidth = window.innerWidth;
 let navHeight = parseInt("50px");
-let footerHeight = parseInt('50px');
 
-let pos = {left: 0, top: 0, x: 0, y: 0};
-const el = document.querySelector('.map');
-const mapImage = document.querySelector('.map img');
-const ele = document.querySelector('html');
-const container = document.querySelector('html');
-const mapInfoBar = document.querySelector('#mapWidth');
-const settingsBar = document.querySelector('#settingsBar');
-const points = document.querySelectorAll('.point');
+let compStyles = window.getComputedStyle(htmlElements.map);
+let maxHeight = parseInt(compStyles.getPropertyValue('max-height'));
+let jsonFile = document.querySelector("#mapScript").getAttribute("mapJSON");
 
-let compStyles = window.getComputedStyle(el);
+htmlElements.mapImage.onload = function(){
+    //setMap Height and Width
+    mapInfo.map.baseHeight = parseInt(compStyles.getPropertyValue('height'));
+    mapInfo.map.baseWidth = parseInt(compStyles.getPropertyValue('width'));
+    
+    //center map
+    htmlElements.map.style.left = `${window.innerWidth/2 - mapInfo.map.baseWidth/2}px`;
 
+    calcMapDimensions();
+}
 
+//using axios for getting files, included in html that includes this
+window.addEventListener('load', async function(){
+    //load info
+    axios.get(jsonFile)
+        .then(function (response) {
+            htmlElements.mapImage.src = response.data.mapSrc;
+            console.log("this runs second?");
+            //handle success
+            pointsData = response.data.points;
+            for(let x = 0; x < pointsData.length; x++){
+                //create point
+                let newPoint = createPoint(pointsData[x]);
+                
+                newPoint.addEventListener('click', function(){
+                    //attach toggle
+                    htmlElements.sidePanel.classList.toggle('active');
+                    
+                    //populate sidepanel
+                    let panelInfo = createPanel(pointsData[x]);
+                    htmlElements.panelInfo.innerHTML = "";
+                    htmlElements.panelInfo.appendChild(panelInfo);
+                });
 
-let maxHeight = compStyles.getPropertyValue('max-height');
-maxHeight =  parseInt(maxHeight.slice(0, -2));
+                htmlElements.map.appendChild(newPoint);
+            }
 
-window.addEventListener('load', function(){
-    mapInfo.map.height = mapInfo.map.baseH = parseInt(compStyles.getPropertyValue('height'));
-    mapInfo.map.width = mapInfo.map.baseW = parseInt(compStyles.getPropertyValue('width'));
-
-    el.style.transform += `scale(1) translate(0px, 0px)`;
-    el.style.left = `${window.innerWidth/2 - mapInfo.map.width/2}px`;
-
-    zoom(0);
+            htmlElements.sidePanel.querySelector('button').addEventListener('click', function(){
+                htmlElements.sidePanel.classList.remove('active');
+            });
+        })
+        .catch(function (error) {
+            //handle error
+            return "error loading json";
+        });
 });
 
-ele.addEventListener('wheel', function(event){
-    event.preventDefault();
+function createPoint(info){
+    let point = document.createElement('div');
+    point.classList.add('point');
+    console.log(info.coordinates);
+    point.style.top = info.coordinates.top;
+    point.style.left = info.coordinates.left;
+    point.setAttribute("data-tooltip", info.name);
+    return point;
+}
 
+function createPanel(info){
+    let panel = document.createElement('div');
+
+    let header = document.createElement('h2');
+    header.textContent = info.name;
+    panel.appendChild(header);
+
+    let desc = document.createElement('p');
+    desc.textContent = info.desc;
+    panel.appendChild(desc);
+
+    for(let x = 0; x < info.categories.length; x++){
+        let category = document.createElement('div');
+        category.classList.add('category');
+
+        let categoryHeader = document.createElement('h3');
+        categoryHeader.textContent = info.categories[x].title;
+        category.appendChild(categoryHeader);
+
+        let categoryBody = document.createElement('p');
+        categoryBody.textContent = info.categories[x].info;
+        category.appendChild(categoryBody);
+
+        panel.appendChild(category);
+    }
+
+    return panel;
+}
+
+function calcMapDimensions(){
+    //calculate img dimensions for moving boundries
+    mapInfo.map.width = mapInfo.map.baseWidth * mapInfo.scale;
+    mapInfo.map.height = mapInfo.map.baseHeight * mapInfo.scale;
+
+    mapInfo.larger.width = mapInfo.map.width > innerWidth;
+    mapInfo.larger.height = mapInfo.map.height > innerHeight - navHeight;
+    
+    //set edges
+    mapInfo.edges.top = (innerHeight - navHeight - mapInfo.map.height)/2 * -1;
+    mapInfo.edges.bottom = (innerHeight - navHeight - mapInfo.map.height)/2;
+    mapInfo.edges.left = (innerWidth - mapInfo.map.width)/2 * -1;
+    mapInfo.edges.right = (innerWidth - mapInfo.map.width)/2;
+}
+
+
+//================================
+//Scale Map Size
+//================================
+
+//Event Listeners
+htmlElements.container.addEventListener('wheel', function(event){
     if(event.deltaY > 0){
         zoom(-0.1);
     }
@@ -50,95 +146,67 @@ ele.addEventListener('wheel', function(event){
     }
 }, {passive:false});
 
-settingsBar.querySelector('button:nth-of-type(1)').addEventListener('click', function(){
+htmlElements.settingsBar.querySelector('button:nth-of-type(1)').addEventListener('click', function(){
     zoom(0.5);
 });
 
-settingsBar.querySelector('button:nth-of-type(2)').addEventListener('click', function(){
+htmlElements.settingsBar.querySelector('button:nth-of-type(2)').addEventListener('click', function(){
     zoom(-0.5);
 });
 
+//Scaling Function
 function zoom(increment = 0){
     //increment scale
     mapInfo.scale += increment;
 
     //adjust scale edge cases
     if(mapInfo.scale < 1) mapInfo.scale = 1;
-    if(mapInfo.scale * intViewportHeight > maxHeight) mapInfo.scale -= increment;
+    if(mapInfo.scale * mapInfo.map.baseHeight > maxHeight) mapInfo.scale -= increment;
 
     //scale map img
-    el.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
-    // mapImage.style.transform = `scale(${mapInfo.scale})`;
+    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
 
-    //calculate img dimensions for moving boundries
-    mapInfo.map.width = parseInt(window.getComputedStyle(mapImage).getPropertyValue('width')) * mapInfo.scale;
-    mapInfo.map.height = parseInt(window.getComputedStyle(mapImage).getPropertyValue('height')) * mapInfo.scale;
-
-    mapInfo.larger.width = mapInfo.map.width > innerWidth;
-    mapInfo.larger.height = mapInfo.map.height > innerHeight - navHeight;
-    
-    //set edges
-    mapInfo.edges.top = (innerHeight - navHeight - footerHeight - mapInfo.map.height)/2 * -1;
-    mapInfo.edges.bottom = (innerHeight - navHeight - footerHeight - mapInfo.map.height)/2;
-    mapInfo.edges.left = (innerWidth - mapInfo.map.width)/2 * -1;
-    mapInfo.edges.right = (innerWidth - mapInfo.map.width)/2;
+    //update map dimensions
+    calcMapDimensions();
 
     //check if out of bounds
     if(mapInfo.larger.height){
-        if(mapInfo.translate.y > mapInfo.edges.top) 
-        {
-            mapInfo.translate.y = mapInfo.edges.top; 
-        }
-
-        if(mapInfo.translate.y  < mapInfo.edges.bottom){
-            mapInfo.translate.y = mapInfo.edges.bottom; 
-        }
+        if(mapInfo.translate.y > mapInfo.edges.top) mapInfo.translate.y = mapInfo.edges.top; 
+        if(mapInfo.translate.y  < mapInfo.edges.bottom) mapInfo.translate.y = mapInfo.edges.bottom; 
     }
     else{
-        if(mapInfo.translate.y < mapInfo.edges.top) 
-        {
-            mapInfo.translate.y = mapInfo.edges.top; 
-        }
-
-        if(mapInfo.translate.y > mapInfo.edges.bottom){
-            mapInfo.translate.y = mapInfo.edges.bottom; 
-        }
+        if(mapInfo.translate.y < mapInfo.edges.top) mapInfo.translate.y = mapInfo.edges.top; 
+        if(mapInfo.translate.y > mapInfo.edges.bottom) mapInfo.translate.y = mapInfo.edges.bottom; 
     }
 
     if(mapInfo.larger.width){
-        if(mapInfo.translate.x > mapInfo.edges.left){
-            mapInfo.translate.x = mapInfo.edges.left;
-        }
-
-        if(mapInfo.translate.x < mapInfo.edges.right){
-            mapInfo.translate.x = mapInfo.edges.right;
-        }
+        if(mapInfo.translate.x > mapInfo.edges.left) mapInfo.translate.x = mapInfo.edges.left;
+        if(mapInfo.translate.x < mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
     }
     else{
-        if(mapInfo.translate.x < mapInfo.edges.left){
-            mapInfo.translate.x = mapInfo.edges.left;
-        }
-
-        if(mapInfo.translate.x > mapInfo.edges.right){
-            mapInfo.translate.x = mapInfo.edges.right;
-        }
+        if(mapInfo.translate.x < mapInfo.edges.left) mapInfo.translate.x = mapInfo.edges.left;
+        if(mapInfo.translate.x > mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
     }
 
-    //el.style.transform = `scale(${mapInfo.scale}) translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
-    el.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
 
     // console.log("===========");
-    // console.log(`BaseWidth: ${mapInfo.map.baseW}, BaseHeight: ${mapInfo.map.baseH}, Scale: ${mapInfo.scale}`);
     // console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
     // console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
     // console.log(`innerHeight: ${window.innerHeight}`);
 }
 
-ele.addEventListener('pointerdown', (e) => mouseDownHandler(e));
+//================================
+//Drag and Move Map
+//================================
 
+//eventlisteners
+htmlElements.container.addEventListener('pointerdown', (e) => mouseDownHandler(e));
+
+//moving functions
 const mouseDownHandler = function(e) {
-    ele.classList.add('grabbing');
-    ele.style.userSelect = 'none';
+    htmlElements.container.classList.add('grabbing');
+    htmlElements.container.style.userSelect = 'none';
 
     //x and y of mouse on click
     mapInfo.prevMouse.x = e.clientX;
@@ -158,30 +226,21 @@ const mouseMoveHandler = function(e){
 
     //add mouse diff to current map offset
     if(mapInfo.larger.height){
-        if(mapY + dy < mapInfo.edges.top && mapY + dy > mapInfo.edges.bottom){
-            mapInfo.translate.y += dy;
-        }
+        if(mapY + dy < mapInfo.edges.top && mapY + dy > mapInfo.edges.bottom) mapInfo.translate.y += dy;
     }
     else{
-        if(mapY + dy > mapInfo.edges.top && mapY + dy < mapInfo.edges.bottom){
-            mapInfo.translate.y += dy;
-        }
+        if(mapY + dy > mapInfo.edges.top && mapY + dy < mapInfo.edges.bottom) mapInfo.translate.y += dy;
     }
     
     if(mapInfo.larger.width){
-        
-        if(mapX + dx < mapInfo.edges.left && mapX + dx > mapInfo.edges.right){
-            mapInfo.translate.x += dx;
-        }
+        if(mapX + dx < mapInfo.edges.left && mapX + dx > mapInfo.edges.right) mapInfo.translate.x += dx;
     }
     else{
-        if(mapX + dx > mapInfo.edges.left && mapX + dx < mapInfo.edges.right){
-            mapInfo.translate.x += dx;
-        }
+        if(mapX + dx > mapInfo.edges.left && mapX + dx < mapInfo.edges.right) mapInfo.translate.x += dx;
     }
     
     //update transform with new value
-    el.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
 
     //update prevMouse to currentMouse
     mapInfo.prevMouse.x = e.clientX;
@@ -189,9 +248,8 @@ const mouseMoveHandler = function(e){
 }
 
 const mouseUpHandler = function() {
-    console.log("mouseIp");
-    ele.classList.remove('grabbing');
-    ele.style.removeProperty('user-select');
+    htmlElements.container.classList.remove('grabbing');
+    htmlElements.container.style.removeProperty('user-select');
 
     document.removeEventListener('pointermove', mouseMoveHandler);
     document.removeEventListener('pointerup', mouseUpHandler);

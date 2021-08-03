@@ -1,0 +1,71 @@
+{
+    "name": "Kalkatesh",
+    "mapSrc": "/kalkatesh.jpg",
+    "wiki": "https://verum.fandom.com/wiki/Kalkatesh",
+    "points": [
+        {
+            "name": "Daborak",
+            "motto": "Duty. Discipline. Death.",
+            "coordinates": {"top": "51%", "left": "83%"},
+            "desc": "a land of lush wheat fields, flat plains and wild rivers. An otherwise temperate land, lush for farming which provides Kalakatesh with a larger portion than normal of its food.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "Daborak was once a collection of city-states, constantly fighting over control of various resources within the fertile fields. This constant competition is believed to be what led to the development of their tactics and general knowledge. Eventually the city-states combined their efforts to face a much greater threat, a contingent of lizardfolk set on conquering the lands of Daborak. The loss of life numbered in the tens of thousands, before finally, the lizardfolk returned to their jungle homes empty-handed. In their weakened state, the Daborakian's feared a counter attack and immediately banded together in one nation to supply a centralized army. When no counterattack came, the people decided to continue with their government; the security and prosperity it provided was preferred to the constant turmoil of war."
+                },
+                {
+                    "title": "Demographic",
+                    "info":"Daborak is dominantly human, although half-elves and half-orcs are the most common among the remainder of the races."
+                },
+                {
+                    "title": "Structure",
+                    "info":"Daborak is ruled by martial law, through a totalitarian military government, that awards rank based on merit. This means that social advancement is quite common in Daborak. Although only on the merits of one's ability to perform in combat."
+                },
+                {
+                    "title": "Religion",
+                    "info":"Glory is the most common deity worshipped within Daborak. Other commonly worshipped are Iass, Astaroth and Tilt. The Seven are prominent as always."
+                },
+                {
+                    "title": "Military",
+                    "info":"The Daborakian military is one of the most prominent in Kalkatesh and its cavalry is undoubtedly the deadliest. There are few things more terrifying than a Daborakian cavalry charge. Besides that, they are an extremely well-organized military, challenged in their soldering skill perhaps only by Krazax. Daborakian warhorses are so valued that they are granted the ability to own property and hold titles of nobility."
+                },
+                {
+                    "title": "Agriculture",
+                    "info":"Daborak is heavily developed in siege engines, but by far, their greatest advancements are in those of its animal husbandry. Using proper breeding and magic infusions, the horses of Dabnorak were granted intelligence and have the ability to understand spoken language and can communicate through a language called Cantor by stomping their hooves. The longer a Daborakian warhorse lives the more intelligent it becomes, some of their paragons possess the ability to actually speak."
+                }
+            ]
+        },
+        {
+            "name": "Dolten",
+            "motto": "",
+            "coordinates": {"top": "60%", "left": "68%"},
+            "desc": "a temperate region, heavily forested with a swamp and a few large scattered rivers. The southern tip is a barren land of shale rock and alchemical industry.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "Dolten is a place rife with peril and mystery, it has always been so. Long ago in the first era when the forests of what would be called Dolten were formed, was home to the mighty Linnorms great primordial dragons who fought over territory and hunted the animals in the old ways. It was during this time that the dragons from Dragonstar attacked, invaders swept over the sky and war came to Verum for the first time. The Linnorms fought these invaders but most were slain resulting in the dragons being weakened; as such, both races spent centuries to recover while the elves began to spread their dominion. Dolten itself was forever changed by the blood of Linnorms spilling into the earth. The forest grew more primal, its beasts began to warp and change. Woe'tanclast the white Linnorm was perhaps the most impactful, for she was the wife and only love of Crovux father of Linnorms it was from her blood which a single spider was swept up in the spider survived and was forever changed and with its survival one of Dolten's most notorious threats was born The Creeping Death. The lands of Dolten continued to be a place of danger and death all throughout the eras. That was until finally a group of desperate settlers paid the price to live there, in blood and will. It was from these first settlers and the witches that aided them, that the land was somewhat tamed allowing for civilization to against all odds thrive."
+                },
+                {
+                    "title": "Demographic",
+                    "info":"The population of Dolten is relatively diverse with a focus on humans, gnomes and elves. In addition to these Dolten is the primary home of skinwalkers and any race of which is difficult to look upon."
+                },
+                {
+                    "title": "Structure",
+                    "info":"Dolten's government is separated into two pieces, the public face of a council of nobles which run day to day operations; however, the true heart of the Doltenian government is a shadow government of witches of the Great Coven. Although this is supposedly a secret, it's a fact everyone knows but never speaks aloud."
+                },
+                {
+                    "title": "Religion",
+                    "info":"The primary religions of Dolten are nearly entirely dominated by the Patrons beings with little form or dogma leading to a pseudo-spiritualism, of the dominant religions of the world the Green Pantheon is the most common."
+                },
+                {
+                    "title": "Military",
+                    "info":"The military branch of Dolten is controlled and manned nearly entirely by the Night Guard, they patrol the perimeter of the country and keep a constant look out from their fortress, the Crimson Citadel. The World Wanderers assist them intimately via the world roads through the deadly forests of Dolten."
+                },
+                {
+                    "title": "Technology",
+                    "info":"Dolten is a sporadically advancing nation in terms of scientific advancement. Parts still cling to the old tribal methods that they have practiced for centuries; this is especially true amongst the skinwalkers, some take to the full development of marble and stone and hope it will stand against the wrath of the forest. In Bleak the advancements rival that of even Khao, while their advances in planar binding rival that of even the old mages guild."
+                }
+            ]
+        }
+    ]
+}
