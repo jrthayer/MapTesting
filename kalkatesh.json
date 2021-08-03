@@ -1,6 +1,6 @@
 {
     "name": "Kalkatesh",
-    "mapSrc": "/kalkatesh.jpg",
+    "mapSrc": "./kalkatesh.jpg",
     "wiki": "https://verum.fandom.com/wiki/Kalkatesh",
     "points": [
         {
