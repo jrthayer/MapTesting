@@ -1,5 +1,5 @@
-//data for map markers
-let pointsData = [];
+//retrieve json file directory from html script
+let jsonFile = document.querySelector("#mapScript").getAttribute("mapJSON");
 
 //map dimensions and moving variables
 const mapInfo = {
@@ -7,38 +7,37 @@ const mapInfo = {
     translate: {x: 0, y: 0},
     prevMouse: {x: 0, y: 0},
     edges: {top: 0, bottom: 0 , left: 0, right: 0},
-    map: {baseHeight:0, baseWidth:0, height: 0, width: 0},
-    larger: {height: false, width: false}
+    map: {baseHeight:0, baseWidth:0, height: 0, width: 0, maxHeight:0},
+    larger: {height: false, width: false},
+    container: {height: 0, width: 0}
 }
 
 //html elements
 const htmlElements = {
     map: document.querySelector('.map'),
     mapImage: document.querySelector('.map img'),
-    container: document.querySelector('html'),
+    container: document.querySelector('.mapContainer'),
     settingsBar: document.querySelector('#settingsBar'),
     sidePanel: document.querySelector('#sidePanel'),
     panelInfo: document.querySelector("#panelInfo")
 }
 
-//variables for screen dimensions
-let appHeight = window.innerHeight;
-let appWidth = window.innerWidth;
-console.log(`w: ${appWidth}, h: ${appHeight}`);
-let navHeight = parseInt("50px");
-
-let compStyles = window.getComputedStyle(htmlElements.map);
-let maxHeight = parseInt(compStyles.getPropertyValue('max-height'));
-let jsonFile = document.querySelector("#mapScript").getAttribute("mapJSON");
-
 htmlElements.mapImage.onload = function(){
-    //setMap Height and Width
+    //set map container height and width
+    let mapContainer = window.getComputedStyle(htmlElements.container);
+    mapInfo.container.height = parseInt(mapContainer.getPropertyValue('height'));
+    mapInfo.container.width = parseInt(mapContainer.getPropertyValue('width'));
+    
+    //set map height and width
+    let compStyles = window.getComputedStyle(htmlElements.map);
+    mapInfo.map.maxHeight = parseInt(compStyles.getPropertyValue('max-height'));
     mapInfo.map.baseHeight = parseInt(compStyles.getPropertyValue('height'));
     mapInfo.map.baseWidth = parseInt(compStyles.getPropertyValue('width'));
     
     //center map
-    htmlElements.map.style.left = `${appWidth/2 - mapInfo.map.baseWidth/2}px`;
+    htmlElements.map.style.left = `${mapInfo.container.width/2 - mapInfo.map.baseWidth/2}px`;
 
+    //update mapInfo
     calcMapDimensions();
 }
 
@@ -49,7 +48,7 @@ window.addEventListener('load', async function(){
         .then(function (response) {
             htmlElements.mapImage.src = response.data.mapSrc;
             //handle success
-            pointsData = response.data.points;
+            let pointsData = response.data.points;
             for(let x = 0; x < pointsData.length; x++){
                 //create point
                 let newPoint = createPoint(pointsData[x]);
@@ -120,14 +119,15 @@ function calcMapDimensions(){
     mapInfo.map.width = mapInfo.map.baseWidth * mapInfo.scale;
     mapInfo.map.height = mapInfo.map.baseHeight * mapInfo.scale;
 
-    mapInfo.larger.width = mapInfo.map.width > appWidth;
-    mapInfo.larger.height = mapInfo.map.height > appHeight - navHeight;
+    //determine if map is currently larger than it's container
+    mapInfo.larger.width = mapInfo.container.width < mapInfo.map.width;
+    mapInfo.larger.height = mapInfo.container.height < mapInfo.map.height;
     
     //set edges
-    mapInfo.edges.top = (appHeight - navHeight - mapInfo.map.height)/2 * -1;
-    mapInfo.edges.bottom = (appHeight - navHeight - mapInfo.map.height)/2;
-    mapInfo.edges.left = (appWidth - mapInfo.map.width)/2 * -1;
-    mapInfo.edges.right = (appWidth - mapInfo.map.width)/2;
+    mapInfo.edges.top = (mapInfo.container.height - mapInfo.map.height)/2 * -1;
+    mapInfo.edges.bottom = (mapInfo.container.height - mapInfo.map.height)/2;
+    mapInfo.edges.left = (mapInfo.container.width - mapInfo.map.width)/2 * -1;
+    mapInfo.edges.right = (mapInfo.container.width - mapInfo.map.width)/2;
 }
 
 
@@ -159,8 +159,8 @@ function zoom(increment = 0){
     mapInfo.scale += increment;
 
     //adjust scale edge cases
-    if(mapInfo.scale < 1) mapInfo.scale = 1;
-    if(mapInfo.scale * mapInfo.map.baseHeight > maxHeight) mapInfo.scale -= increment;
+    if(mapInfo.scale * mapInfo.map.baseHeight < mapInfo.container.height) mapInfo.scale = 1;
+    if(mapInfo.scale * mapInfo.map.baseHeight > mapInfo.map.maxHeight) mapInfo.scale -= increment;
 
     //scale map img
     htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
@@ -213,9 +213,14 @@ const mouseDownHandler = function(e) {
 
     document.addEventListener('pointermove', mouseMoveHandler);
     document.addEventListener('pointerup', mouseUpHandler);
+
+    console.log("===========");
+    console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
+    console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
 }
 
 const mouseMoveHandler = function(e){
+    console.log("moving");
     // How far the mouse has been moved
     const dx = e.clientX - mapInfo.prevMouse.x;
     const dy = e.clientY - mapInfo.prevMouse.y;

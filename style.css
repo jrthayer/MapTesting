@@ -52,12 +52,16 @@ header{
     right: 0 !important;
 }
 
+.mapContainer{
+    top: var(--navHeight);
+    position: absolute;
+    width: calc(100vw);
+    height: calc(100vh - var(--navHeight));
+}
+
 .map{
     position: absolute;
-    top: var(--navHeight);
-
-    height: calc(100vh - var(--navHeight));
-    min-height: calc(100vh - var(--navHeight));
+    height: 100%;
     max-height: 2000px;
     width: fit-content;
 
@@ -82,7 +86,6 @@ header{
     position: absolute;
     
     width: calc(4vh);
-    min-width: 10px;
     height: calc(4vh);
     
     /* Makes it look like a pin */
