@@ -204,8 +204,8 @@ htmlElements.container.addEventListener('pointerdown', (e) => mouseDownHandler(e
 
 //moving functions
 const mouseDownHandler = function(e) {
-    htmlElements.container.classList.add('grabbing');
-    htmlElements.container.style.userSelect = 'none';
+    htmlElements.map.classList.add('grabbing');
+    htmlElements.map.style.userSelect = 'none';
 
     //x and y of mouse on click
     mapInfo.prevMouse.x = e.clientX;
@@ -247,9 +247,12 @@ const mouseMoveHandler = function(e){
 }
 
 const mouseUpHandler = function() {
-    htmlElements.container.classList.remove('grabbing');
-    htmlElements.container.style.removeProperty('user-select');
+    htmlElements.map.classList.remove('grabbing');
+    htmlElements.map.style.removeProperty('user-select');
 
     document.removeEventListener('pointermove', mouseMoveHandler);
     document.removeEventListener('pointerup', mouseUpHandler);
 }
+
+htmlElements.sidePanel.addEventListener('pointerdown', (e) => e.stopPropagation());
+htmlElements.sidePanel.addEventListener('wheel', (e) => e.stopPropagation());
