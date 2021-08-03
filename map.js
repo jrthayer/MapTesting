@@ -22,8 +22,9 @@ const htmlElements = {
 }
 
 //variables for screen dimensions
-let intViewportHeight = window.screen.availHeight;
-let intViewportWidth = window.innerWidth;
+let appHeight = window.innerHeight;
+let appWidth = window.innerWidth;
+console.log(`w: ${appWidth}, h: ${appHeight}`);
 let navHeight = parseInt("50px");
 
 let compStyles = window.getComputedStyle(htmlElements.map);
@@ -36,7 +37,7 @@ htmlElements.mapImage.onload = function(){
     mapInfo.map.baseWidth = parseInt(compStyles.getPropertyValue('width'));
     
     //center map
-    htmlElements.map.style.left = `${window.innerWidth/2 - mapInfo.map.baseWidth/2}px`;
+    htmlElements.map.style.left = `${appWidth/2 - mapInfo.map.baseWidth/2}px`;
 
     calcMapDimensions();
 }
@@ -47,7 +48,6 @@ window.addEventListener('load', async function(){
     axios.get(jsonFile)
         .then(function (response) {
             htmlElements.mapImage.src = response.data.mapSrc;
-            console.log("this runs second?");
             //handle success
             pointsData = response.data.points;
             for(let x = 0; x < pointsData.length; x++){
@@ -80,7 +80,6 @@ window.addEventListener('load', async function(){
 function createPoint(info){
     let point = document.createElement('div');
     point.classList.add('point');
-    console.log(info.coordinates);
     point.style.top = info.coordinates.top;
     point.style.left = info.coordinates.left;
     point.setAttribute("data-tooltip", info.name);
@@ -121,14 +120,14 @@ function calcMapDimensions(){
     mapInfo.map.width = mapInfo.map.baseWidth * mapInfo.scale;
     mapInfo.map.height = mapInfo.map.baseHeight * mapInfo.scale;
 
-    mapInfo.larger.width = mapInfo.map.width > innerWidth;
-    mapInfo.larger.height = mapInfo.map.height > innerHeight - navHeight;
+    mapInfo.larger.width = mapInfo.map.width > appWidth;
+    mapInfo.larger.height = mapInfo.map.height > appHeight - navHeight;
     
     //set edges
-    mapInfo.edges.top = (innerHeight - navHeight - mapInfo.map.height)/2 * -1;
-    mapInfo.edges.bottom = (innerHeight - navHeight - mapInfo.map.height)/2;
-    mapInfo.edges.left = (innerWidth - mapInfo.map.width)/2 * -1;
-    mapInfo.edges.right = (innerWidth - mapInfo.map.width)/2;
+    mapInfo.edges.top = (appHeight - navHeight - mapInfo.map.height)/2 * -1;
+    mapInfo.edges.bottom = (appHeight - navHeight - mapInfo.map.height)/2;
+    mapInfo.edges.left = (appWidth - mapInfo.map.width)/2 * -1;
+    mapInfo.edges.right = (appWidth - mapInfo.map.width)/2;
 }
 
 
@@ -190,10 +189,10 @@ function zoom(increment = 0){
 
     htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
 
-    // console.log("===========");
-    // console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
-    // console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
-    // console.log(`innerHeight: ${window.innerHeight}`);
+    console.log("===========");
+    console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
+    console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
+    console.log(`innerHeight: ${window.screen.availHeight}`);
 }
 
 //================================
