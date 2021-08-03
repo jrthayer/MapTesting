@@ -22,7 +22,7 @@ const htmlElements = {
 }
 
 //variables for screen dimensions
-let appHeight = window.innerHeight;
+let appHeight = window.screen.availHeight;
 let appWidth = window.innerWidth;
 console.log(`w: ${appWidth}, h: ${appHeight}`);
 let navHeight = parseInt("50px");
