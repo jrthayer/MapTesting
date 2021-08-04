@@ -86,7 +86,9 @@ nav{
 html,
 body{
     margin: 0;
-    height: calc(100vh - 50px); 
+    min-height: calc(100vh - 50px);
+    min-height: -webkit-fill-available; 
+
 
     overflow: hidden;
 
@@ -108,7 +110,8 @@ header{
     position: absolute;
     top: var(--navHeight);
     
-    height: calc(100vh - var(--navHeight));
+    /* height: calc(100vh - var(--navHeight)); */
+    height: calc(100% - var(--navHeight));
     width: calc(100vw);
 }
 
