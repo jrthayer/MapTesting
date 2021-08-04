@@ -1,3 +1,27 @@
+//------------//------------//------------//------------//------------
+//      TABLE OF CONTENTS
+//------------//------------//------------//------------//------------
+//      1. Initialization
+//          1.1 Global Data Structures
+//          1.2 Intialize Components
+//      2. Features
+//          2.1 Map Scale
+//          2.2 Map Drag & Move
+//          2.3 Side Panel
+//      3. Helper Functions
+//------------//------------//------------//------------//------------
+
+
+
+//------------//------------//------------//------------
+//      1. Initialization
+//------------//------------//------------//------------
+
+
+//------------//------------//------------ 
+//  1.1 Global Data Structures 
+//------------//------------//------------
+
 //retrieve json file directory from html script
 let jsonFile = document.querySelector("#mapScript").getAttribute("mapJSON");
 
@@ -19,9 +43,66 @@ const htmlElements = {
     container: document.querySelector('.mapContainer'),
     settingsBar: document.querySelector('#settingsBar'),
     sidePanel: document.querySelector('#sidePanel'),
-    panelInfo: document.querySelector("#panelInfo")
+    panelInfo: document.querySelector("#panelInfo"),
+    pointsContainer: ""
 }
+ 
 
+//------------//------------//------------
+//  1.2 Intialize Components
+//------------//------------//------------
+
+//after html page is loaded retrieve json file and generate page
+//------------
+//+used axios for get request
+//+generates map on success
+//+console error on failure
+window.addEventListener('load', async function(){
+    //load info
+    axios.get(jsonFile)
+        .then(function (response) {
+            //load map image triggering onload function below
+            htmlElements.mapImage.src = response.data.mapSrc;
+            htmlElements.mapImage.classList.add('transition');
+            //generate map points
+            let pointsContainer = document.createElement('div');
+            pointsContainer.id = 'pointsContainer';
+            pointsContainer.classList.add('transition');
+            let pointsData = response.data.points;
+            let pointTypes = response.data.pointTypes;
+            for(let x = 0; x < pointsData.length; x++){
+                //create point
+                let newPoint = createPoint(pointsData[x], pointTypes);
+                
+                newPoint.addEventListener('click', function(){
+                    //attach toggle
+                    htmlElements.sidePanel.classList.toggle('active');
+                    htmlElements.sidePanel.style.setProperty("--color700", newPoint.style.getPropertyValue("--color700"));
+                    htmlElements.sidePanel.style.setProperty("--color400", newPoint.style.getPropertyValue("--color400"));
+
+                    //populate sidepanel
+                    let panelInfo = createPanel(pointsData[x]);
+                    htmlElements.panelInfo.innerHTML = "";
+                    htmlElements.panelInfo.appendChild(panelInfo);
+                });
+                pointsContainer.appendChild(newPoint);
+                
+            }
+            htmlElements.pointsContainer = pointsContainer;
+            htmlElements.map.appendChild(pointsContainer);
+
+            //close side panel with button 
+            htmlElements.sidePanel.querySelector('button').addEventListener('click', function(){
+                htmlElements.sidePanel.classList.remove('active');
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});
+
+//set necessary variables after map img has loaded
+//------------
 htmlElements.mapImage.onload = function(){
     //set map container height and width
     let mapContainer = window.getComputedStyle(htmlElements.container);
@@ -33,7 +114,7 @@ htmlElements.mapImage.onload = function(){
     mapInfo.map.maxHeight = parseInt(compStyles.getPropertyValue('max-height'));
     mapInfo.map.baseHeight = parseInt(compStyles.getPropertyValue('height'));
     mapInfo.map.baseWidth = parseInt(compStyles.getPropertyValue('width'));
-    
+
     //center map
     htmlElements.map.style.left = `${mapInfo.container.width/2 - mapInfo.map.baseWidth/2}px`;
 
@@ -41,62 +122,52 @@ htmlElements.mapImage.onload = function(){
     calcMapDimensions();
 }
 
-//using axios for getting files, included in html that includes this
-window.addEventListener('load', async function(){
-    //load info
-    axios.get(jsonFile)
-        .then(function (response) {
-            htmlElements.mapImage.src = response.data.mapSrc;
-            //handle success
-            let pointsData = response.data.points;
-            for(let x = 0; x < pointsData.length; x++){
-                //create point
-                let newPoint = createPoint(pointsData[x]);
-                
-                newPoint.addEventListener('click', function(){
-                    //attach toggle
-                    htmlElements.sidePanel.classList.toggle('active');
-                    
-                    //populate sidepanel
-                    let panelInfo = createPanel(pointsData[x]);
-                    htmlElements.panelInfo.innerHTML = "";
-                    htmlElements.panelInfo.appendChild(panelInfo);
-                });
-
-                htmlElements.map.appendChild(newPoint);
-            }
-
-            htmlElements.sidePanel.querySelector('button').addEventListener('click', function(){
-                htmlElements.sidePanel.classList.remove('active');
-            });
-        })
-        .catch(function (error) {
-            //handle error
-            return "error loading json";
-        });
-});
-
-function createPoint(info){
+//assemble map point and returns it
+//------------
+// info: 
+function createPoint(info, types){
     let point = document.createElement('div');
     point.classList.add('point');
     point.style.top = info.coordinates.top;
     point.style.left = info.coordinates.left;
     point.setAttribute("data-tooltip", info.name);
+
+    //does not error check, each point needs to have proper type
+    let color700 = types[info.type].color700;
+    let color400 = types[info.type].color400;
+    
+    point.style.setProperty("--color700", color700);
+    point.style.setProperty("--color400", color400);
+
     return point;
 }
 
+//assemble side panel innner content and returns it
+//------------
+// info:
 function createPanel(info){
     let panel = document.createElement('div');
+    let topCategory = document.createElement('div');
+    topCategory.classList.add('category');
 
     let header = document.createElement('h2');
     header.textContent = info.name;
-    panel.appendChild(header);
+    topCategory.appendChild(header);
 
     let desc = document.createElement('p');
     desc.textContent = info.desc;
-    panel.appendChild(desc);
+    topCategory.appendChild(desc);
+    panel.appendChild(topCategory);
 
     for(let x = 0; x < info.categories.length; x++){
+        let divider = document.createElement('div');
+        divider.classList.add('divider');
+        let left = document.createElement('div');
+        let right = document.createElement('div');
+        let middle = document.createElement('div');
+        divider.append(left, right, middle);
+
+
         let category = document.createElement('div');
         category.classList.add('category');
 
@@ -108,65 +179,51 @@ function createPanel(info){
         categoryBody.textContent = info.categories[x].info;
         category.appendChild(categoryBody);
 
+        panel.appendChild(divider);
         panel.appendChild(category);
     }
 
     return panel;
 }
 
-function calcMapDimensions(){
-    //calculate img dimensions for moving boundries
-    mapInfo.map.width = mapInfo.map.baseWidth * mapInfo.scale;
-    mapInfo.map.height = mapInfo.map.baseHeight * mapInfo.scale;
-
-    //determine if map is currently larger than it's container
-    mapInfo.larger.width = mapInfo.container.width < mapInfo.map.width;
-    mapInfo.larger.height = mapInfo.container.height < mapInfo.map.height;
-    
-    //set edges
-    mapInfo.edges.top = (mapInfo.container.height - mapInfo.map.height)/2 * -1;
-    mapInfo.edges.bottom = (mapInfo.container.height - mapInfo.map.height)/2;
-    mapInfo.edges.left = (mapInfo.container.width - mapInfo.map.width)/2 * -1;
-    mapInfo.edges.right = (mapInfo.container.width - mapInfo.map.width)/2;
-}
 
 
-//================================
-//Scale Map Size
-//================================
+//------------//------------//------------//------------
+//      2. Features
+//------------//------------//------------//------------
 
-//Event Listeners
-htmlElements.container.addEventListener('wheel', function(event){
-    if(event.deltaY > 0){
-        zoom(-0.1);
-    }
-    else{
-        zoom(0.1);
-    }
-}, {passive:false});
 
-htmlElements.settingsBar.querySelector('button:nth-of-type(1)').addEventListener('click', function(){
-    zoom(0.5);
-});
+//------------//------------//------------
+//  2.1 Map Scale
+//------------//------------//------------
 
-htmlElements.settingsBar.querySelector('button:nth-of-type(2)').addEventListener('click', function(){
-    zoom(-0.5);
-});
+//functions
+//------------//------------
 
-//Scaling Function
+//scales map
+//------------
+//+updates scale
+//+checks for max and min map height
+//+scales img and updates map variables
+//+checks if image is out of bounds
 function zoom(increment = 0){
     //increment scale
     mapInfo.scale += increment;
 
-    //adjust scale edge cases
+    //check for max and min height
     if(mapInfo.scale * mapInfo.map.baseHeight < mapInfo.container.height) mapInfo.scale = 1;
     if(mapInfo.scale * mapInfo.map.baseHeight > mapInfo.map.maxHeight) mapInfo.scale -= increment;
 
     //scale map img
-    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
-
+    // htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    htmlElements.mapImage.style.transform = `scale(${mapInfo.scale})`;
+    htmlElements.pointsContainer.style.transform = `scale(${mapInfo.scale})`;
     //update map dimensions
     calcMapDimensions();
+    // htmlElements.map.style.width = mapInfo.map.width+"px";
+    // htmlElements.map.style.height = mapInfo.map.height+"px";
+
+    let outOfBounds = false;
 
     //check if out of bounds
     if(mapInfo.larger.height){
@@ -187,23 +244,50 @@ function zoom(increment = 0){
         if(mapInfo.translate.x > mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
     }
 
-    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    
+    
+    htmlElements.map.classList.add('transition');
+    //move map to be in bounds, moves it to the same spot if not changed
+    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
+    setTimeout(function(){
+        htmlElements.map.classList.remove('transition');
+    }, 600);
 
-    console.log("===========");
-    console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
-    console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
-    console.log(`innerHeight: ${window.screen.availHeight}`);
+    // Testing console log block
+    // console.log("===========");
+    // console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
+    // console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
+    // console.log(`innerHeight: ${window.screen.availHeight}`);
 }
 
-//================================
-//Drag and Move Map
-//================================
+//eventListeners
+//------------//------------
+htmlElements.container.addEventListener('wheel', function(event){
+    if(event.deltaY > 0){
+        zoom(-0.1);
+    }
+    else{
+        zoom(0.1);
+    }
+});
 
-//eventlisteners
-htmlElements.container.addEventListener('pointerdown', (e) => mouseDownHandler(e));
+htmlElements.settingsBar.querySelector('button:nth-of-type(1)').addEventListener('click', function(){
+    zoom(0.5);
+});
 
-//moving functions
+htmlElements.settingsBar.querySelector('button:nth-of-type(2)').addEventListener('click', function(){
+    zoom(-0.5);
+});
+
+
+//------------//------------//------------
+//  2.2 Map Drag & Move 
+//------------//------------//------------
+
+// functions
+//------------//------------
 const mouseDownHandler = function(e) {
+    // change cursor when dragging map
     htmlElements.map.classList.add('grabbing');
     htmlElements.map.style.userSelect = 'none';
 
@@ -211,24 +295,23 @@ const mouseDownHandler = function(e) {
     mapInfo.prevMouse.x = e.clientX;
     mapInfo.prevMouse.y = e.clientY;
 
+    // add move and up listeners
     document.addEventListener('pointermove', mouseMoveHandler);
     document.addEventListener('pointerup', mouseUpHandler);
-
-    console.log("===========");
-    console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
-    console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
 }
 
 const mouseMoveHandler = function(e){
-    console.log("moving");
     // How far the mouse has been moved
     const dx = e.clientX - mapInfo.prevMouse.x;
     const dy = e.clientY - mapInfo.prevMouse.y;
 
+    //local variables for maps current x/y translation points to reduce line size
     const mapX = mapInfo.translate.x;
     const mapY = mapInfo.translate.y;
 
-    //add mouse diff to current map offset
+    //check bounds of map
+    //------------ 
+    //Two different behaviors depending on if the the map is larger or smaller than the container
     if(mapInfo.larger.height){
         if(mapY + dy < mapInfo.edges.top && mapY + dy > mapInfo.edges.bottom) mapInfo.translate.y += dy;
     }
@@ -243,8 +326,11 @@ const mouseMoveHandler = function(e){
         if(mapX + dx > mapInfo.edges.left && mapX + dx < mapInfo.edges.right) mapInfo.translate.x += dx;
     }
     
-    //update transform with new value
-    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    //update transform with new values
+    // htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
+    
+    
 
     //update prevMouse to currentMouse
     mapInfo.prevMouse.x = e.clientX;
@@ -252,12 +338,47 @@ const mouseMoveHandler = function(e){
 }
 
 const mouseUpHandler = function() {
+    // cursor is no longer grabbing
     htmlElements.map.classList.remove('grabbing');
     htmlElements.map.style.removeProperty('user-select');
 
+    // remove moving and mouse up listeners
     document.removeEventListener('pointermove', mouseMoveHandler);
     document.removeEventListener('pointerup', mouseUpHandler);
 }
 
+// eventListeners
+//------------//------------
+htmlElements.container.addEventListener('pointerdown', (e) => mouseDownHandler(e));
+
+
+//------------//------------//------------
+//  2.3 Side Panel
+//------------//------------//------------
+
+// eventListeners
+//------------//------------
 htmlElements.sidePanel.addEventListener('pointerdown', (e) => e.stopPropagation());
 htmlElements.sidePanel.addEventListener('wheel', (e) => e.stopPropagation());
+
+
+// ======================================
+//     3. Helper Functions
+// ======================================
+
+//update mapInfo values, presumably after width, height, or scale has changed
+function calcMapDimensions(){
+    //calculate img dimensions for moving boundries
+    mapInfo.map.width = mapInfo.map.baseWidth * mapInfo.scale;
+    mapInfo.map.height = mapInfo.map.baseHeight * mapInfo.scale;
+
+    //determine if map is currently larger than it's container
+    mapInfo.larger.width = mapInfo.container.width < mapInfo.map.width;
+    mapInfo.larger.height = mapInfo.container.height < mapInfo.map.height;
+    
+    //set edges
+    mapInfo.edges.top = (mapInfo.container.height - mapInfo.map.height)/2 * -1;
+    mapInfo.edges.bottom = (mapInfo.container.height - mapInfo.map.height)/2;
+    mapInfo.edges.left = (mapInfo.container.width - mapInfo.map.width)/2 * -1;
+    mapInfo.edges.right = (mapInfo.container.width - mapInfo.map.width)/2;
+}
