@@ -128,6 +128,11 @@ function createPoint(info, types){
     point.classList.add('point');
     point.style.top = info.coordinates.top;
     point.style.left = info.coordinates.left;
+
+    let tooltip = document.createElement('div');
+    tooltip.classList.add('tooltip');
+    tooltip.textContent = info.name;
+    point.appendChild(tooltip);
     point.setAttribute("data-tooltip", info.name);
 
     //does not error check, each point needs to have proper type

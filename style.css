@@ -79,6 +79,11 @@ h3{
     user-select: text;
 }
 
+br{
+    margin:2.5em 0;/* FF for instance */
+    line-height:5em;/* chrome for instance */
+}
+
 /* 
 //------------//------------//------------
     3.Layout
@@ -211,6 +216,7 @@ header{
     padding: 1rem;
 
     height: calc(100% - 1rem * 2);
+    width: calc(100% - 1rem * 2);
 
     overflow: auto;
 }
@@ -352,9 +358,6 @@ header{
     background-color: var(--color400);
     /* border: solid 1px var(--color700); */
 }   
-    .point:hover{
-        cursor: pointer;
-    }
     /* circle in middle of point */
     .point::after{
         content: "";
@@ -366,10 +369,17 @@ header{
         height: 50%;
         width: 50%;
         
-        border-radius: 100%;
+        border-radius: 50%;
 
         background: var(--color700);
     }
+    .point:hover{
+        cursor: pointer;
+    }
+    .point:hover .tooltip{
+        display: block;
+    }
+    
 
 
 /* 
@@ -377,24 +387,33 @@ header{
     4.4 Tooltip
 //------------//------------
 */
-/* Awesome CSS tooltip from SO */
-[data-tooltip]:before {
-    content : attr(data-tooltip);
-
+.tooltip{
+    font-size: 2vh;
     position : relative;
-    top: calc(-4vh); left: calc(3vh);
+    z-index: -1;
+    /* 4vh/2 is the point width*/
+    transform: rotate(45deg) translate(calc(-50% + 4vh/2), calc(-160%));
+    transform-origin: left;
+    white-space: nowrap;
+    width: fit-content;
 
-    padding: .3rem;
-    border-radius: .3rem;
+    padding: .2rem;
+    border-radius: .2rem;
 
     background-color: var(--color700);
-    color: white;
-    
-    opacity : 0;
-    transform: rotate(90deg) translate(-50%,-50%);
+    color: var(--textColor400);
+
+    display: none;
 }
-[data-tooltip]:hover:before {        
-    opacity : 1;
+
+.tooltip::after{
+    position: absolute;
+    bottom: -.2rem;
+    left: calc(50% - 6.5px);
+    border-top: 5px solid #000;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    content: " ";
 }
 
 /* 

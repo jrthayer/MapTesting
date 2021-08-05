@@ -3,6 +3,10 @@
     "mapSrc": "./kalkatesh_custom.png",
     "wiki": "https://verum.fandom.com/wiki/Kalkatesh",
     "pointTypes":{
+            "":{
+                "color700": "#CCFF00",
+                "color400": "black"
+            },
             "city":{
                 "color700": "#0e0101",
                 "color400": "#630808"
@@ -18,10 +22,43 @@
     },
     "points": [
         {
+            "name": "",
+            "motto": "",
+            "type": "",
+            "coordinates": {"top": "50%", "left": "50%"},
+            "desc": "",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": ""
+                },
+                {
+                    "title": "Demographic",
+                    "info": ""
+                },
+                {
+                    "title": "Structure",
+                    "info": ""
+                },
+                {
+                    "title": "Religion",
+                    "info": ""
+                },
+                {
+                    "title": "Military",
+                    "info": ""
+                },
+                {
+                    "title": "Agriculture",
+                    "info": ""
+                }
+            ]
+        },
+        {
             "name": "Daborak",
             "motto": "Duty. Discipline. Death.",
             "type": "country",
-            "coordinates": {"top": "51%", "left": "83%"},
+            "coordinates": {"top": "49%", "left": "80%"},
             "desc": "A land of lush wheat fields, flat plains, and wild rivers.\n\nLush for farming which provides Kalakatesh with a large portion of its food.",
             "categories": [
                 {
@@ -54,24 +91,24 @@
             "name": "Dolten",
             "motto": "",
             "type": "country",
-            "coordinates": {"top": "60%", "left": "68%"},
+            "coordinates": {"top": "57%", "left": "65%"},
             "desc": "A temperate region, heavily forested with a swamp and a few large scattered rivers.\n\nThe southern tip is a barren land of shale rock and alchemical industry.",
             "categories": [
                 {
                     "title": "History",
-                    "info": "Dolten is a place rife with peril and mystery, it has always been so. Long ago in the first era when the forests of what would be called Dolten were formed, was home to the mighty Linnorms great primordial dragons who fought over territory and hunted the animals in the old ways. It was during this time that the dragons from Dragonstar attacked, invaders swept over the sky and war came to Verum for the first time. The Linnorms fought these invaders but most were slain resulting in the dragons being weakened; as such, both races spent centuries to recover while the elves began to spread their dominion. Dolten itself was forever changed by the blood of Linnorms spilling into the earth. The forest grew more primal, its beasts began to warp and change. Woe'tanclast the white Linnorm was perhaps the most impactful, for she was the wife and only love of Crovux father of Linnorms it was from her blood which a single spider was swept up in the spider survived and was forever changed and with its survival one of Dolten's most notorious threats was born The Creeping Death. The lands of Dolten continued to be a place of danger and death all throughout the eras. That was until finally a group of desperate settlers paid the price to live there, in blood and will. It was from these first settlers and the witches that aided them, that the land was somewhat tamed allowing for civilization to against all odds thrive."
+                    "info": "Dolten is a place rife with peril and mystery, it has always been so.\n\nLong ago in the first era when the forests of what would be called Dolten were formed, mighty Linnorms(great primordial dragons) fought over territory and hunted the animals in the old ways. It was during this time that the dragons from Dragonstar attacked, sweeping over the sky and bringing war to Verum for the first time. \n\nThe Linnorms fought these invaders but most were slain resulting in the dragons being weakened; as such, both races spent centuries to recover while the elves began to spread their dominion. Dolten itself was forever changed by the blood of Linnorms spilling into the earth. The forest grew more primal, its beasts began to warp and change. \n\nThe white Linnorm Woe'tanclast, wife of Crovux(father of Linnorms), was perhaps the most impactful. For from her blood a single spider was changed forever and reborn as one of Dolten's most notorious threats, The Creeping Death.\n\nThe lands of Dolten continued to be a place of danger and death all throughout the eras. That was until finally a group of desperate settlers paid the price to live there, in blood and will. It was from these first settlers and the witches that aided them, that the land was somewhat tamed allowing for civilization to thrive against all odds."
                 },
                 {
                     "title": "Demographic",
-                    "info":"The population of Dolten is relatively diverse with a focus on humans, gnomes and elves. In addition to these Dolten is the primary home of skinwalkers and any race of which is difficult to look upon."
+                    "info":"The population of Dolten is relatively diverse with a focus on humans, gnomes and elves.\n\nIn addition to these Dolten is the primary home of skinwalkers and any race of which is difficult to look upon."
                 },
                 {
                     "title": "Structure",
-                    "info":"Dolten's government is separated into two pieces, the public face of a council of nobles which run day to day operations; however, the true heart of the Doltenian government is a shadow government of witches of the Great Coven. Although this is supposedly a secret, it's a fact everyone knows but never speaks aloud."
+                    "info":"Dolten's government is separated into two pieces, a council of nobles which run the day to day operations and  a shadow government of Great Coven witches that are the true heart of the Doltenian government.\n\nAlthough this is supposedly a secret, it's a fact everyone knows but never speaks aloud."
                 },
                 {
                     "title": "Religion",
-                    "info":"The primary religions of Dolten are nearly entirely dominated by the Patrons beings with little form or dogma leading to a pseudo-spiritualism, of the dominant religions of the world the Green Pantheon is the most common."
+                    "info":"The primary religions of Dolten are nearly entirely dominated by the Patrons(beings with little form or dogma, leading to a pseudo-spiritualism).\n\nOf the dominant religions of the world the Green Pantheon is the most common."
                 },
                 {
                     "title": "Military",
@@ -79,8 +116,59 @@
                 },
                 {
                     "title": "Technology",
-                    "info":"Dolten is a sporadically advancing nation in terms of scientific advancement. Parts still cling to the old tribal methods that they have practiced for centuries; this is especially true amongst the skinwalkers, some take to the full development of marble and stone and hope it will stand against the wrath of the forest. In Bleak the advancements rival that of even Khao, while their advances in planar binding rival that of even the old mages guild."
+                    "info":"Dolten is a sporadically advancing nation in terms of scientific advancement.\n\nParts still cling to the old tribal methods that they have practiced for centuries; this is especially true amongst the skinwalkers, some take to the full development of marble and stone and hope it will stand against the wrath of the forest.\n\nIn Bleak the advancements rival that of even Khao, while their advances in planar binding rival that of even the old mages guild."
                 }
+            ]
+        },
+        {
+            "name": "Orde",
+            "motto": "Faith Above Flesh",
+            "type": "country",
+            "coordinates": {"top": "22%", "left": "25%"},
+            "desc": "A supposed utopia of wealth and plenty.\n\nThe citizens of which live under the constant supervision of The White Pantheon and its organized religions.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "Orde was a country formed slowly from those that fled the fall of the Elven Empire. They quickly formed a country based on religious freedom, that believed that the cruelties and dark magics the Elven Empire used were the cause of their misfortune and misery.\n\nAs time went on religious freedom was eventually replaced with the standard moral goods; this invoked a sense of order and good will, in exchange for a sharp prejudice.\n\nEvery 20 years or so the White Council replaces its various parts, allowing new ideas to spread and change to become possible. However, Orde's mistrust of the darker things have led to many unfortunate events, including war and the rise of the Inquisition.\n\nThe Reckoning shattered the belief system of Orde to its very core. Not only did they have to use the power of evil to assist in defending the Seven against a great threat, but they lost many of their deities of the past in this time of trouble.\n\nModern day Orde attempts to follow the Seven's doctrine of hope, but old habits die hard and there is a stirring of mistrust and a quiet desperation because this peace can only be maintained for so long and the scales are imbalanced."
+                },
+                {
+                    "title": "Demographic",
+                    "info": "The population of Orde is quite diverse, featuring races from all corners of Kalkatesh.\n\nHumans do come out slightly ahead in numbers, with tieflings coming in at the lowest. The tieflings, although the country itself holds no official prejudice against them, do not feel comfortable in the country.\n\nOther races that share difficult to understand powers or forms usually stay within the outlier settlements."
+                },
+                {
+                    "title": "Religion",
+                    "info": "The White Pantheon is unquestionably the most represented in Orde, most of the deities within it, have their main churches within the country.\n\nOther religions, save for those that serve evil are welcome within Orde."
+                },
+                {
+                    "title": "Military",
+                    "info": "Orde's military force is mostly composed of the Order of the White Council, a contingent of paladins from The White Pantheon. There are also a few militia contracts with mercenaries in the outlier towns, which is comprised of religiously inclined warriors. The Justicars keep order as the main policing force for the cities."
+                },
+                {
+                    "title": "Infrastructure",
+                    "info": "Orde is perhaps the most well developed in terms of infrastructure out of all the countries. Instead of only a few cities with paved roads, nearly all of the cities in Orde benefit from paved roads and fully operational aqueducts."
+                }
+            ]
+        },
+        {
+            "name": "Khao",
+            "motto": "",
+            "type": "country",
+            "coordinates": {"top": "10%", "left": "65%"},
+            "desc": "Khao is a twin existence, one being the great jungle below called The T'zar, the other being the great floating city of Khao.\n\nThe jungle below is comprised of rivers, mountain s and lush green flora. The city is comprised of heavily regulated districts, each with its own various mark.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "560 years ago, Khao was simply a jungle filled with tribes that warred with one another, that was until one day when ancient ruins were discovered by the Khaons. Fueled by the knowledge and magical enhancements found within the ruins, Khoan society developed and advanced quickly, soon capable of magical flight.\n\nSeeking security from a great war that ravaged Kalkatesh, the Khaons decided that they would take up an isolation policy enforced by a truly lofty project, the floating city of Khao. For within the clouds they would be unchallenged and unmolested —but what to do with all the population— for the great city could not fit them all.\n\nThe elders believed the fairest way was pure chance and so a series of random allotments were decided, these people would be those that would ascend to the heavens while the rest would stay below. Much to the surprise of those in power, not a single soul attempted to cheat, the allotments were made and the people that were once unified in knowledge would now be separated by distance.\n\nThe people of Khao are stronger knit than most so it was agreed by those in the sky that they would always care for those below; that as their fleet grew larger, they would land and gather the tribes. The eventual goal of the Khaons is to ascend all of their people and they have kept to that promise for these 500 years."
+                }
+            ]
+        },
+        {
+            "name": "The Great Floating City",
+            "motto": "of Khao",
+            "type": "city",
+            "coordinates": {"top": "15%", "left": "70%"},
+            "desc": "Khao is a twin existence, one being the great jungle below called The T'zar, the other being the great floating city of Khao.\n\nThe jungle below is comprised of rivers, mountain s and lush green flora. The city is comprised of heavily regulated districts, each with its own various mark.",
+            "categories": [
             ]
         }
     ]
