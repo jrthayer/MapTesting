@@ -53,6 +53,9 @@ h3::selection{
 button{
     border: none;
     background: none;
+    color: var(--textColor700);
+    outline: none;
+    box-shadow: none;
 }
 /* 
 //------------//------------//------------
@@ -112,7 +115,7 @@ body{
 }
 
 header{
-    z-index: 2;
+    z-index: 15;
     position: fixed;
     top: 0;
     
@@ -124,7 +127,6 @@ header{
     position: absolute;
     top: var(--navHeight);
     
-    /* height: calc(100vh - var(--navHeight)); */
     height: calc(100% - var(--navHeight));
     width: calc(100vw);
 
@@ -144,22 +146,22 @@ header{
 #sidePanel{
     z-index: 3;
     position: absolute;
-    top: 0;
-    left: calc(100%);
     
-    
-    height: 100%;
-    width: calc(100% - 3rem);
-    border-left: solid 1px var(--color400);
+    /* 3rem is for mobile bottom button */
+    height: calc(100% - 3rem);
+    width: 100%;
 
     background-color: var(--color700);
     color: var(--textColor400);
     
-    transition: 1s left;
+    transition: 1s top;
     touch-action: auto;
     cursor: default;
 
     white-space: pre-wrap;
+
+    top: 100%;
+    left: 0;
 }
 /* 
 //------------
@@ -167,42 +169,62 @@ header{
 //------------
 */
 #sidePanelBtn{
-    font-size: 1rem;
-
     z-index: 4;
     position: absolute;
-    top: calc(50% - 2.5rem);
-    left: -4rem;
 
-    width: 3rem;
-    height: 5rem;
-    margin: 1rem;
+    top: calc(-3rem);
+    left: calc(50% - 2.5rem);
+
+    width: 5rem;
+    height: 3rem;
 
     border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 
     color: var(--textColor700);
     background-color: var(--color400);
 
     font-weight: 700;
     font-size: 2rem;
-
-    
-
     cursor: pointer;
 }
-    #sidePanelBtn:before{
+    #sidePanelBtn::before{
         position: absolute;
 
         top: 50%;
-        right: 10%;
-        transform: translate(-50%, -50%);
+        right: 50%;
+        transform: translate(50%, -50%);
 
         font-family: 'FontAwesome';
-        content: "\f053";
+        content: "\f077";
         
         display: block;
     }
+
+
+#bottomBtn{
+    height: 3rem;
+    width: 100%;
+    position: absolute;
+    bottom: -3rem;
+    left: 0;
+    background-color: var(--color400);
+    border: 2px solid var(--color700);
+}
+    #bottomBtn::before{
+        font-size: 3rem;
+        position: absolute;
+
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+
+        font-family: 'FontAwesome';
+        content: "\f078";
+        
+        display: block;
+    }
+
 
 /* 
 //------------
@@ -439,12 +461,12 @@ header{
 }
 
 .active{
-    left: 3rem !important;
+    /* left: 3rem !important; */
+    top: 0 !important;
 }
-    .active #sidePanelBtn::before{
+    /* .active #sidePanelBtn::before{
         content: "\f054";
-
-    }
+    } */
 
 .transition{
     transition: transform .5s;
@@ -459,13 +481,43 @@ header{
 /* 
 ===== 6.1 Tablet/Desktop ===== 
 */
-@media(min-width: 30rem) {
+@media(min-width: 33rem) {
     #sidePanel{
+        top: 0;
+        left: 100%;
+
         width: 30rem;
+        height: 100%;
+        
+        border-left: solid 2px var(--color400);
+
+        transition: 1s left;
     }
+
+    #sidePanelBtn{
+        top: calc(50% - 2.5rem);
+        left: -3rem;
+
+        width: 3rem;
+        height: 5rem;
+
+        border-radius: 0;
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
+        #sidePanelBtn::before{
+            content: "\f053";
+        }
 
     .active{
         left: calc(100% - 30rem) !important;
+    }
+        .active #sidePanelBtn::before{
+            content: "\f054";
+        }
+
+    #bottomBtn{
+        display: none;
     }
 }
 

@@ -8,6 +8,7 @@
 //          2.1 Map Scale
 //          2.2 Map Drag & Move
 //          2.3 Side Panel
+//          2.4 Resize Container
 //      3. Helper Functions
 //------------//------------//------------//------------//------------
 
@@ -44,6 +45,7 @@ const htmlElements = {
     settingsBar: document.querySelector('#settingsBar'),
     sidePanel: document.querySelector('#sidePanel'),
     sidePanelBtn: document.querySelector('#sidePanelBtn'),
+    bottomBtn: document.querySelector('#bottomBtn'),
     panelInfo: document.querySelector("#panelInfo"),
     pointsContainer: ""
 }
@@ -102,21 +104,7 @@ window.addEventListener('load', async function(){
 //set necessary variables after map img has loaded
 //------------
 htmlElements.mapImage.onload = function(){
-    //set map container height and width
-    let mapContainer = window.getComputedStyle(htmlElements.container);
-    mapInfo.container.height = parseInt(mapContainer.getPropertyValue('height'));
-    mapInfo.container.width = parseInt(mapContainer.getPropertyValue('width'));
-    
-    //set map height and width
-    let compStyles = window.getComputedStyle(htmlElements.map);
-    mapInfo.map.maxHeight = parseInt(compStyles.getPropertyValue('max-height'));
-    mapInfo.map.baseHeight = parseInt(compStyles.getPropertyValue('height'));
-    mapInfo.map.baseWidth = parseInt(compStyles.getPropertyValue('width'));
-
-    //center map
-    htmlElements.map.style.left = `${mapInfo.container.width/2 - mapInfo.map.baseWidth/2}px`;
-
-    //update mapInfo
+    initialMapDimensions();
     calcMapDimensions();
 }
 
@@ -229,32 +217,7 @@ function zoom(increment = 0){
     let outOfBounds = false;
 
     //check if out of bounds
-    if(mapInfo.larger.height){
-        if(mapInfo.translate.y > mapInfo.edges.top) mapInfo.translate.y = mapInfo.edges.top; 
-        if(mapInfo.translate.y  < mapInfo.edges.bottom) mapInfo.translate.y = mapInfo.edges.bottom; 
-    }
-    else{
-        if(mapInfo.translate.y < mapInfo.edges.top) mapInfo.translate.y = mapInfo.edges.top; 
-        if(mapInfo.translate.y > mapInfo.edges.bottom) mapInfo.translate.y = mapInfo.edges.bottom; 
-    }
-
-    if(mapInfo.larger.width){
-        if(mapInfo.translate.x > mapInfo.edges.left) mapInfo.translate.x = mapInfo.edges.left;
-        if(mapInfo.translate.x < mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
-    }
-    else{
-        if(mapInfo.translate.x < mapInfo.edges.left) mapInfo.translate.x = mapInfo.edges.left;
-        if(mapInfo.translate.x > mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
-    }
-
-    
-    
-    htmlElements.map.classList.add('transition');
-    //move map to be in bounds, moves it to the same spot if not changed
-    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
-    setTimeout(function(){
-        htmlElements.map.classList.remove('transition');
-    }, 600);
+    checkBoundries();
 
     // Testing console log block
     // console.log("===========");
@@ -363,9 +326,22 @@ htmlElements.map.addEventListener('pointerdown', (e) => mouseDownHandler(e));
 //------------//------------
 //close side panel with button 
 htmlElements.sidePanelBtn.addEventListener('click', ()=> htmlElements.sidePanel.classList.toggle('active'));
+htmlElements.bottomBtn.addEventListener('click', ()=> htmlElements.sidePanel.classList.remove('active'));
 
 htmlElements.sidePanel.addEventListener('pointerdown', (e) => e.stopPropagation());
 htmlElements.sidePanel.addEventListener('wheel', (e) => e.stopPropagation());
+
+
+//------------//------------//------------
+//  2.4 Resize Container
+//------------//------------//------------
+
+//intialize and adjust map variables when screen is resized 
+window.addEventListener('resize', function(){
+    initialMapDimensions();
+    calcMapDimensions();
+    checkBoundries();
+});
 
 
 // ======================================
@@ -387,4 +363,50 @@ function calcMapDimensions(){
     mapInfo.edges.bottom = (mapInfo.container.height - mapInfo.map.height)/2;
     mapInfo.edges.left = (mapInfo.container.width - mapInfo.map.width)/2 * -1;
     mapInfo.edges.right = (mapInfo.container.width - mapInfo.map.width)/2;
+}
+
+function initialMapDimensions(){
+    //set map container height and width
+    let mapContainer = window.getComputedStyle(htmlElements.container);
+    mapInfo.container.height = parseInt(mapContainer.getPropertyValue('height'));
+    mapInfo.container.width = parseInt(mapContainer.getPropertyValue('width'));
+    
+    //set map height and width
+    let compStyles = window.getComputedStyle(htmlElements.map);
+    mapInfo.map.maxHeight = parseInt(compStyles.getPropertyValue('max-height'));
+    mapInfo.map.baseHeight = parseInt(compStyles.getPropertyValue('height'));
+    mapInfo.map.baseWidth = parseInt(compStyles.getPropertyValue('width'));
+
+    //center map + set origin to center
+    htmlElements.map.style.left = `${mapInfo.container.width/2 - mapInfo.map.baseWidth/2}px`;
+    htmlElements.map.style.top = '0px';
+}
+
+function checkBoundries(){
+    if(mapInfo.larger.height){
+        if(mapInfo.translate.y > mapInfo.edges.top) mapInfo.translate.y = mapInfo.edges.top; 
+        if(mapInfo.translate.y  < mapInfo.edges.bottom) mapInfo.translate.y = mapInfo.edges.bottom; 
+    }
+    else{
+        if(mapInfo.translate.y < mapInfo.edges.top) mapInfo.translate.y = mapInfo.edges.top; 
+        if(mapInfo.translate.y > mapInfo.edges.bottom) mapInfo.translate.y = mapInfo.edges.bottom; 
+    }
+
+    if(mapInfo.larger.width){
+        if(mapInfo.translate.x > mapInfo.edges.left) mapInfo.translate.x = mapInfo.edges.left;
+        if(mapInfo.translate.x < mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
+    }
+    else{
+        if(mapInfo.translate.x < mapInfo.edges.left) mapInfo.translate.x = mapInfo.edges.left;
+        if(mapInfo.translate.x > mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
+    }
+
+    
+    
+    htmlElements.map.classList.add('transition');
+    //move map to be in bounds, moves it to the same spot if not changed
+    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
+    setTimeout(function(){
+        htmlElements.map.classList.remove('transition');
+    }, 600);
 }
