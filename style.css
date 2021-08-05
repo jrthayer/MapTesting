@@ -7,6 +7,10 @@
     3. Layout
     4. Components
         4.1 Side Panel
+            4.11 Toggle Button
+            4.12 Info Panel
+                4.12a Category
+                4.12b Divider
         4.2 Map
         4.3 Point
         4.4 Tooltip
@@ -57,6 +61,7 @@ button{
 */
 html{
     font-family: "Spiegel", Helvetica, sans-serif;
+    user-select: none;
 }
 
 h2{
@@ -68,6 +73,10 @@ h2{
 h3{
     font-size: 1.8rem;
     margin-top: 1rem;
+}
+
+#sidePanel{
+    user-select: text;
 }
 
 /* 
@@ -113,6 +122,7 @@ header{
     /* height: calc(100vh - var(--navHeight)); */
     height: calc(100% - var(--navHeight));
     width: calc(100vw);
+
 }
 
 /* 
@@ -130,66 +140,146 @@ header{
     z-index: 3;
     position: absolute;
     top: 0;
-    right: calc(100%);
+    left: calc(100%);
     
     
-    height: calc(100vh - var(--navHeight));
-    width: calc(100vw);
-
-    overflow: auto;
+    height: 100%;
+    width: 100%;
 
     background-color: var(--color700);
     color: var(--textColor400);
     
-    transition: 1s right;
+    transition: 1s left;
     touch-action: auto;
     cursor: default;
 
     white-space: pre-wrap;
 }
-    #sidePanel button{
-        z-index: 4;
+/* 
+//------------
+    4.11 Toggle Button
+//------------
+*/
+#sidePanelBtn{
+    font-size: 1rem;
+
+    z-index: 4;
+    position: absolute;
+    top: calc(50% - 2rem);
+    left: -2.5rem;
+
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
+
+    border-radius: .5rem;
+
+    color: var(--textColor700);
+    background-color: var(--color400);
+    box-shadow: 0px 0px 0px 4px var(--color700),
+    0px 0px 0px 8px var(--color400);
+
+    font-weight: 700;
+    font-size: 2rem;
+
+    transform: rotate(45deg);
+    transition: .6s transform;
+
+    cursor: pointer;
+}
+    #sidePanelBtn:before{
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 2em;
-        height: 2em;
+        left: 35%;
+        top: 65%;
 
-        padding: 0;
-
-        color: var(--textColor700);
-
-        font-weight: 700;
-        font-size: 2rem;
-
-        /* border: 1px solid var(--textColor400); */
+        font-family: 'FontAwesome';
+        content: "\f078";
         
+        transform: translate(-60%, -40%) rotate(45deg);
+        transition: .3s transform;
     }
-    #sidePanel::-webkit-scrollbar{
+
+/* 
+//------------
+    4.12 Info Panel
+//------------
+*/
+#panelInfo{
+    position: absolute;
+    top: 0;
+
+    padding: 1rem;
+
+    height: calc(100% - 1rem * 2);
+
+    overflow: auto;
+}
+    #panelInfo::-webkit-scrollbar{
         background-color: var(--color700);
         border-left: solid 1px var(--color400);
     }
-    #sidePanel::-webkit-scrollbar-track{
+    #panelInfo::-webkit-scrollbar-track{
         background-color: var(--textColor400);
     }
-    #sidePanel::-webkit-scrollbar-thumb{
+    #panelInfo::-webkit-scrollbar-thumb{
         background-color: var(--color400);
         border: 1px solid var(--textColor700);
         border-radius: 25px;
     }
 
-
-    #panelInfo{
-        position: absolute;
-        top: 0;
-
+/* 
+    4.12a Category
+*/
+.category{
+    padding-right: 1rem;
+    padding-left: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+    .category > :not(p){
         padding: 1rem;
+        margin-right: -1rem;
+        margin-left: -4rem;
+        padding-left: 1rem;
+    }
+    .category:first-of-type{
+        padding: 3rem;
+        /* cover top parent */
+        margin-left: -1rem;
+        padding-left: 4rem;
+        margin-right: -1rem;
+        padding-right: 1rem;
+        margin-top: -1rem;
 
-        width: calc(100% - 1rem*2);
+        background: linear-gradient(180deg, var(--color400),rgba(220,9,20,0));
     }
-    .divider{
-        position: relative;
+    .category h2{
+        text-transform: uppercase;
+        text-shadow: -1px -1px 1px var(--color700), 1px -1px 1px var(--color700), -1px 1px 1px var(--color700), 1px 1px 1px var(--color700);
+        color: var(--textColor400);
+        text-align: center;
     }
+    .category h3{
+        background: linear-gradient(270deg, var(--color700), 20%, var(--color400), 80%, var(--color700));
+        
+        text-align: center;
+        
+        text-transform: uppercase;
+    }
+    .category p{
+        color: var(--textColor700);
+        line-height: 1.5rem;
+    }
+
+/* 
+    4.12b Divider
+*/
+.divider{
+    position: relative;
+    
+    margin-right: -1rem;
+    margin-left: -1rem;
+}
     .divider div:nth-of-type(1),
     .divider div:nth-of-type(2)
     {
@@ -202,46 +292,14 @@ header{
         top: -6px;
     }
     .divider div:nth-of-type(1){
-        left: 0;
+        left: 3rem;
     }
     .divider div:nth-of-type(2){
-        right: 0;
+        right: 1rem;
     }
     .divider div:nth-of-type(3){
         border-top: solid 1px var(--color400);
-        margin: 0 -1rem;
     }
-    .category{
-        padding: 1rem 2rem;
-        position: relative;
-    }
-        .category:first-of-type{
-            left: -1rem;
-            top: -1rem;
-
-            width: calc(100% - 2rem*2);
-            padding: 0rem 3rem;
-            padding-top: 5rem;
-
-            background: linear-gradient(180deg, var(--color400),rgba(220,9,20,0));
-        }
-        .category h2{
-            text-transform: uppercase;
-            text-shadow: -1px -1px 1px var(--color700), 1px -1px 1px var(--color700), -1px 1px 1px var(--color700), 1px 1px 1px var(--color700);
-            color: var(--textColor400);
-        }
-        .category h3{
-            background: linear-gradient(45deg, var(--color400), 30%, var(--color700));
-            padding: .5rem;
-            padding-left: 3.3rem;
-            margin-left:  -3.3rem;
-            width: 100%;
-            text-transform: uppercase;
-        }
-        .category p{
-            color: var(--textColor700);
-            line-height: 1.5rem;
-        }
 
 /* 
 //------------//------------
@@ -312,6 +370,8 @@ header{
 
         background: var(--color700);
     }
+
+
 /* 
 //------------//------------
     4.4 Tooltip
@@ -322,7 +382,7 @@ header{
     content : attr(data-tooltip);
 
     position : relative;
-    top: calc(-3vh); left: calc(3vh);
+    top: calc(-4vh); left: calc(3vh);
 
     padding: .3rem;
     border-radius: .3rem;
@@ -331,7 +391,7 @@ header{
     color: white;
     
     opacity : 0;
-    transform: translate(-50%,-50%) rotate(45deg);
+    transform: rotate(90deg) translate(-50%,-50%);
 }
 [data-tooltip]:hover:before {        
     opacity : 1;
@@ -378,8 +438,11 @@ header{
 }
 
 .active{
-    right: 0 !important;
+    left: 0 !important;
 }
+    .active #sidePanelBtn{
+        transform: rotate(225deg);
+    }
 
 .transition{
     transition: transform .5s;
@@ -391,6 +454,18 @@ header{
 //------------//------------//------------
 */
 
+/* 
+===== 6.1 Tablet/Desktop ===== 
+*/
+@media(min-width: 30rem) {
+    #sidePanel{
+        width: 30rem;
+    }
+
+    .active{
+        left: calc(100% - 30rem) !important;
+    }
+}
 
 /* 
     0. Quick-Hacks/Temporary

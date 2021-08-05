@@ -43,6 +43,7 @@ const htmlElements = {
     container: document.querySelector('.mapContainer'),
     settingsBar: document.querySelector('#settingsBar'),
     sidePanel: document.querySelector('#sidePanel'),
+    sidePanelBtn: document.querySelector('#sidePanelBtn'),
     panelInfo: document.querySelector("#panelInfo"),
     pointsContainer: ""
 }
@@ -76,11 +77,13 @@ window.addEventListener('load', async function(){
                 
                 newPoint.addEventListener('click', function(){
                     //attach toggle
-                    htmlElements.sidePanel.classList.toggle('active');
+                    
+                    htmlElements.sidePanel.classList.add('active');
                     htmlElements.sidePanel.style.setProperty("--color700", newPoint.style.getPropertyValue("--color700"));
                     htmlElements.sidePanel.style.setProperty("--color400", newPoint.style.getPropertyValue("--color400"));
 
                     //populate sidepanel
+                    htmlElements.panelInfo.scrollTo(0,0);
                     let panelInfo = createPanel(pointsData[x]);
                     htmlElements.panelInfo.innerHTML = "";
                     htmlElements.panelInfo.appendChild(panelInfo);
@@ -90,11 +93,6 @@ window.addEventListener('load', async function(){
             }
             htmlElements.pointsContainer = pointsContainer;
             htmlElements.map.appendChild(pointsContainer);
-
-            //close side panel with button 
-            htmlElements.sidePanel.querySelector('button').addEventListener('click', function(){
-                htmlElements.sidePanel.classList.remove('active');
-            });
         })
         .catch(function (error) {
             console.log(error);
@@ -349,7 +347,7 @@ const mouseUpHandler = function() {
 
 // eventListeners
 //------------//------------
-htmlElements.container.addEventListener('pointerdown', (e) => mouseDownHandler(e));
+htmlElements.map.addEventListener('pointerdown', (e) => mouseDownHandler(e));
 
 
 //------------//------------//------------
@@ -358,6 +356,9 @@ htmlElements.container.addEventListener('pointerdown', (e) => mouseDownHandler(e
 
 // eventListeners
 //------------//------------
+//close side panel with button 
+htmlElements.sidePanelBtn.addEventListener('click', ()=> htmlElements.sidePanel.classList.toggle('active'));
+
 htmlElements.sidePanel.addEventListener('pointerdown', (e) => e.stopPropagation());
 htmlElements.sidePanel.addEventListener('wheel', (e) => e.stopPropagation());
 

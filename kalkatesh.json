@@ -9,11 +9,11 @@
             },
             "country":{
                 "color700": "#01080e",
-                "color400": "#04213e"
+                "color400": "#063665"
             },
             "region":{
                 "color700": "#020e01",
-                "color400": "#083e04"
+                "color400": "#0b5b06"
             }
     },
     "points": [
