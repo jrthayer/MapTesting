@@ -123,7 +123,7 @@ body{
     background-color: rgb(25,25,25);
 
     touch-action: none;
-
+    /* this is needed to prevent url collapse */
     width: 100%;
     height: 100%;
     margin: 0;
@@ -202,7 +202,7 @@ header{
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
 
-    color: var(--textColor700);
+    color: var(--textColor400);
     background-color: var(--color400);
 
     font-weight: 700;
@@ -229,9 +229,11 @@ header{
     position: absolute;
     bottom: -3rem;
     left: 0;
+    
+    /* button */
     background-color: var(--color400);
     border: 2px solid var(--color700);
-    color: var(--textColor700);
+    color: var(--textColor400);
 }
     #bottomBtn::before{
         font-size: 3rem;
@@ -296,6 +298,7 @@ header{
     .category h3{
         background: linear-gradient(270deg, var(--color700), 20%, var(--color400), 80%, var(--color700));
         margin: 0 -2rem;
+        padding: .5rem;
         text-align: center;
         
         text-transform: uppercase;
@@ -343,7 +346,7 @@ header{
 }
     #legendPanel .category:first-of-type{
         background: none;
-
+        border: none;
     }
     #legendPanel .category{
         /* text-align: center; */
@@ -352,10 +355,12 @@ header{
         background-color: var(--color400);
         margin-bottom: 1rem;
         border-radius: 1rem;
+
+        border: var(--buttonSecondary) 3px solid;
     }
     #legendPanel h2{
         font-size: 3rem;
-        text-shadow: none;
+
         color: var(--color400);
         padding-top: 2rem;
         margin-bottom: 0rem;
@@ -363,6 +368,8 @@ header{
 
     #legendPanel h3{
         font-size: 2rem;
+
+        /* text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black; */
 
         margin: 0 1rem;
         padding: .5rem;
@@ -375,6 +382,7 @@ header{
         display: inline-block;
         width: 35px;
         height: 35px;
+        cursor: auto;
     }
     
 
@@ -462,7 +470,7 @@ header{
     font-size: 2vh;
     position : relative;
     z-index: -1;
-    /* 4vh/2 is the point width*/
+    /* 4vh/2 is for the point width*/
     transform: rotate(45deg) translate(calc(-50% + 4vh/2), calc(-160%));
     transform-origin: left;
     white-space: nowrap;
@@ -509,6 +517,8 @@ header{
     
     margin: .5rem;
     border-radius: .5rem;
+
+    pointer-events: none; 
 }
     #settingsBar button{
         height: 50px;
@@ -516,6 +526,7 @@ header{
         font-size: 1.5rem;
 
         padding: .5rem;
+        pointer-events: auto; 
     }
     #settingsBar button:active{
         background-color: hsl(0, 0%, 70%);
@@ -523,15 +534,18 @@ header{
     #settingsBar button:nth-last-child(1){
         border-bottom-left-radius: 0rem;
         border-bottom-right-radius: 0rem;
+        border-top: solid 1px var(--buttonSecondary);
     }
     #settingsBar button:nth-last-child(2){
         border-top-left-radius: 0rem;
         border-top-right-radius: 0rem;
+        border-bottom: solid 1px var(--buttonSecondary);
     }
     
     #nightModeBtn{
         height: 50px;
         width: 50px;
+        border-top: solid 1px var(--buttonSecondary);
 
         margin-bottom: 1rem;
 
@@ -548,6 +562,7 @@ header{
 
     #legend{
         padding-left: 1rem;
+        border-bottom: solid 1px var(--buttonSecondary);
     }
         #legend .point{
             position: unset;
@@ -597,11 +612,9 @@ header{
         color: var(--colorDarkMode);
     }
     .darkMode #nightModeBtn{
-
-        border: solid 3px var(--buttonSecondary);
+        border-color: var(--buttonSecondary);
         background-color: var(--buttonPrimary);
         color: hsl(0, 0%, 50%);
-        
     }
         .darkMode #nightModeBtn::before{
             font-weight:900;
@@ -627,7 +640,7 @@ header{
         width: 30rem;
         height: 100%;
         
-        border-left: solid 2px var(--color400);
+        border-left: solid 4px var(--color400);
 
         transition: 1s left;
     }
@@ -657,7 +670,53 @@ header{
     #bottomBtn{
         display: none;
     }
+
+    /* Rotate Settings Bar if it overlaps sidepanel tab*/
+    @media(max-height: 40rem) {
+        #settingsBar{
+            z-index: 2;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        
+            height: calc(100% - .5rem *2);
+            
+        }
+        #nightModeBtn{
+            height: 50px;
+            width: 50px;
+    
+            margin-bottom: 0rem;
+            margin-right: 1rem;
+    
+            background-color: var(--buttonText);
+            color: hsl(0, 0%, 50%);
+
+            border: solid 2px var(--buttonSecondary);
+            border-left: solid 1px var(--buttonSecondary);
+        }
+
+        #settingsBar button:nth-last-child(1){
+            border: solid 2px var(--buttonSecondary);
+            border-left: solid 1px var(--buttonSecondary);
+        }
+        #settingsBar button:nth-last-child(2){
+            border: solid 2px var(--buttonSecondary);
+            border-right: solid 1px var(--buttonSecondary);
+        }
+        
+        #legend{
+            padding-left: 1rem;
+            border: solid 2px var(--buttonSecondary);
+            border-left: solid 1px var(--buttonSecondary);
+        }
+    }
 }
+
 
 /* 
     0. Quick-Hacks/Temporary
