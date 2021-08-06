@@ -9,7 +9,9 @@
 //          2.2 Map Drag & Move
 //          2.3 Side Panel
 //          2.4 Resize Container
-//      3. Helper Functions
+//          2.5 Night Mode
+//      3. Html Generators
+//      4. Helper Functions
 //------------//------------//------------//------------//------------
 
 
@@ -67,29 +69,27 @@ window.addEventListener('load', async function(){
             //load map image triggering onload function below
             htmlElements.mapImage.src = response.data.mapSrc;
             htmlElements.mapImage.classList.add('transition');
+
+            let pointsData = response.data.points;
+            let pointTypes = response.data.pointTypes;
+
+            console.log();
+            //create legend feature
+            //repeated code clean up later!!!!
+            let legendBtn = document.querySelector('#legend');
+            let legendHtml = createLegend(pointTypes);
+            legendBtn.addEventListener('click', () => populatePanel(legendBtn, legendHtml));
+
             //generate map points
             let pointsContainer = document.createElement('div');
             pointsContainer.id = 'pointsContainer';
             pointsContainer.classList.add('transition');
-            let pointsData = response.data.points;
-            let pointTypes = response.data.pointTypes;
+
             for(let x = 0; x < pointsData.length; x++){
                 //create point
                 let newPoint = createPoint(pointsData[x], pointTypes);
-                
-                newPoint.addEventListener('click', function(){
-                    //attach toggle
-                    
-                    htmlElements.sidePanel.classList.add('active');
-                    htmlElements.sidePanel.style.setProperty("--color700", newPoint.style.getPropertyValue("--color700"));
-                    htmlElements.sidePanel.style.setProperty("--color400", newPoint.style.getPropertyValue("--color400"));
-
-                    //populate sidepanel
-                    htmlElements.panelInfo.scrollTo(0,0);
-                    let panelInfo = createPanel(pointsData[x]);
-                    htmlElements.panelInfo.innerHTML = "";
-                    htmlElements.panelInfo.appendChild(panelInfo);
-                });
+                let pointInfo = createPanel(pointsData[x]);
+                newPoint.addEventListener('click', () => populatePanel(newPoint, pointInfo));
                 pointsContainer.appendChild(newPoint);
                 
             }
@@ -107,77 +107,6 @@ htmlElements.mapImage.onload = function(){
     initialMapDimensions();
     calcMapDimensions();
 }
-
-//assemble map point and returns it
-//------------
-// info: 
-function createPoint(info, types){
-    let point = document.createElement('div');
-    point.classList.add('point');
-    point.style.top = info.coordinates.top;
-    point.style.left = info.coordinates.left;
-
-    let tooltip = document.createElement('div');
-    tooltip.classList.add('tooltip');
-    tooltip.textContent = info.name;
-    point.appendChild(tooltip);
-    point.setAttribute("data-tooltip", info.name);
-
-    //does not error check, each point needs to have proper type
-    let color700 = types[info.type].color700;
-    let color400 = types[info.type].color400;
-    
-    point.style.setProperty("--color700", color700);
-    point.style.setProperty("--color400", color400);
-
-    return point;
-}
-
-//assemble side panel innner content and returns it
-//------------
-// info:
-function createPanel(info){
-    let panel = document.createElement('div');
-    let topCategory = document.createElement('div');
-    topCategory.classList.add('category');
-
-    let header = document.createElement('h2');
-    header.textContent = info.name;
-    topCategory.appendChild(header);
-
-    let desc = document.createElement('p');
-    desc.textContent = info.desc;
-    topCategory.appendChild(desc);
-    panel.appendChild(topCategory);
-
-    for(let x = 0; x < info.categories.length; x++){
-        let divider = document.createElement('div');
-        divider.classList.add('divider');
-        let left = document.createElement('div');
-        let right = document.createElement('div');
-        let middle = document.createElement('div');
-        divider.append(left, right, middle);
-
-
-        let category = document.createElement('div');
-        category.classList.add('category');
-
-        let categoryHeader = document.createElement('h3');
-        categoryHeader.textContent = info.categories[x].title;
-        category.appendChild(categoryHeader);
-
-        let categoryBody = document.createElement('p');
-        categoryBody.textContent = info.categories[x].info;
-        category.appendChild(categoryBody);
-
-        panel.appendChild(divider);
-        panel.appendChild(category);
-    }
-
-    return panel;
-}
-
-
 
 //------------//------------//------------//------------
 //      2. Features
@@ -237,11 +166,11 @@ htmlElements.container.addEventListener('wheel', function(event){
     }
 });
 
-htmlElements.settingsBar.querySelector('button:nth-of-type(1)').addEventListener('click', function(){
+htmlElements.settingsBar.querySelector('button:nth-last-child(2)').addEventListener('click', function(){
     zoom(0.5);
 });
 
-htmlElements.settingsBar.querySelector('button:nth-of-type(2)').addEventListener('click', function(){
+htmlElements.settingsBar.querySelector('button:nth-last-child(1)').addEventListener('click', function(){
     zoom(-0.5);
 });
 
@@ -322,6 +251,21 @@ htmlElements.map.addEventListener('pointerdown', (e) => mouseDownHandler(e));
 //  2.3 Side Panel
 //------------//------------//------------
 
+//sets panel color based on colors of element passed in and replaces the innerHtml with the info html object
+//------------
+//element: html element with properties --color700 and --color400
+//info: html element being placed inside the side pannel
+function populatePanel(element, info){
+    htmlElements.sidePanel.classList.add('active');
+    htmlElements.sidePanel.style.setProperty("--color700", element.style.getPropertyValue("--color700"));
+    htmlElements.sidePanel.style.setProperty("--color400", element.style.getPropertyValue("--color400"));
+
+    //populate sidepanel
+    htmlElements.panelInfo.scrollTo(0,0);
+    htmlElements.panelInfo.innerHTML = "";
+    htmlElements.panelInfo.appendChild(info);
+}
+
 // eventListeners
 //------------//------------
 //close side panel with button 
@@ -344,8 +288,127 @@ window.addEventListener('resize', function(){
 });
 
 
+//------------//------------//------------
+//  2.5 Night Mode
+//------------//------------//------------
+
+htmlElements.settingsBar.querySelector('button:nth-last-child(3)').addEventListener('click', function(){;
+    htmlElements.container.classList.toggle("darkMode");
+});
+
 // ======================================
-//     3. Helper Functions
+//     3. Html Generators
+// ======================================
+
+//assemble map point and returns it
+//------------
+// info: 
+function createPoint(info, types){
+    let point = document.createElement('div');
+    point.classList.add('point');
+    point.style.top = info.coordinates.top;
+    point.style.left = info.coordinates.left;
+
+    let tooltip = document.createElement('div');
+    tooltip.classList.add('tooltip');
+    tooltip.textContent = info.name;
+    point.appendChild(tooltip);
+    point.setAttribute("data-tooltip", info.name);
+
+    //does not error check, each point needs to have proper type
+    let color700 = types[info.type].color700;
+    let color400 = types[info.type].color400;
+    
+    point.style.setProperty("--color700", color700);
+    point.style.setProperty("--color400", color400);
+
+    return point;
+}
+
+//assemble side panel innner content and returns it
+//------------
+// info:
+function createPanel(info){
+    let panel = document.createElement('div');
+    let topCategory = document.createElement('div');
+    topCategory.classList.add('category');
+
+    let header = document.createElement('h2');
+    header.textContent = info.name;
+    topCategory.appendChild(header);
+
+    let desc = document.createElement('p');
+    desc.textContent = info.desc;
+    topCategory.appendChild(desc);
+    panel.appendChild(topCategory);
+
+    for(let x = 0; x < info.categories.length; x++){
+        let divider = document.createElement('div');
+        divider.classList.add('divider');
+        let left = document.createElement('div');
+        let right = document.createElement('div');
+        let middle = document.createElement('div');
+        divider.append(left, right, middle);
+
+
+        let category = document.createElement('div');
+        category.classList.add('category');
+
+        let categoryHeader = document.createElement('h3');
+        categoryHeader.textContent = info.categories[x].title;
+        category.appendChild(categoryHeader);
+
+        let categoryBody = document.createElement('p');
+        categoryBody.textContent = info.categories[x].info;
+        category.appendChild(categoryBody);
+
+        panel.appendChild(divider);
+        panel.appendChild(category);
+    }
+
+    return panel;
+}
+
+function createLegend(info){
+    let legend = document.createElement('div');
+    legend.id = "legendPanel";
+    let topCategory = document.createElement('div');
+    topCategory.classList.add('category');
+
+    let header = document.createElement('h2');
+    header.textContent = "Legend";
+    topCategory.appendChild(header);
+
+    legend.appendChild(topCategory);
+
+    for (var key in info) {
+        if (info.hasOwnProperty(key) && key !== "") {
+            let category = document.createElement('div');
+            category.classList.add('category');
+
+            let point = document.createElement('div');
+            point.classList.add('point');
+
+            let color700 = info[key].color700;
+            let color400 = info[key].color400;
+            
+            point.style.setProperty("--color700", color700);
+            point.style.setProperty("--color400", color400);
+
+            let categoryHeader = document.createElement('h3');
+            categoryHeader.textContent = key;
+
+            category.appendChild(point);
+            category.appendChild(categoryHeader);
+            legend.appendChild(category);
+        }
+    }
+
+    return legend;
+}
+
+// ======================================
+//     4. Helper Functions
 // ======================================
 
 //update mapInfo values, presumably after width, height, or scale has changed
