@@ -337,6 +337,12 @@ function createPanel(info){
     header.textContent = info.name;
     topCategory.appendChild(header);
 
+    if(info.motto !== ""){
+        let motto = document.createElement('h4');
+        motto.textContent = info.motto;
+        topCategory.appendChild(motto);
+    }
+
     let desc = document.createElement('p');
     desc.textContent = info.desc;
     topCategory.appendChild(desc);

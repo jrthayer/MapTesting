@@ -37,7 +37,7 @@
                     "info": ""
                 },
                 {
-                    "title": "Structure",
+                    "title": "Government",
                     "info": ""
                 },
                 {
@@ -50,6 +50,14 @@
                 },
                 {
                     "title": "Agriculture",
+                    "info": ""
+                },
+                {
+                    "title": "Trade",
+                    "info": ""
+                },
+                {
+                    "title": "Technology",
                     "info": ""
                 }
             ]
@@ -70,7 +78,7 @@
                     "info":"Daborak is dominantly human, although half-elves and half-orcs are the most common among the remainder of the races."
                 },
                 {
-                    "title": "Structure",
+                    "title": "Government",
                     "info":"Daborak is ruled by martial law, through a totalitarian military government, that awards rank based on merit. This means that social advancement is quite common in Daborak. Although only on the merits of one's ability to perform in combat."
                 },
                 {
@@ -144,7 +152,7 @@
                     "info": "Orde's military force is mostly composed of the Order of the White Council, a contingent of paladins from The White Pantheon. There are also a few militia contracts with mercenaries in the outlier towns, which is comprised of religiously inclined warriors. The Justicars keep order as the main policing force for the cities."
                 },
                 {
-                    "title": "Infrastructure",
+                    "title": "Technology",
                     "info": "Orde is perhaps the most well developed in terms of infrastructure out of all the countries. Instead of only a few cities with paved roads, nearly all of the cities in Orde benefit from paved roads and fully operational aqueducts."
                 }
             ]
@@ -154,7 +162,7 @@
             "motto": "",
             "type": "country",
             "coordinates": {"top": "10%", "left": "65%"},
-            "desc": "Khao is a twin existence, one being the great jungle below called The T'zar, the other being the great floating city of Khao.\n\nThe jungle below is comprised of rivers, mountain s and lush green flora. The city is comprised of heavily regulated districts, each with its own various mark.",
+            "desc": "Khao is a twin existence, one being the great jungle below called The T'zar, the other being the great floating city of Khao.\n\nThe jungle below is comprised of rivers, mountains, and lush green flora. The city is comprised of heavily regulated districts, each with its own various mark.",
             "categories": [
                 {
                     "title": "History",
@@ -167,8 +175,321 @@
             "motto": "of Khao",
             "type": "city",
             "coordinates": {"top": "15%", "left": "70%"},
-            "desc": "Khao is a twin existence, one being the great jungle below called The T'zar, the other being the great floating city of Khao.\n\nThe jungle below is comprised of rivers, mountain s and lush green flora. The city is comprised of heavily regulated districts, each with its own various mark.",
+            "desc": "Khao is a twin existence, one being the great jungle below called The T'zar, the other being the great floating city of Khao.\n\nThe jungle below is comprised of rivers, mountains and lush green flora. The city is comprised of heavily regulated districts, each with its own various mark.",
             "categories": [
+                {
+                    "title": "Demographic",
+                    "info": "Khao is truly diverse compared with the rest of the world. Some would consider them morally corrupt—the corruption not based on race, gender, nor religion, but rather wealth. There is a slight surplus of humans and lizardfolk."
+                },
+                {
+                    "title": "Government",
+                    "info": "Khao in both its forms is ruled by the Coin Lords; however, there is also a council of elders which governs the tribes below. The city of Khao uses it's considerable wealth to provide food, shelter and security to their ground walking brethren. With this odd exception Khao is ruled as an oligarchy."
+                },
+                {
+                    "title": "Religion",
+                    "info": "All religions are welcome within Khao as long as they pay their taxes and do not cause undo destruction or misery."
+                },
+                {
+                    "title": "Military",
+                    "info": "The Khaon military is composed of their native brethren when needed; however, it is mostly reliant on the glorious airship armada that not only protects the city but is also part of the city.\n\nWithin the city are guards employed by the Coin Lord called the Sky Knights, who use gliding and mounts to traverse the city quickly for the sake of rescuing any denizen that may accidentally go over the many edges and gaps of the floating city."
+                },
+                {
+                    "title": "Trade",
+                    "info": "The Economy of Khao is a multi-varied web of intricacy. It is comprised of several treaties which deal with the various countries of the world.\n\nThe Great Bazaar sells pretty much anything one can think of, including: transportation, slavery, and angelic boons. As such, Khao is a world power in which nearly all wealth can be traced back to in some fashion."
+                },
+                {
+                    "title": "Technology",
+                    "info": "Khao is a shining example of technological advancement, specifically in the field of flight and in the general application of alchemical engines. With the possible exception of Bleak, no other city or country has come close to the advancement of Khao.\n\nTheir advancements include alchemical lighting, food preservation, beverage cooling and various other minor conveniences."
+                }
+            ]
+        },
+        {
+            "name": "Bloodwave Bay",
+            "motto": "",
+            "type": "region",
+            "coordinates": {"top": "64%", "left": "39%"},
+            "desc": "Bloodwave Bay is a body of inland sea, said to hold many unexplored treasures. The sea is harsh and constantly moving.",
+            "categories": [
+                {
+                    "title": "Demographic",
+                    "info": "Not much is known about the people that populate and possibly govern the region, but it is known that many pirates and Baymen call Bloodwave Bay their home."
+                },
+                {
+                    "title": "Trade",
+                    "info": "The Copper Cove is the central hub for many of Bloodwave Bay to talk sales and make a profit, no matter how shady the deal may seem. Gold is described to be the lifeblood of Copper Cove."
+                }
+            ]
+        },
+        {
+            "name": "The Badlands",
+            "motto": "",
+            "type": "region",
+            "coordinates": {"top": "19%", "left": "50%"},
+            "desc": "The Badlands is a vast wasteland. Clean water is scarce, and food is found mostly in places where those few people—who remain—were able to survive.\n\nThese locations are what still remains of the farmable land, despite this they still often have to hunt the dangerous creatures or commit acts of cannibalism to survive.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "Once, the badlands was a nearly utopian landscape, filled with plenty and majesty. That all changed when Synonine Twelvestar VII, was betrayed by his son. This one act ended the family line not only in it's governance, but also transformed the son into the first dark elf.\n\nThe blight from that action spread into the earth, poisoning it and transforming the Badlands into what it is today. Thousands died within the first few days, from sickness and desperation. Thousands more from famine and neglect. The elves lost the seat of power and the struggle for what scraps remained fueled a war in Majital that would cost the elves their last home.\n\nThere was however a spark of hope. 60 years after the reckoning, there began an expedition from the elves that followed the old ways. They took the last of the imperial line, to attempt to take back their homeland. Their success is yet to be seen."
+                },
+                {
+                    "title": "Demographic",
+                    "info": "Creatures like gnolls, orcs and desperate dark elves are the most common of these tribes but there are many forms of misery within this place."
+                },
+                {
+                    "title": "Government",
+                    "info": "The Badlands have no established large government, just the various tribes that roam its wastes."
+                },
+                {
+                    "title": "Religion",
+                    "info": "For those that still cling to religion within this hopeless place, it should be noted that the gods vary wildly. There are those that pray to the light and those that embrace the dark. In this land of famine and peril, all are welcome."
+                },
+                {
+                    "title": "Military",
+                    "info": "While war is no stranger to the Badlands, there are very few that could consider themselves to possess anything resembling a military. Most combat is tribal skirmishes that come to swift, brutal ends."
+                },
+                {
+                    "title": "Trade",
+                    "info": "The only real economy of the Badlands is the excavation and selling of ancient elven artifacts and corpses."
+                },
+                {
+                    "title": "Technology",
+                    "info": "The Badlands was previously a thriving empire of bio-magical engineering. Now the Badlands have been reduced to nothing but ash, dust, and death."
+                }
+            ]
+        },
+        {
+            "name": "Steton",
+            "motto": "",
+            "type": "country",
+            "coordinates": {"top": "55%", "left": "48%"},
+            "desc": "The southern tip of Steton is known to be an untamed wilderness, even to the wild people of Steton. The Floating Peaks, located there, are home to the more nomadic clans of Steton.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "Steton is a nation whose history has been bathed in turmoil and civil war.\n\nOver the last hundred years or so, the current bloodline of kings that sit upon the Throne of Giants, has ruled successfully and fairly. The Highfall bloodline has led to the prosperity of the wild lands of Steton and the citizens that live therein."
+                },
+                {
+                    "title": "Military",
+                    "info": "Stetonians are a hardy people, whose main occupation is hunting and gathering from the monsters that cover the land. As such Steton is home to some of the best monster hunters and warriors Verum have ever seen.\n\nRivaled only by Daborak's discipline, Stetonian fury on the battlefield is a sight to be feared."
+                },
+                {
+                    "title": "Trade",
+                    "info": "Leatherworking is a national pastime of Steton.\n\nSo much so that the title of Hide Flayer is given to those that commit themselves to the art and craft so fully that they may be mistaken for the insane."
+                },
+                {
+                    "title": "Giants",
+                    "info": "Giants are a commonplace occurrence in Steton, in fact many of them are citizens.\n\nThe many giants that instead roam the lands are hunted for their skin and the large hoards they tend to collect.\n\nMost are fought by the few Stetonians that wish to test themselves against the might of such cunning and organized creatures."
+                }
+            ]
+        },
+        {
+            "name": "Krazax",
+            "motto": "Undeterred",
+            "type": "country",
+            "coordinates": {"top": "56%", "left": "27%"},
+            "desc": "Comprised mostly of a mountainous region called the Iron Highlands, where most cities are located, and plains called the Lowlands. The western-most region of the Iron Highlands is an icy landscape called the Western Reaches.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "The kingdom of Krazax has stood since the Second Era, outlasting even the elven imperial empire.\n\nThe dwarves have carved a sturdy home out of the rock and stone of the Spine of Crovux where they have opened their borders to other races that wish to live in law and peace."
+                },
+                {
+                    "title": "Demographic",
+                    "info": "Krazax is populated mostly by dwarves, especially near the capital,  with the population increasing in diversity the closer it is to the border."
+                },
+                {
+                    "title": "Government",
+                    "info": "Krazax has a hereditary monarchy as its government system, with their current king being King Kalar Highfall."
+                },
+                {
+                    "title": "Religion",
+                    "info": "Krazax’s official state religion is the Grey Pantheon."
+                },
+                {
+                    "title": "Trade",
+                    "info": "Krazax produces silver, gold, and gems, along with providing Masters of Craft and Military expertise to other countries."
+                }
+            ]
+        },
+        {
+            "name": "Majital",
+            "motto": "Always Forward",
+            "type": "country",
+            "coordinates": {"top": "65%", "left": "19%"},
+            "desc": "A land comprised of desert and scattered oases.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "Majital is abundant in two things. Sand and Magic. This desert country although lacking in natural resources, makes up for this by being the home of the wizards guild.\n\nMajitalians are a people who value knowledge, ambition, and privacy. Their cunning nature is matched only by the beauty of their darkened skin."
+                },
+                {
+                    "title": "Demographic",
+                    "info": "Majital is populated mostly by humans, with some elves, gnomes, and other races."
+                },
+                {
+                    "title": "Government",
+                    "info": "Majital uses a magocracy to define its government, using the ranks of the The Mages Guild for its highest political offices. The natives of Majital follow a simple democratic Khanate system."
+                },
+                {
+                    "title": "Religion",
+                    "info": "Majital has no official religion.\n\nRuntheras, Cassius, Falaael, and Raquel are commonly worshiped by the populace."
+                },
+                {
+                    "title": "Military",
+                    "info": "Majital's power has always been in its mages and the knowledge they collected over centuries."
+                },
+                {
+                    "title": "Trade",
+                    "info": "Majital has a few large salt mines that provide a productive economy and the Mage's Guild provides quite a bit of wealth with it's magical services.\n\nThe Gold Road stretches to connect the other world roads all throughout Majital and with it the trade of salt, magic, and mages spreads to the rest of Kalkatesh."
+                },
+                {
+                    "title": "Technology",
+                    "info": "Technology is by no means stunted in Majital, but due to the presence of an abundance of arcane knowledge any technology serves to enhance magic."
+                },
+                {
+                    "title": "Foreign Relations",
+                    "info": "Majital has a shaky standing with most of the countries in Kalkatesh. The tyranny of The Mages Guild of the 5th era is still fresh in the minds of the people.\n\nAlthough there is not open disdain there is certainly watchful caution and in some cases cold war."
+                },
+                {
+                    "title": "Education",
+                    "info": "Majital boasts the highest rate of literacy and education level of Kalkatesh.\n\nThe Mages Guild has always treated the natives of the Scour with respect to maintain the peace. Making sure that they are educated and benefit from the bounties that arcane knowledge has provided."
+                }
+            ]
+        },
+        {
+            "name": "The Rift",
+            "motto": "",
+            "type": "region",
+            "coordinates": {"top": "33%", "left": "87%"},
+            "desc": "The Rift was once a swirling mass of wild magic, spells given sentience and a bestial hunger for magic. However, as the seals have been restored and stability returned to the inner planes. The Rift has begun to stabilize, revealing ruins long since thought abandoned.\n\nThose that have tried to live on its edge have found new lands to inhabit and the rampant magic has caused several changes within them during the process. The volatile and unstable nature of The Rift is seen etched onto their very flesh and burned into their minds.",
+            "categories": []
+        },
+        {
+            "name": "Mirage",
+            "motto": "",
+            "type": "city",
+            "coordinates": {"top": "73%", "left": "23%"},
+            "desc": "The capital of Majital and the seat of power for the Mages Guild. It is a shining beacon of understanding, built atop the ruins of the Spiral Council.",
+            "categories": [
+                {
+                    "title": "Demographic",
+                    "info": "The demographics of Mirage are similar to the rest of Majital, with the distinct difference of the Shar'kai. The ash elves claim Mirage to be their sanctuary and refuge."
+                },
+                {
+                    "title": "Government",
+                    "info": "Mirage is ruled by a mageocracy which is lead by the Mages Guild."
+                },
+                {
+                    "title": "Military",
+                    "info": "Mirage, as the seat of power to the Mages Guild is protected by the mighty Taltaken, autonomous servants to the Mages Guild."
+                },
+                {
+                    "title": "Trade",
+                    "info": "Mirage depends on trade for food and labor, in which it trades arcane services and knowledge."
+                }
+            ]
+        },
+        {
+            "name": "Crestfall",
+            "motto": "",
+            "type": "city",
+            "coordinates": {"top": "12%", "left": "33.5%"},
+            "desc": "The jewel of Orde, a glittering white marble city, with massive aqueducts that provide a power source as well as a water source for the shimmering city.\n\nConstantly maintained divine blessings, has all but eliminated sickness and the White Pantheon has blessed many aspects of life for those that live within Crestfall, as such, many of citizens are pious—to differing degrees.",
+            "categories": [
+                {
+                    "title": "Demographic",
+                    "info": "Humans and half-elves number slightly more than the other goodly races, with the monstrous ones, being all but absent within this holy city.\n\nThe city's vanity has led to many of the less 'pretty' races to feel a slight social prejudice, enough that they choose to live elsewhere most of the time."
+                },
+                {
+                    "title": "Government",
+                    "info": "Crestfall is the seat of government for all of Orde and it is where the White Council can be found.\n\nAlthough the White Council is the ruling body of all of Orde, Crestfall has its day to day operations overseen by bishops of the various religions that dominate the city. This has led to some, albeit minor disagreements among the faithful of the White Pantheon but regardless the city lives in a reasonable peace and gratuitous prosperity."
+                },
+                {
+                    "title": "Military",
+                    "info": "The military arm of Crestfall is the same as all of Orde, it is protected by the Order of the White Council.\n\nThe honor guard of this force, The Alabaster Knights, guard Crestfall itself."
+                },
+                {
+                    "title": "Trade",
+                    "info": "Crestfall depends much of its economy on the taxes and tithes it receives throughout the country.\n\nThe city itself has a trade market but it is not sufficient to sustain the city; therefore, The White Council makes great strides to maintain good relations with the other cities in Orde."
+                }
+            ]
+        },
+        {
+            "name": "Chrysalisk",
+            "motto": "",
+            "type": "city",
+            "coordinates": {"top": "10%", "left": "58%"},
+            "desc": "Within the giant crystalline corpse of an insect lies a large village in the jungles of Western Khao.\n\nThe surrounding flora has overgrown the area, and it is not until one passes through the painstakingly maintained tunnel into the village that one can see the abundant wealth lying within.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "When the Ii’tanas collapsed, some of their splendour and extravagance escaped from their lands and made its way to Khao.\n\nThe crystalline insect was once a symbol of wealth and prosperity, so when the lizardfolk of Khao discovered it’s corpse they settled within and  began to mine its bones for gems.\n\nDue to raids from outsiders wanting to take the wealth of Chrysalisk for themselves, the village of Chrysalisk is insular and distrustful of outsiders."
+                },
+                {
+                    "title": "Demographic",
+                    "info": "Chrysalisk is a bustling village with a population of approximately 4,000. The population consists almost entirely of saurians and kobolds.\n\nDue to the remote nature of the village and the hostile environment of the surrounding jungle, there is very little immigration or emigration in the insular society of the city. The wealth of the mines is closely guarded by its residents, and outsiders are not usually welcomed within."
+                },
+                {
+                    "title": "Government",
+                    "info": "Society in Chrysalisk is tribal in nature, and the oldest and most venerable of its residents rise to the top of the tribal hierarchy and rule the village."
+                },
+                {
+                    "title": "Religion",
+                    "info": "While there is no organized religion present in the city, many of the residents worship Lorn and make devotions in the private of their own homes.\n\nIn the kobold district of the village, there is a hidden shrine to The Seven, where many of the diminutive lizardfolk go to worship one of their own."
+                },
+                {
+                    "title": "Military",
+                    "info": "Tribal warriors amongst the residents of Chrysalisk protect the village from the hostile fauna of the Khaon jungle and the occasional bandit raid.\n\nChrysalisk is relatively peaceful; it is rare that the warriors are called upon to defend the village, and most of their time—when they are called— it is to go hunting to provide for the village, as well as protecting the occasional convoy."
+                },
+                {
+                    "title": "Agriculture",
+                    "info": ""
+                },
+                {
+                    "title": "Trade",
+                    "info": "The wealth of Chrysalisk lies in the gems that can be mined from its insectoid foundation. Traces of residual Ii’tanas magic still linger in the gems, and they fetch a pretty price in the city of Khao.\n\nAs the village itself is very secretive and insular, monthly trading convoys will make their way out of the village and travel for weeks to the nearest trading post, where their prearranged contact with the Great Bazaar will exchange the gems for gold and luxurious supplies that are not easily procured within the village."
+                },
+                {
+                    "title": "Technology",
+                    "info": "The gems of Chrysalisk still contain latent magic from the age of the Ii’tanas, sought after by researchers and collectors alike.\n\nThere are a few residents of the village that are more versed in the arcane and study the crystals themselves, but the majority of magics in Chrysalisk are druidic in nature—used by tribal shamans to run the day-to-day affairs of the village."
+                }
+            ]
+        },
+        {
+            "name": "Thornscorn",
+            "motto": "",
+            "type": "city",
+            "coordinates": {"top": "25%", "left": "66%"},
+            "desc": "Deep within the heart of the jungles of Khao, there is a large, twisting bramble. Paths have been carved into this bramble in a strange labyrinth, and within the center of this twisting grove of life, is the town of Thornscorn.",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": "At first, the town of Thornscorn was nothing but a small field of thorns—easy to move through, and generally just another part of the vast jungle. This changed when the first leader of Thornscorn, Titalla, found his way to this section of the jungle.\n\nTitalla was an exile from another lizardfolk tribe, he wandered the jungles in search of a place of refuge for his family. The only home he could find was among the plants, so he started to grow intune with the nature around him. When he saw the small field of brambles, he saw something greater that could lie within—a true home.\n\nHe spent years using druidic magic to grow the brambles into a large shelter. In time his family grew, and he needed to expand the brambles around him. The thorns that protected him kept growing and growing until it could house a small town. With a home finally made, he could step down as leader and let someone else lead.\n\nHe had to be sure that the leader of the tribe would be someone he could trust, and someone who could defend themselves in this savage home. He proposed solutions to this: Firstly, the leader must be of Titalla’s blood—a relative of some sort. And secondly, they must win in a trial by combat against the previous leader. With these rules in place, Thornscorn blossomed into the town it is now."
+                },
+                {
+                    "title": "Demographic",
+                    "info": "Thornscorn is considered a small town with a population of around 2,200 citizens. Almost the entirety of Thornscorn is lizardfolk, but those who can brave the labyrinth are welcome to trade and offer their services to the lizardfolk there. "
+                },
+                {
+                    "title": "Government",
+                    "info": "The leader of Thornscorn is decided by trials by combat from those who are of the correct bloodline. Only the strong may lead in this endless labyrinth.\n\nThe leader of Thornscorn is often accompanied by a council of druids that help advise the leader of Thornscorn"
+                },
+                {
+                    "title": "Religion",
+                    "info": "The citizens of Thornscorn often worship gods of the Green Pantheon, but it is common that the lizardfolk there worship natural spirits and other powerful creatures that aren’t exactly gods—but are powerful in their own rights.\n\nThe most common god to worship in Thornscorn is Inca, as respecting the plants around them respects their homeland."
+                },
+                {
+                    "title": "Military",
+                    "info": "The military of Thornscorn is small but fierce. The druids of Thornscorn often make the lands into sharp thickets; the lizardfolk warriors simply walk through the thorns, as the small pricks can only scratch at their scales.\n\nThe warriors are trained to move through the plants with ease, and keep silent while doing so, often ambushing unwanted creatures within the bramble labyrinth that surrounds their home."
+                },
+                {
+                    "title": "Trade",
+                    "info": "The greatest thing Thornscorn can offer in the economy is its services, as their druids and warriors are adapted to fighting in the nearby jungles. They also export a lot of berries that grow within the town's center itself.\n\nMerchant lords often use Thornscorn druids to help out their more natural exports. This is enough to keep the town thriving and alive."
+                },
+                {
+                    "title": "Magic",
+                    "info": "Most of the magic of Thornscorn is druidic. It is common for the druids of Thornscorn to know how to change plants to their advantage.\n\nIt is rumored that the druids there know how to bring the bramble around them to life; having the very terrain around their enemies start to contort and entangle creatures, or pull them deep into the labyrinth to be lost until they become plant food."
+                }
             ]
         }
     ]

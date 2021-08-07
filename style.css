@@ -19,7 +19,7 @@
     5. State Classes
         5.1 Dark Mode
     6. Media Queries
-        6.1 
+        6.1 Tablet/Desktop
     0. Quick-Hacks/Temporary
 */
 
@@ -86,8 +86,12 @@ h2{
 }
 
 h3{
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-top: 1rem;
+}
+
+h4{
+    font-size: .8rem;
 }
 
 #sidePanel{
@@ -291,9 +295,11 @@ header{
     }
     .category h2{
         text-transform: uppercase;
-        text-shadow: -1px -1px 1px var(--color700), 1px -1px 1px var(--color700), -1px 1px 1px var(--color700), 1px 1px 1px var(--color700);
+        text-shadow: -1px -1px 2px var(--color700), 1px -1px 2px var(--color700), -1px 1px 0px var(--color700), 1px 1px 0px var(--color700);
         color: var(--textColor400);
         text-align: center;
+
+        margin-bottom: .5rem;
     }
     .category h3{
         background: linear-gradient(270deg, var(--color700), 20%, var(--color400), 80%, var(--color700));
@@ -303,6 +309,20 @@ header{
         
         text-transform: uppercase;
     }
+    .category h4{
+        color: var(--color400);
+        text-align: center;
+        padding: .2rem .6rem;
+        width: fit-content;
+        margin: 0 auto;
+
+        letter-spacing: 1px;
+
+        margin-bottom: 2.5rem;
+        background-color: var(--textColor400);
+        border-radius: .5rem;
+    }
+
     .category p{
         color: var(--textColor700);
         line-height: 1.5rem;
@@ -617,7 +637,7 @@ header{
         color: hsl(0, 0%, 50%);
     }
         .darkMode #nightModeBtn::before{
-            font-weight:900;
+            font-weight: 900;
         }
     .darkMode .point{
         filter: brightness(1.5);
@@ -633,6 +653,14 @@ header{
 ===== 6.1 Tablet/Desktop ===== 
 */
 @media(min-width: 33rem) {
+    h2{
+        font-size: 3rem;
+    }
+
+    h3{
+        font-size: 1.8rem;
+    }
+
     #sidePanel{
         top: 0;
         left: 100%;
@@ -640,7 +668,7 @@ header{
         width: 30rem;
         height: 100%;
         
-        border-left: solid 4px var(--color400);
+        border-left: solid 3px var(--color400);
 
         transition: 1s left;
     }
@@ -721,3 +749,4 @@ header{
 /* 
     0. Quick-Hacks/Temporary
 */
+
