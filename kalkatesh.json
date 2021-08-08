@@ -2,22 +2,28 @@
     "name": "Kalkatesh",
     "mapSrc": "./kalkatesh_custom.png",
     "wiki": "https://verum.fandom.com/wiki/Kalkatesh",
+    "maxZoomLevel": 2,
+    "scaleMax": 1.5,
     "pointTypes":{
             "":{
                 "color700": "#CCFF00",
-                "color400": "black"
+                "color400": "black",
+                "zoomLevel": 0
             },
             "city":{
                 "color700": "#0e0101",
-                "color400": "#630808"
+                "color400": "#630808",
+                "zoomLevel": 1
             },
             "country":{
                 "color700": "#01080e",
-                "color400": "#063665"
+                "color400": "#063665",
+                "zoomLevel": 0
             },
             "region":{
                 "color700": "#020e01",
-                "color400": "#0b5b06"
+                "color400": "#0b5b06",
+                "zoomLevel": 2
             }
     },
     "points": [

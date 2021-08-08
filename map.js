@@ -36,7 +36,11 @@ const mapInfo = {
     edges: {top: 0, bottom: 0 , left: 0, right: 0},
     map: {baseHeight:0, baseWidth:0, height: 0, width: 0, maxHeight:0},
     larger: {height: false, width: false},
-    container: {height: 0, width: 0}
+    container: {height: 0, width: 0},
+    maxZoomLevel: 0,
+    scaleIncrement: 0,
+    scaleMax: 0,
+    scaleMin: 1
 }
 
 //html elements
@@ -66,16 +70,22 @@ window.addEventListener('load', async function(){
     //load info
     axios.get(jsonFile)
         .then(function (response) {
+            let data = response.data;
             //load map image triggering onload function below
-            htmlElements.mapImage.src = response.data.mapSrc;
+            htmlElements.mapImage.src = data.mapSrc;
             htmlElements.mapImage.classList.add('transition');
 
-            let pointsData = response.data.points;
-            let pointTypes = response.data.pointTypes;
+            //init zoom values
+            mapInfo.maxZoomLevel = data.maxZoomLevel;
+            
+            mapInfo.scaleMax = data.scaleMax;
+            mapInfo.scaleIncrement = (mapInfo.scaleMax - mapInfo.scaleMin) / mapInfo.maxZoomLevel;
+
+            let pointsData = data.points;
+            let pointTypes = data.pointTypes;
 
             console.log();
             //create legend feature
-            //repeated code clean up later!!!!
             let legendBtn = document.querySelector('#legend');
             let legendHtml = createLegend(pointTypes);
             legendBtn.addEventListener('click', () => populatePanel(legendBtn, legendHtml));
@@ -126,16 +136,18 @@ htmlElements.mapImage.onload = function(){
 //+checks for max and min map height
 //+scales img and updates map variables
 //+checks if image is out of bounds
-function zoom(increment = 0){
+function zoom(direction = 0){
     //increment scale
-    mapInfo.scale += increment;
+    htmlElements.map.classList.remove(`zoom-${(mapInfo.scale-1)/ mapInfo.scaleIncrement}`);
+    mapInfo.scale += mapInfo.scaleIncrement * direction;
+
 
     //check for max and min height
-    if(mapInfo.scale * mapInfo.map.baseHeight < mapInfo.container.height) mapInfo.scale = 1;
-    if(mapInfo.scale * mapInfo.map.baseHeight > mapInfo.map.maxHeight) mapInfo.scale -= increment;
-
+    if(mapInfo.scale < mapInfo.scaleMin) mapInfo.scale = mapInfo.scaleMin;
+    if(mapInfo.scale > mapInfo.scaleMax) mapInfo.scale -= mapInfo.scaleIncrement;
+    htmlElements.map.classList.add(`zoom-${(mapInfo.scale-1)/ mapInfo.scaleIncrement}`);
     //scale map img
-    // htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    //translateZ makes map img not blurry
     htmlElements.mapImage.style.transform = `scale(${mapInfo.scale})`;
     htmlElements.pointsContainer.style.transform = `scale(${mapInfo.scale})`;
     //update map dimensions
@@ -159,19 +171,19 @@ function zoom(increment = 0){
 //------------//------------
 htmlElements.container.addEventListener('wheel', function(event){
     if(event.deltaY > 0){
-        zoom(-0.1);
+        zoom(-1);
     }
     else{
-        zoom(0.1);
+        zoom(1);
     }
 });
 
 htmlElements.settingsBar.querySelector('button:nth-last-child(2)').addEventListener('click', function(){
-    zoom(0.5);
+    zoom(1);
 });
 
 htmlElements.settingsBar.querySelector('button:nth-last-child(1)').addEventListener('click', function(){
-    zoom(-0.5);
+    zoom(-1);
 });
 
 
@@ -321,6 +333,7 @@ function createPoint(info, types){
     
     point.style.setProperty("--color700", color700);
     point.style.setProperty("--color400", color400);
+    point.classList.add(`point-zoomLevel-${types[info.type].zoomLevel}`);
 
     return point;
 }

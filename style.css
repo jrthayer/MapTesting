@@ -18,6 +18,7 @@
         4.5 Settings Bar
     5. State Classes
         5.1 Dark Mode
+        5.2 Zoom Stages
     6. Media Queries
         6.1 Tablet/Desktop
     0. Quick-Hacks/Temporary
@@ -425,6 +426,8 @@ header{
         display: block;
 
         height: 100%;
+        object-fit: cover;
+        transform: translateZ(0);
 
         pointer-events: none;
         -webkit-user-drag: none;
@@ -455,7 +458,8 @@ header{
     transform: rotate(-45deg);
     
     background-color: var(--color400);
-    /* border: solid 1px var(--color700); */
+
+    transition: transform 1s linear;
 }   
     /* circle in middle of point */
     .point::after{
@@ -468,7 +472,7 @@ header{
         height: 50%;
         width: 50%;
         
-        border-radius: 50%;
+        border-radius: 48%;
 
         background: var(--color700);
     }
@@ -593,6 +597,8 @@ header{
             margin-top: -5px;
 
             background-color: var(--buttonText);
+            /*Needed because of hidden points*/
+            transform: scale(1) rotate(-45deg);
         }
 
 /* 
@@ -642,6 +648,49 @@ header{
     .darkMode .point{
         filter: brightness(1.5);
     }
+
+/* 
+//------------//------------
+    5.2 Zoom Stages
+//------------//------------
+*/
+/* zoom0 */
+.point:not(.point-zoomLevel-0){
+    transform: scale(0) rotate(-45deg);
+}
+/* zoom1 */
+.zoom-1 .point-zoomLevel-0 .tooltip{
+    transform: scale(2) rotate(45deg) translate(calc(-50% + 2vh/2), calc(-115%));
+}
+.zoom-1 .point-zoomLevel-0{
+    transform: scale(.5) rotate(-45deg) translate(-2vh, 2vh);
+}
+
+.zoom-1 .point-zoomLevel-1 .tooltip{
+    transform: scale(1) rotate(45deg) translate(calc(-50% + 4vh/2), calc(-160%));
+}
+.zoom-1 .point-zoomLevel-1{
+    transform: scale(1) rotate(-45deg);
+
+}
+
+/* zoom2 */
+.zoom-2 .point-zoomLevel-0{
+    transform: scale(.25) rotate(-45deg) translate(-6vh,6vh);
+}
+.zoom-2 .point-zoomLevel-0 .tooltip{
+    transform: scale(4) rotate(45deg) translate(calc(-50% + 1.5vh/2), calc(-93%));
+}
+.zoom-2 .point-zoomLevel-1 .tooltip{
+    transform: scale(2) rotate(45deg) translate(calc(-50% + 2vh/2), calc(-115%));
+}
+.zoom-2 .point-zoomLevel-1{
+    transform: scale(.5) rotate(-45deg) translate(-2vh, 2vh);
+}
+
+.zoom-2 .point-zoomLevel-2{
+    transform: scale(.8) rotate(-45deg);
+}
 
 /* 
 //------------//------------//------------
