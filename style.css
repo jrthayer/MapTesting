@@ -389,9 +389,6 @@ header{
 
     #legendPanel h3{
         font-size: 2rem;
-
-        /* text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black; */
-
         margin: 0 1rem;
         padding: .5rem;
         background: none;
@@ -404,6 +401,8 @@ header{
         width: 35px;
         height: 35px;
         cursor: auto;
+
+        transform: scale(1) rotate(-45deg) translate(0, 0);
     }
     
 
@@ -455,7 +454,7 @@ header{
     
     /* Makes it look like a pin */
     border-radius: 50% 50% 50% 0;
-    transform: rotate(-45deg) translateZ(0);
+    transform: scale(1) rotate(-45deg) translate(0, 0);
     
     background-color: var(--color400);
 
@@ -656,21 +655,21 @@ header{
 */
 /* zoom0 */
 .point:not(.point-zoomLevel-0){
-    transform: scale(0) rotate(-45deg) translateZ(0);
+    transform: scale(0) rotate(-45deg) translate(0, 0);
 }
 /* zoom1 */
 .zoom-1 .point-zoomLevel-0 .tooltip{
     transform: scale(2) rotate(45deg) translate(calc(-50% + 2vh/2), calc(-115%));
 }
 .zoom-1 .point-zoomLevel-0{
-    transform: scale(.5) rotate(-45deg) translate(-2vh, 2vh) translateZ(0);
+    transform: scale(.5) rotate(-45deg) translate(-2vh, 2vh);
 }
 
 .zoom-1 .point-zoomLevel-1 .tooltip{
     transform: scale(1) rotate(45deg) translate(calc(-50% + 4vh/2), calc(-160%));
 }
 .zoom-1 .point-zoomLevel-1{
-    transform: scale(1) rotate(-45deg) translateZ(0);
+    transform: scale(1) rotate(-45deg);
 
 }
 
@@ -679,17 +678,17 @@ header{
     transform: scale(.25) rotate(-45deg) translate(-6vh,6vh);
 }
 .zoom-2 .point-zoomLevel-0 .tooltip{
-    transform: scale(4) rotate(45deg) translate(calc(-50% + 1.5vh/2), calc(-93%)) translateZ(0);
+    transform: scale(4) rotate(45deg) translate(calc(-50% + 1.5vh/2), calc(-93%));
 }
 .zoom-2 .point-zoomLevel-1 .tooltip{
     transform: scale(2) rotate(45deg) translate(calc(-50% + 2vh/2), calc(-115%));
 }
 .zoom-2 .point-zoomLevel-1{
-    transform: scale(.5) rotate(-45deg) translate(-2vh, 2vh) translateZ(0);
+    transform: scale(.5) rotate(-45deg) translate(-2vh, 2vh);
 }
 
 .zoom-2 .point-zoomLevel-2{
-    transform: scale(.8) rotate(-45deg) translateZ(0);
+    transform: scale(.8) rotate(-45deg);
 }
 
 /* 
