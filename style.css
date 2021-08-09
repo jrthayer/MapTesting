@@ -7,13 +7,14 @@
     3. Layout
     4. Components
         4.1 Side Panel
-            4.11 Toggle Button
-            4.12 Info Panel
-                4.12a Category
-                4.12b Divider
+            4.11 Info Panel
+                4.11a Category
+                4.11b Divider
+            4.12 Toggle Button
             4.13 Legend Panel
         4.2 Map
         4.3 Point
+            4.3a Point Types
         4.4 Tooltip
         4.5 Settings Bar
     5. State Classes
@@ -35,7 +36,7 @@
     --textColor400: hsl(37, 19%, 97%);
     --color700: #01080e;
     --color400: hsl(210, 88%, 13%);
-    --colorDarkMode: #7f7f7f;
+    --colorDarkMode: #000;
     --buttonPrimary: hsl(0, 0%, 90%);
     --buttonSecondary: hsl(0, 0%, 80%);
     --buttonText: hsl(0, 0%, 30%);
@@ -97,11 +98,6 @@ h4{
 
 #sidePanel{
     user-select: text;
-}
-
-br{
-    margin:2.5em 0;/* FF for instance */
-    line-height:5em;/* chrome for instance */
 }
 
 /* 
@@ -188,9 +184,37 @@ header{
     top: 100%;
     left: 0;
 }
+
 /* 
 //------------
-    4.11 Toggle Button
+    4.11 Info Panel
+//------------
+*/
+#panelInfo{
+    position: absolute;
+    top: 0;
+
+    height: calc(100%);
+    width: calc(100% - 2 * 2rem);
+    padding: 0 2rem;
+
+    overflow: auto;
+}
+    #panelInfo::-webkit-scrollbar{
+        background-color: var(--color700);
+    }
+    #panelInfo::-webkit-scrollbar-track{
+        background-color: var(--textColor400);
+    }
+    #panelInfo::-webkit-scrollbar-thumb{
+        background-color: var(--color400);
+        border: 1px solid var(--textColor700);
+        border-radius: 25px;
+    }
+
+/* 
+//------------
+    4.12 Toggle Button
 //------------
 */
 #sidePanelBtn{
@@ -254,37 +278,8 @@ header{
         display: block;
     }
 
-
 /* 
-//------------
-    4.12 Info Panel
-//------------
-*/
-#panelInfo{
-    position: absolute;
-    top: 0;
-
-    height: calc(100%);
-    width: calc(100% - 2 * 2rem);
-    padding: 0 2rem;
-
-    overflow: auto;
-}
-    #panelInfo::-webkit-scrollbar{
-        background-color: var(--color700);
-        border-left: solid 1px var(--color400);
-    }
-    #panelInfo::-webkit-scrollbar-track{
-        background-color: var(--textColor400);
-    }
-    #panelInfo::-webkit-scrollbar-thumb{
-        background-color: var(--color400);
-        border: 1px solid var(--textColor700);
-        border-radius: 25px;
-    }
-
-/* 
-    4.12a Category
+    4.11a Category
 */
 .category{
     padding: 2rem 0;
@@ -330,7 +325,7 @@ header{
     }
 
 /* 
-    4.12b Divider
+    4.11b Divider
 */
 .divider{
     position: relative;
@@ -415,8 +410,6 @@ header{
     z-index: 1;
     position: absolute;
 
-    height: 100%;
-    max-height: 2000px;
     width: fit-content;
 
     cursor: grab;
@@ -426,7 +419,7 @@ header{
 
         height: 100%;
         object-fit: cover;
-        transform: translateZ(0);
+        transform: scale(var(--mapScale));
 
         pointer-events: none;
         -webkit-user-drag: none;
@@ -441,47 +434,61 @@ header{
     position: absolute;
     top: 0;
     left: 0;
-
+    transform: scale(var(--mapScale));
     height: 100%;
     width: 100%;
+
+    --pointHeight: 1;
 }
 
 .point{
+    --scale: 1;
+
     position: absolute;
-    
-    height: calc(4vh);
-    width: calc(4vh);
+    /* --pointHeight is set by js, --scale is overridden by css classes */
+    height: calc(var(--pointHeight) * var(--scale) * 1px);
+    width: calc(var(--pointHeight) * var(--scale) * 1px);
     
     /* Makes it look like a pin */
     border-radius: 50% 50% 50% 0;
-    transform: scale(1) rotate(-45deg) translate(0, 0);
-    
     background-color: var(--color400);
-
-    transition: transform 1s linear;
+    transform:  translate(-50%, -50%) rotate(-45deg);
+    z-index: 2;
 }   
     /* circle in middle of point */
     .point::after{
         content: "";
         position: absolute;
+        
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-
         height: 50%;
         width: 50%;
-        
-        border-radius: 48%;
-
+        border-radius: 50%;
         background: var(--color700);
     }
     .point:hover{
         cursor: pointer;
-    }
-    .point:hover .tooltip{
-        display: block;
+        z-index: 3;
     }
     
+/* 
+//------------
+    4.3a Point Types
+//------------
+*/
+.point-country{
+    --scale: 1.5;
+}
+
+.point-city{
+    --scale: 1;
+}
+
+.point-region{
+    --scale: .8;
+}
 
 
 /* 
@@ -492,31 +499,28 @@ header{
 .tooltip{
     font-size: 2vh;
     position : relative;
-    z-index: -1;
-    /* 4vh/2 is for the point width*/
-    transform: rotate(45deg) translate(calc(-50% + 4vh/2), calc(-160%));
-    transform-origin: left;
+
+    left: 100%;
+    top: 0;
+    transform-origin: 50% 100%;
+    /*scale because space between point and tooltip is based on height of point*/
+    /*scale is defined in parent .point div*/
+    transform: translate(calc(-50% - var(--scale)*.14vh), calc(-100% + var(--scale)*.14vh)) rotate(45deg) scale(calc( 1/(var(--mapScale)) + 1/(var(--mapScale)) ));
+    
     white-space: nowrap;
     width: fit-content;
-
     padding: .2rem;
     border-radius: .2rem;
 
     background-color: var(--color700);
     color: var(--textColor400);
 
-    display: none;
+    visibility: hidden;
+    pointer-events: none;
 }
-    .tooltip::after{
-        position: absolute;
-        bottom: -.2rem;
-        left: calc(50% - 6.5px);
-        border-top: 5px solid var(--color700);
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
-        content: " ";
+    .point:hover .tooltip{
+        visibility: visible;
     }
-    
 
 
 
@@ -610,12 +614,8 @@ header{
 }
 
 .active{
-    /* left: 3rem !important; */
     top: 0 !important;
 }
-    /* .active #sidePanelBtn::before{
-        content: "\f054";
-    } */
 
 .transition{
     transition: transform .5s;
@@ -630,10 +630,10 @@ header{
     background-color: var(--colorDarkMode) !important;
 }
     .darkMode img{
-        filter: brightness(.5);
+        filter: brightness(1) invert(1);
     }
     .darkMode #pointsContainer{
-        filter: brightness(.7);
+        filter: brightness(1) contrast(.9);
     }
     .darkMode #nightModeBtn{
         border-color: var(--buttonSecondary);
@@ -643,49 +643,12 @@ header{
         .darkMode #nightModeBtn::before{
             font-weight: 900;
         }
+    .darkMode .tooltip{
+        background-color: var(--buttonSecondary);
+        color: var(--color700);
+    }
 
-/* 
-//------------//------------
-    5.2 Zoom Stages
-//------------//------------
-*/
-/* zoom0 */
-.point:not(.point-zoomLevel-0){
-    transform: scale(0) rotate(-45deg) translate(0, 0);
-}
-/* zoom1 */
-.zoom-1 .point-zoomLevel-0 .tooltip{
-    transform: scale(2) rotate(45deg) translate(calc(-50% + 2vh/2), calc(-115%));
-}
-.zoom-1 .point-zoomLevel-0{
-    transform: scale(.5) rotate(-45deg) translate(-2vh, 2vh);
-}
 
-.zoom-1 .point-zoomLevel-1 .tooltip{
-    transform: scale(1) rotate(45deg) translate(calc(-50% + 4vh/2), calc(-160%));
-}
-.zoom-1 .point-zoomLevel-1{
-    transform: scale(1) rotate(-45deg);
-
-}
-
-/* zoom2 */
-.zoom-2 .point-zoomLevel-0{
-    transform: scale(.25) rotate(-45deg) translate(-6vh,6vh);
-}
-.zoom-2 .point-zoomLevel-0 .tooltip{
-    transform: scale(4) rotate(45deg) translate(calc(-50% + 1.5vh/2), calc(-93%));
-}
-.zoom-2 .point-zoomLevel-1 .tooltip{
-    transform: scale(2) rotate(45deg) translate(calc(-50% + 2vh/2), calc(-115%));
-}
-.zoom-2 .point-zoomLevel-1{
-    transform: scale(.5) rotate(-45deg) translate(-2vh, 2vh);
-}
-
-.zoom-2 .point-zoomLevel-2{
-    transform: scale(.8) rotate(-45deg);
-}
 
 /* 
 //------------//------------//------------

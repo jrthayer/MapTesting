@@ -45,15 +45,16 @@ const mapInfo = {
 
 //html elements
 const htmlElements = {
+    container: document.querySelector('.mapContainer'),
     map: document.querySelector('.map'),
     mapImage: document.querySelector('.map img'),
-    container: document.querySelector('.mapContainer'),
+    pointsContainer: "",
     settingsBar: document.querySelector('#settingsBar'),
     sidePanel: document.querySelector('#sidePanel'),
     sidePanelBtn: document.querySelector('#sidePanelBtn'),
     bottomBtn: document.querySelector('#bottomBtn'),
-    panelInfo: document.querySelector("#panelInfo"),
-    pointsContainer: ""
+    panelInfo: document.querySelector("#panelInfo")
+    
 }
  
 
@@ -71,20 +72,21 @@ window.addEventListener('load', async function(){
     axios.get(jsonFile)
         .then(function (response) {
             let data = response.data;
-            //load map image triggering onload function below
-            htmlElements.mapImage.src = data.mapSrc;
-            htmlElements.mapImage.classList.add('transition');
 
             //init zoom values
-            mapInfo.maxZoomLevel = data.maxZoomLevel;
-            
-            mapInfo.scaleMax = data.scaleMax;
-            mapInfo.scaleIncrement = (mapInfo.scaleMax - mapInfo.scaleMin) / mapInfo.maxZoomLevel;
+            mapInfo.map.maxHeight = data.maxHeight;
+            mapInfo.map.minHeight = data.minHeight;
+            mapInfo.scaleIncrement = .2;
+            htmlElements.map.style.setProperty('--mapScale', mapInfo.scale);
+
+            //load map image triggering onload function below
+            htmlElements.mapImage.src = data.mapSrc;
+            htmlElements.mapImage.style.height = mapInfo.map.minHeight+"px";
+            htmlElements.mapImage.classList.add('transition');
 
             let pointsData = data.points;
             let pointTypes = data.pointTypes;
 
-            console.log();
             //create legend feature
             let legendBtn = document.querySelector('#legend');
             let legendHtml = createLegend(pointTypes);
@@ -98,13 +100,16 @@ window.addEventListener('load', async function(){
             for(let x = 0; x < pointsData.length; x++){
                 //create point
                 let newPoint = createPoint(pointsData[x], pointTypes);
+                
                 let pointInfo = createPanel(pointsData[x]);
                 newPoint.addEventListener('click', () => populatePanel(newPoint, pointInfo));
                 pointsContainer.appendChild(newPoint);
                 
             }
             htmlElements.pointsContainer = pointsContainer;
+            htmlElements.pointsContainer.style.setProperty('--pointHeight',  mapInfo.map.minHeight/100 *3);
             htmlElements.map.appendChild(pointsContainer);
+
         })
         .catch(function (error) {
             console.log(error);
@@ -138,33 +143,31 @@ htmlElements.mapImage.onload = function(){
 //+checks if image is out of bounds
 function zoom(direction = 0){
     //increment scale
-    htmlElements.map.classList.remove(`zoom-${(mapInfo.scale-1)/ mapInfo.scaleIncrement}`);
     mapInfo.scale += mapInfo.scaleIncrement * direction;
-
+    calcMapDimensions();
 
     //check for max and min height
-    if(mapInfo.scale < mapInfo.scaleMin) mapInfo.scale = mapInfo.scaleMin;
-    if(mapInfo.scale > mapInfo.scaleMax) mapInfo.scale -= mapInfo.scaleIncrement;
-    htmlElements.map.classList.add(`zoom-${(mapInfo.scale-1)/ mapInfo.scaleIncrement}`);
-    //scale map img
-    //translateZ makes map img not blurry
-    htmlElements.mapImage.style.transform = `scale(${mapInfo.scale})`;
-    htmlElements.pointsContainer.style.transform = `scale(${mapInfo.scale})`;
-    //update map dimensions
-    calcMapDimensions();
-    // htmlElements.map.style.width = mapInfo.map.width+"px";
-    // htmlElements.map.style.height = mapInfo.map.height+"px";
+    if(mapInfo.map.height < mapInfo.map.minHeight){
+        mapInfo.scale = mapInfo.scaleMin;
+        calcMapDimensions();
+    }
 
-    let outOfBounds = false;
+    if(mapInfo.map.height > mapInfo.map.maxHeight){
+        mapInfo.scale -= mapInfo.scaleIncrement;
+        calcMapDimensions();
+    }
 
-    //check if out of bounds
+    //scale map img & map containers
+    htmlElements.map.style.setProperty('--mapScale', mapInfo.scale);
     checkBoundries();
 
-    // Testing console log block
-    // console.log("===========");
-    // console.log(`Width: ${mapInfo.map.width}, Height: ${mapInfo.map.height}`);
-    // console.log(`Left: ${mapInfo.edges.left}, Top: ${mapInfo.edges.top}, Bottom: ${mapInfo.edges.bottom}`);
-    // console.log(`innerHeight: ${window.screen.availHeight}`);
+    //moveMap 
+    htmlElements.map.classList.add('transition');
+    //move map to be in bounds, moves it to the same spot if not changed
+    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
+    setTimeout(function(){
+        htmlElements.map.classList.remove('transition');
+    }, 600);
 }
 
 //eventListeners
@@ -212,32 +215,11 @@ const mouseMoveHandler = function(e){
     const dx = e.clientX - mapInfo.prevMouse.x;
     const dy = e.clientY - mapInfo.prevMouse.y;
 
-    //local variables for maps current x/y translation points to reduce line size
-    const mapX = mapInfo.translate.x;
-    const mapY = mapInfo.translate.y;
-
-    //check bounds of map
-    //------------ 
-    //Two different behaviors depending on if the the map is larger or smaller than the container
-    if(mapInfo.larger.height){
-        if(mapY + dy < mapInfo.edges.top && mapY + dy > mapInfo.edges.bottom) mapInfo.translate.y += dy;
-    }
-    else{
-        if(mapY + dy > mapInfo.edges.top && mapY + dy < mapInfo.edges.bottom) mapInfo.translate.y += dy;
-    }
+    mapInfo.translate.y += dy;
+    mapInfo.translate.x += dx;
     
-    if(mapInfo.larger.width){
-        if(mapX + dx < mapInfo.edges.left && mapX + dx > mapInfo.edges.right) mapInfo.translate.x += dx;
-    }
-    else{
-        if(mapX + dx > mapInfo.edges.left && mapX + dx < mapInfo.edges.right) mapInfo.translate.x += dx;
-    }
-    
-    //update transform with new values
-    // htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"}) scale(${mapInfo.scale}) `;
+    checkBoundries();
     htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
-    
-    
 
     //update prevMouse to currentMouse
     mapInfo.prevMouse.x = e.clientX;
@@ -333,7 +315,7 @@ function createPoint(info, types){
     
     point.style.setProperty("--color700", color700);
     point.style.setProperty("--color400", color400);
-    point.classList.add(`point-zoomLevel-${types[info.type].zoomLevel}`);
+    point.classList.add(`point-${info.type}`);
 
     return point;
 }
@@ -455,40 +437,58 @@ function initialMapDimensions(){
     
     //set map height and width
     let compStyles = window.getComputedStyle(htmlElements.map);
-    mapInfo.map.maxHeight = parseInt(compStyles.getPropertyValue('max-height'));
     mapInfo.map.baseHeight = parseInt(compStyles.getPropertyValue('height'));
     mapInfo.map.baseWidth = parseInt(compStyles.getPropertyValue('width'));
 
     //center map + set origin to center
     htmlElements.map.style.left = `${mapInfo.container.width/2 - mapInfo.map.baseWidth/2}px`;
-    htmlElements.map.style.top = '0px';
+    htmlElements.map.style.top = `${mapInfo.container.height/2 - mapInfo.map.baseHeight/2}px`;
 }
 
 function checkBoundries(){
+    let inBoundries = true;
+
     if(mapInfo.larger.height){
-        if(mapInfo.translate.y > mapInfo.edges.top) mapInfo.translate.y = mapInfo.edges.top; 
-        if(mapInfo.translate.y  < mapInfo.edges.bottom) mapInfo.translate.y = mapInfo.edges.bottom; 
+        if(mapInfo.translate.y > mapInfo.edges.top){
+            mapInfo.translate.y = mapInfo.edges.top;
+            inBoundries = false;
+        } 
+        if(mapInfo.translate.y  < mapInfo.edges.bottom){
+            mapInfo.translate.y = mapInfo.edges.bottom;
+            inBoundries = false; 
+        }
     }
     else{
-        if(mapInfo.translate.y < mapInfo.edges.top) mapInfo.translate.y = mapInfo.edges.top; 
-        if(mapInfo.translate.y > mapInfo.edges.bottom) mapInfo.translate.y = mapInfo.edges.bottom; 
+        if(mapInfo.translate.y < mapInfo.edges.top){
+            mapInfo.translate.y = mapInfo.edges.top;
+            inBoundries = false;
+        } 
+        if(mapInfo.translate.y > mapInfo.edges.bottom){
+            mapInfo.translate.y = mapInfo.edges.bottom; 
+            inBoundries = false;
+        } 
     }
 
     if(mapInfo.larger.width){
-        if(mapInfo.translate.x > mapInfo.edges.left) mapInfo.translate.x = mapInfo.edges.left;
-        if(mapInfo.translate.x < mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
+        if(mapInfo.translate.x > mapInfo.edges.left){
+            mapInfo.translate.x = mapInfo.edges.left;
+            inBoundries = false;
+        }
+        if(mapInfo.translate.x < mapInfo.edges.right){
+            mapInfo.translate.x = mapInfo.edges.right;
+            inBoundries = false;
+        }
     }
     else{
-        if(mapInfo.translate.x < mapInfo.edges.left) mapInfo.translate.x = mapInfo.edges.left;
-        if(mapInfo.translate.x > mapInfo.edges.right) mapInfo.translate.x = mapInfo.edges.right;
+        if(mapInfo.translate.x < mapInfo.edges.left){
+            mapInfo.translate.x = mapInfo.edges.left;
+            inBoundries = false;
+        }
+        if(mapInfo.translate.x > mapInfo.edges.right){
+            mapInfo.translate.x = mapInfo.edges.right;
+            inBoundries = false;
+        }
     }
 
-    
-    
-    htmlElements.map.classList.add('transition');
-    //move map to be in bounds, moves it to the same spot if not changed
-    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
-    setTimeout(function(){
-        htmlElements.map.classList.remove('transition');
-    }, 600);
+    return inBoundries;
 }
