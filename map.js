@@ -40,7 +40,15 @@ const mapInfo = {
     maxZoomLevel: 0,
     scaleIncrement: 0,
     scaleMax: 0,
-    scaleMin: 1
+    scaleMin: 1,
+    timeout: function(){
+        return setTimeout(function(){
+            htmlElements.map.classList.remove('transition');
+            htmlElements.map.addEventListener('pointerdown', mouseDownHandler);
+            console.log("this ran");
+        }, 500);
+    },
+    timeoutID: 0
 }
 
 //html elements
@@ -54,7 +62,6 @@ const htmlElements = {
     sidePanelBtn: document.querySelector('#sidePanelBtn'),
     bottomBtn: document.querySelector('#bottomBtn'),
     panelInfo: document.querySelector("#panelInfo")
-    
 }
  
 
@@ -76,7 +83,7 @@ window.addEventListener('load', async function(){
             //init zoom values
             mapInfo.map.maxHeight = data.maxHeight;
             mapInfo.map.minHeight = data.minHeight;
-            mapInfo.scaleIncrement = .2;
+            mapInfo.scaleIncrement = data.scaleIncrement;
             htmlElements.map.style.setProperty('--mapScale', mapInfo.scale);
 
             //load map image triggering onload function below
@@ -97,24 +104,41 @@ window.addEventListener('load', async function(){
             pointsContainer.id = 'pointsContainer';
             pointsContainer.classList.add('transition');
 
-            for(let x = 0; x < pointsData.length; x++){
-                //create point
-                let newPoint = createPoint(pointsData[x], pointTypes);
+            generatePoints(pointsContainer, pointsData, pointTypes);
+            // for(let x = 0; x < pointsData.length; x++){
+            //     //create point
+            //     let newPoint = createPoint(pointsData[x], pointTypes);
+            //     let pointInfo = createPanel(pointsData[x]);
+            //     newPoint.addEventListener('click', () => populatePanel(newPoint, pointInfo));
+            //     pointsContainer.appendChild(newPoint);
                 
-                let pointInfo = createPanel(pointsData[x]);
-                newPoint.addEventListener('click', () => populatePanel(newPoint, pointInfo));
-                pointsContainer.appendChild(newPoint);
-                
-            }
-            htmlElements.pointsContainer = pointsContainer;
-            htmlElements.pointsContainer.style.setProperty('--pointHeight',  mapInfo.map.minHeight/100 *3);
-            htmlElements.map.appendChild(pointsContainer);
+            //     if('points' in pointsData[x]){
 
+            //         console.log(`This point has points: ${pointsData[x].name}`);
+            //     }
+
+                
+            // }
+            htmlElements.pointsContainer = pointsContainer;
+            htmlElements.pointsContainer.style.setProperty('--pointHeight',  mapInfo.map.minHeight/100 * 3);
+            htmlElements.map.appendChild(pointsContainer);
         })
         .catch(function (error) {
             console.log(error);
         });
 });
+
+function generatePoints(parent, points, pointTypes){
+    for(let x = 0; x < points.length; x++){
+        let newPoint = createPoint(points[x], pointTypes);
+        let pointInfo = createPanel(points[x]);
+        newPoint.addEventListener('click', () => populatePanel(newPoint, pointInfo));
+        parent.appendChild(newPoint);
+        if('points' in points[x]){
+            generatePoints(parent, points[x].points, pointTypes);
+        }
+    }
+}
 
 //set necessary variables after map img has loaded
 //------------
@@ -141,9 +165,10 @@ htmlElements.mapImage.onload = function(){
 //+checks for max and min map height
 //+scales img and updates map variables
 //+checks if image is out of bounds
-function zoom(direction = 0){
+function zoom(increment = 0){
+    let prevScale = mapInfo.scale;
     //increment scale
-    mapInfo.scale += mapInfo.scaleIncrement * direction;
+    mapInfo.scale += increment;
     calcMapDimensions();
 
     //check for max and min height
@@ -153,40 +178,44 @@ function zoom(direction = 0){
     }
 
     if(mapInfo.map.height > mapInfo.map.maxHeight){
-        mapInfo.scale -= mapInfo.scaleIncrement;
+        mapInfo.scale -= increment;
         calcMapDimensions();
     }
 
-    //scale map img & map containers
-    htmlElements.map.style.setProperty('--mapScale', mapInfo.scale);
-    checkBoundries();
+    if(prevScale != mapInfo.scale){
+        //scale map img & map containers
+        htmlElements.map.style.setProperty('--mapScale', mapInfo.scale);
+        checkBoundries();
 
-    //moveMap 
-    htmlElements.map.classList.add('transition');
-    //move map to be in bounds, moves it to the same spot if not changed
-    htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
-    setTimeout(function(){
-        htmlElements.map.classList.remove('transition');
-    }, 600);
+        //moveMap 
+        clearTimeout(mapInfo.timeoutID);
+        htmlElements.map.classList.add('transition');
+        htmlElements.map.removeEventListener('pointerdown', mouseDownHandler);
+        mapInfo.timeoutID = mapInfo.timeout();
+        
+        //move map to be in bounds, moves it to the same spot if not changed
+        htmlElements.map.style.transform = `translate(${mapInfo.translate.x+"px"}, ${mapInfo.translate.y+"px"})`;
+    }
 }
 
 //eventListeners
 //------------//------------
 htmlElements.container.addEventListener('wheel', function(event){
+    let scrollScale = mapInfo.scaleIncrement/5;
     if(event.deltaY > 0){
-        zoom(-1);
+        zoom(scrollScale * -1);
     }
     else{
-        zoom(1);
+        zoom(scrollScale);
     }
 });
 
 htmlElements.settingsBar.querySelector('button:nth-last-child(2)').addEventListener('click', function(){
-    zoom(1);
+    zoom(mapInfo.scaleIncrement);
 });
 
 htmlElements.settingsBar.querySelector('button:nth-last-child(1)').addEventListener('click', function(){
-    zoom(-1);
+    zoom(mapInfo.scaleIncrement * -1);
 });
 
 
@@ -238,7 +267,7 @@ const mouseUpHandler = function() {
 
 // eventListeners
 //------------//------------
-htmlElements.map.addEventListener('pointerdown', (e) => mouseDownHandler(e));
+htmlElements.map.addEventListener('pointerdown', mouseDownHandler);
 
 
 //------------//------------//------------
@@ -315,6 +344,7 @@ function createPoint(info, types){
     
     point.style.setProperty("--color700", color700);
     point.style.setProperty("--color400", color400);
+    point.style.setProperty("--pointScale", types[info.type].scale);
     point.classList.add(`point-${info.type}`);
 
     return point;
@@ -325,6 +355,7 @@ function createPoint(info, types){
 // info:
 function createPanel(info){
     let panel = document.createElement('div');
+    panel.id = "pointPanel";
     let topCategory = document.createElement('div');
     topCategory.classList.add('category');
 
@@ -382,9 +413,9 @@ function createLegend(info){
 
     legend.appendChild(topCategory);
 
-    for (var key in info) {
+    for (let key in info) {
         if (info.hasOwnProperty(key) && key !== "") {
-            let category = document.createElement('div');
+            let category = document.createElement('button');
             category.classList.add('category');
 
             let point = document.createElement('div');
@@ -401,11 +432,22 @@ function createLegend(info){
 
             category.appendChild(point);
             category.appendChild(categoryHeader);
+
+            category.style.setProperty('--type', `point-${key}`);
+            category.addEventListener('click', () => togglePoints(category,`.point-${key}`));
             legend.appendChild(category);
         }
     }
 
     return legend;
+}
+
+function togglePoints(button, type){
+    let points = htmlElements.pointsContainer.querySelectorAll(type);
+    button.classList.toggle('disabled');
+    for(point of [...points]){
+        point.classList.toggle('hidden');
+    }
 }
 
 // ======================================

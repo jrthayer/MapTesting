@@ -21,7 +21,8 @@
         5.1 Dark Mode
         5.2 Zoom Stages
     6. Media Queries
-        6.1 Tablet/Desktop
+        6.1 Phones > 350px
+        6.2 Tablet/Desktop
     0. Quick-Hacks/Temporary
 */
 
@@ -40,6 +41,9 @@
     --buttonPrimary: hsl(0, 0%, 90%);
     --buttonSecondary: hsl(0, 0%, 80%);
     --buttonText: hsl(0, 0%, 30%);
+    --pointScale: 1;
+    --mapScale: 1;
+    --pointHeight: 1;
 }
 
 h2::selection,
@@ -51,7 +55,8 @@ h3::selection{
     background: var(--color400);
 }
 
-.point{
+.point,
+button{
     -webkit-user-select: none;  
     -moz-user-select: none;    
     -ms-user-select: none;      
@@ -82,7 +87,7 @@ html{
 }
 
 h2{
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-top: 0;
     margin-bottom: 1.5rem;
 }
@@ -211,6 +216,81 @@ header{
         border: 1px solid var(--textColor700);
         border-radius: 25px;
     }
+    #pointPanel .category:first-of-type{
+        background: linear-gradient(180deg, var(--color400),rgba(220,9,20,0));
+        margin: 0 -2rem;
+        padding: 2rem;
+    }
+
+/* 
+    4.11a Category
+*/
+.category{
+    padding: 2rem 0;
+    display: block;
+}
+    .category h2{
+        text-transform: uppercase;
+        text-shadow: -1px -1px 2px var(--color700), 1px -1px 2px var(--color700), -1px 1px 0px var(--color700), 1px 1px 0px var(--color700);
+        color: var(--textColor400);
+        text-align: center;
+
+        margin-bottom: .5rem;
+    }
+    .category h3{
+        background: linear-gradient(270deg, var(--color700), 20%, var(--color400), 80%, var(--color700));
+        margin: 0 -2rem;
+        padding: .5rem;
+        text-align: center;
+        
+        text-transform: uppercase;
+    }
+    .category h4{
+        color: var(--color400);
+        text-align: center;
+        padding: .2rem .6rem;
+        width: fit-content;
+        margin: 0 auto;
+
+        letter-spacing: 1px;
+
+        margin-bottom: 2.5rem;
+        background-color: var(--textColor400);
+        border-radius: .5rem;
+    }
+
+    .category p{
+        color: var(--textColor700);
+        line-height: 1.5rem;
+    }
+
+/* 
+    4.11b Divider
+*/
+.divider{
+    position: relative;
+    margin: 0 -2rem;
+}
+    .divider div:nth-of-type(1),
+    .divider div:nth-of-type(2)
+    {
+        width: 12px;
+        height: 12px;
+        border: solid 1px var(--color400);
+        background-color: var(--color700);
+        position: absolute;
+        transform: rotate(45deg);
+        top: -6px;
+    }
+    .divider div:nth-of-type(1){
+        left: 3rem;
+    }
+    .divider div:nth-of-type(2){
+        right: 1rem;
+    }
+    .divider div:nth-of-type(3){
+        border-top: solid 1px var(--color400);
+    }
 
 /* 
 //------------
@@ -279,127 +359,66 @@ header{
     }
 
 /* 
-    4.11a Category
-*/
-.category{
-    padding: 2rem 0;
-}
-    .category:first-of-type{
-        background: linear-gradient(180deg, var(--color400),rgba(220,9,20,0));
-        margin: 0 -2rem;
-        padding: 2rem;
-    }
-    .category h2{
-        text-transform: uppercase;
-        text-shadow: -1px -1px 2px var(--color700), 1px -1px 2px var(--color700), -1px 1px 0px var(--color700), 1px 1px 0px var(--color700);
-        color: var(--textColor400);
-        text-align: center;
-
-        margin-bottom: .5rem;
-    }
-    .category h3{
-        background: linear-gradient(270deg, var(--color700), 20%, var(--color400), 80%, var(--color700));
-        margin: 0 -2rem;
-        padding: .5rem;
-        text-align: center;
-        
-        text-transform: uppercase;
-    }
-    .category h4{
-        color: var(--color400);
-        text-align: center;
-        padding: .2rem .6rem;
-        width: fit-content;
-        margin: 0 auto;
-
-        letter-spacing: 1px;
-
-        margin-bottom: 2.5rem;
-        background-color: var(--textColor400);
-        border-radius: .5rem;
-    }
-
-    .category p{
-        color: var(--textColor700);
-        line-height: 1.5rem;
-    }
-
-/* 
-    4.11b Divider
-*/
-.divider{
-    position: relative;
-    margin: 0 -2rem;
-}
-    .divider div:nth-of-type(1),
-    .divider div:nth-of-type(2)
-    {
-        width: 12px;
-        height: 12px;
-        border: solid 1px var(--color400);
-        background-color: var(--color700);
-        position: absolute;
-        transform: rotate(45deg);
-        top: -6px;
-    }
-    .divider div:nth-of-type(1){
-        left: 3rem;
-    }
-    .divider div:nth-of-type(2){
-        right: 1rem;
-    }
-    .divider div:nth-of-type(3){
-        border-top: solid 1px var(--color400);
-    }
-/* 
 //------------
     4.13 Legend Panel
 //------------
 */
 #legendPanel{
-    /* background-color: var(--color400); */
     min-height: 100%;
 }
-    #legendPanel .category:first-of-type{
+    #legendPanel>div:first-of-type{
         background: none;
         border: none;
+        width: auto;
+        padding: .5rem;
+        text-align: center;
+        display: block;
     }
     #legendPanel .category{
-        /* text-align: center; */
+        display: flex;
+
+        width: 100%;
         padding: .5rem;
         padding-left: 1rem;
-        background-color: var(--color400);
-        margin-bottom: 1rem;
+        border: var(--buttonText) 3px solid;
         border-radius: 1rem;
-
-        border: var(--buttonSecondary) 3px solid;
+        margin-bottom: 1rem;
+        
+        background-color: var(--buttonSecondary);
+        color: black;
+    
+        text-align: left;
     }
     #legendPanel h2{
-        font-size: 3rem;
 
-        color: var(--color400);
         padding-top: 2rem;
         margin-bottom: 0rem;
-    }
 
+        color: black;
+
+        font-weight: 900;
+        text-shadow: -1px -1px 2px white, 1px -1px 2px white, -1px 1px 0px white, 1px 1px 0px white;
+    }
     #legendPanel h3{
-        font-size: 2rem;
+        flex: 100;
+
         margin: 0 1rem;
         padding: .5rem;
+
         background: none;
-        background-color: var(--color400);
-        display: inline-block;
+        
+        text-align: left;
+        font-weight: 700;
     }
     #legendPanel .point{
-        position: unset;
-        display: inline-block;
+        position: relative;
+        
         width: 35px;
         height: 35px;
         cursor: auto;
 
         transform: scale(1) rotate(-45deg) translate(0, 0);
     }
-    
 
 /* 
 //------------//------------
@@ -442,12 +461,10 @@ header{
 }
 
 .point{
-    --scale: 1;
-
     position: absolute;
     /* --pointHeight is set by js, --scale is overridden by css classes */
-    height: calc(var(--pointHeight) * var(--scale) * 1px);
-    width: calc(var(--pointHeight) * var(--scale) * 1px);
+    height: calc(var(--pointHeight) * var(--pointScale) * 1px);
+    width: calc(var(--pointHeight) * var(--pointScale) * 1px);
     
     /* Makes it look like a pin */
     border-radius: 50% 50% 50% 0;
@@ -472,23 +489,6 @@ header{
         cursor: pointer;
         z-index: 3;
     }
-    
-/* 
-//------------
-    4.3a Point Types
-//------------
-*/
-.point-country{
-    --scale: 1.5;
-}
-
-.point-city{
-    --scale: 1;
-}
-
-.point-region{
-    --scale: .8;
-}
 
 
 /* 
@@ -505,7 +505,7 @@ header{
     transform-origin: 50% 100%;
     /*scale because space between point and tooltip is based on height of point*/
     /*scale is defined in parent .point div*/
-    transform: translate(calc(-50% - var(--scale)*.14vh), calc(-100% + var(--scale)*.14vh)) rotate(45deg) scale(calc( 1/(var(--mapScale)) + 1/(var(--mapScale)) ));
+    transform: translate(calc(-50% - var(--pointScale)*.14vh), calc(-100% + var(--pointScale)*.14vh)) rotate(45deg) scale(calc( 1/(var(--mapScale)) + 1/(var(--mapScale)) ));
     
     white-space: nowrap;
     width: fit-content;
@@ -621,6 +621,22 @@ header{
     transition: transform .5s;
 }
 
+.hidden{
+    visibility: hidden;
+}
+
+/* used in the legend when turning points on/off */
+.disabled h3{
+    position: relative;
+}
+   .disabled h3::before{
+        content: "";
+        position: absolute;
+        border: 3px solid #2c2c2c;
+        top: calc(50% - 3px);
+        margin-left: -10px;
+        width: 100%;
+    }
 /* 
 //------------//------------
     5.1 Dark Mode
@@ -657,7 +673,20 @@ header{
 */
 
 /* 
-===== 6.1 Tablet/Desktop ===== 
+===== 6.1 Phones > 350px ===== 
+*/
+@media(min-width: 22rem) {
+    h2{
+        font-size: 2.5rem;
+    }
+    
+    h3{
+        font-size: 1.5rem;
+    }
+}
+
+/* 
+===== 6.2 Tablet/Desktop ===== 
 */
 @media(min-width: 33rem) {
     h2{

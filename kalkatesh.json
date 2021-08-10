@@ -1,25 +1,35 @@
 {
     "name": "Kalkatesh",
-    "mapSrc": "./kalkatesh_custom.png",
+    "mapSrc": "./kalkatesh_2200.png",
     "wiki": "https://verum.fandom.com/wiki/Kalkatesh",
     "minHeight": 400,
-    "maxHeight": 2000,
+    "maxHeight": 2200,
+    "scaleIncrement": 1.5,
     "pointTypes":{
             "":{
                 "color700": "#CCFF00",
-                "color400": "black"
-            },
-            "city":{
-                "color700": "#0e0101",
-                "color400": "#630808"
+                "color400": "black",
+                "scale": 0.8
             },
             "country":{
                 "color700": "#01080e",
-                "color400": "#063665"
+                "color400": "#063665",
+                "scale": 1.1
             },
             "region":{
                 "color700": "#020e01",
-                "color400": "#0b5b06"
+                "color400": "#0b5b06",
+                "scale": 1.1
+            },
+            "city":{
+                "color700": "#0e0101",
+                "color400": "#630808",
+                "scale": 0.8
+            },
+            "landmark":{
+                "color700": "#000000",
+                "color400": "#424242",
+                "scale": 0.5
             }
     },
     "points": [
@@ -68,7 +78,7 @@
             "name": "Daborak",
             "motto": "Duty. Discipline. Death.",
             "type": "country",
-            "coordinates": {"top": "49%", "left": "80%"},
+            "coordinates": {"top": "52%", "left": "75%"},
             "desc": "A land of lush wheat fields, flat plains, and wild rivers.\n\nLush for farming which provides Kalakatesh with a large portion of its food.",
             "categories": [
                 {
@@ -95,13 +105,265 @@
                     "title": "Agriculture",
                     "info":"Daborak is heavily developed in siege engines, but by far, their greatest advancements are in those of its animal husbandry.\n\nUsing proper breeding and magic infusions, the horses of Dabnorak were granted intelligence giving them the ability to understand spoken language and communicate through a language called Cantor by stomping their hooves.\n\nThe longer a Daborakian warhorse lives the more intelligent it becomes, some of their paragons possess the ability to actually speak."
                 }
+            ],
+            "points": [
+                {
+                    "name": "The Rolling Wastes",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "48%", "left": "73%"},
+                    "desc": "The northern section of Daborak is a place of boulder strewn fields where the desperate hide out justice for their crimes. Civility is found in short supply here.",
+                    "categories": []
+                },
+                {
+                    "name": "Thunderlands",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "53%", "left": "77%"},
+                    "desc": "The center of the great plains is marred by the thundering of storms and hooves of Daborak.",
+                    "categories": []
+                },
+                {
+                    "name": "The Razor Cliffs",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "56%", "left": "82%"},
+                    "desc": "The eastern most cliffs of Daborak are home to a set of razor sharp rocks that stand as a challenge to the ocean waves.",
+                    "categories": []
+                },
+                {
+                    "name": "Shadowfields",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "70%", "left": "72%"},
+                    "desc": "The southern peninsula of Daborak is shrouded in blackened fields and whispered rumor.",
+                    "categories": []
+                },
+                {
+                    "name": "Ragehoof",
+                    "motto": "",
+                    "type": "city",
+                    "coordinates": {"top": "51%", "left": "79%"},
+                    "desc": "The last of the cities of Daborak to have some minor form of independence. As such many of those that disagree with the laws of the land meet there to be amongst those of similar minds.",
+                    "categories": []
+                },
+                {
+                    "name": "Graver's Coast",
+                    "motto": "",
+                    "type": "city",
+                    "coordinates": {"top": "53%", "left": "83%"},
+                    "desc": "A lonely town on the razor cliffs, with a strange ritual of tossing the dead into the sea.",
+                    "categories": []
+                },
+                {
+                    "name": "Ramon's Roost",
+                    "motto": "",
+                    "type": "city",
+                    "coordinates": {"top": "59%", "left": "78%"},
+                    "desc": "A simple town, with simple practices. It is not a place you would go for developments of the scientific or magical nature; though there is speculation that magic is used in the creation of the various beverages that are served at the taverns for which the city is well known.",
+                    "categories": [
+                        {
+                            "title": "History",
+                            "info": "Ramon’s Roost came from humble beginnings; a tavern that had been built during the time just after Daborak’s city states had driven back the invading Lizardfolk. It was a place of rest for travellers, soldiers, and adventurers alike.\n\nSince then the town has sprung up around it, with the main road leading through it still passing by this tavern. The problem, however, lies in that there are three taverns in the city—each vying for supremacy with their beverages. And each of them claim that they are the original tavern, which only adds to the confusion and to the rivalry. These taverns have become so well known that there is a yearly national festival dedicated to the drinks that they serve, and the population of the city during this time swells from the 3,000 regular residents to a staggering 20,000.\n\nThe taverns are Janicki's Jack, Crosseyed Mule, and Poppys Port in the Storm Pop. Each tavern serves their own unique and distinct alcohol and beverage.\n\nOne of the more well known—though not necessarily enough to claim without a shadow of a doubt that it is superior—is Uncle Poppy’s Elixir of Everything, served at Poppys Port in the Storm Pop. It is supposedly so potent and delectable that a single drink is enough to cause the drinker to become addicted to it. This is rumored to be because of the rare ingredients used to create the drink, and one of those is whispered to be the tears of an angel.\n\nOf course there has never been any definitive proof of this brought forth, and Poppy, the owner of the tavern would be the first to deny that rumor. Though it has not stopped it from festering."
+                        },
+                        {
+                            "title": "Demographic",
+                            "info": "Most of the three-thousand (3,000) people living within the city are human, with a smaller percentage of half-orc and half-elf citizenry. Other races living within the area have a much smaller percentage."
+                        },
+                        {
+                            "title": "Government",
+                            "info": "Like the rest of Daborak, Ramon’s Roost is under the control of the military and they have a noticeable presence within. Other than that the people with the most power in the city are the owners of the three taverns that vye for superiority."
+                        },
+                        {
+                            "title": "Religion",
+                            "info": "As with the rest of the country, the city is primarily made up of worshipers of Glory and the Grey Pantheon, Iass being the most common of the group. The city does however have a noticeable presence of Green Pantheon worshippers, specifically those that worship Vinsc in the hope that Lord Autumn would aid in their harvests."
+                        },
+                        {
+                            "title": "Military",
+                            "info": "The military presence in Ramon’s Roost is noticeable, but not inherently pronounced. It is a common stop for many travellers in the area, and as such has enough military personnel that it can adequately keep the city safe—that number swells to almost 8 times its size when the need arises."
+                        },
+                        {
+                            "title": "Trade",
+                            "info": "Most of the income in the city comes from the three taverns residing in it. They generate gold which is then spent in the markets and used to pay their workers.\n\nThere are various stores within the city. This includes a small marketplace where one can buy clothes, food, materials, and other such items; however, they pale in comparison to the taverns that demand the spotlight.\n\nDuring the festival every person living in the city sees a sudden growth of the money flowing in and out of both their own pockets, and those of visitors."
+                        }
+                    ]
+                },
+                {
+                    "name": "Stalker's Eye",
+                    "motto": "",
+                    "type": "city",
+                    "coordinates": {"top": "47%", "left": "75%"},
+                    "desc": "A small town centered around an immense military academy.\n\nThe Academy, literally called “Stalkers Eye” is Daborak’s lead academy for spies, assassins, thief's, and hitmen. Many finals involve stealing, apprehending, or acquiring papers from other students, who have to stay behind.",
+                    "categories": [
+                        {
+                            "title": "History",
+                            "info": "Stalkers Eye was originally just the small town it makes up. Full of twisted and evil bandits fighting for mob rule. Many cutthroats and assassins plagued the constantly shifting political sphere.\n\nHowever, their superior scouting and reconnaissance abilities always gave their military an advantage. Compared to the other city-states in Daborak, they had the smallest force."
+                        },
+                        {
+                            "title": "Demographic",
+                            "info": "The town-part of Stalkers Eye can find races of all kinds, with a minor population of Tieflings. Most of the citizens are farmers and indentured servants working for others. The Academy is often barren of the more stout and brawnier races, and instead filled with Humans, Tabaxi, Halfings, Aarakocra, Kenku, goblins, and Elves."
+                        },
+                        {
+                            "title": "Government",
+                            "info": "Stalkers Eye is entirely ran by Unano “Mourning Rivers” an old Tabaxi, who despite his age, still benefits from his heightened reflexes. He reports directly to the Daborakian Military, and controls most of the town along with a few other ex-military personnel. He was once a student at the academy in Stalkers Eye, Through their training, he has since then turned into a decorated and mysteriously unknown agent for the military."
+                        },
+                        {
+                            "title": "Religion",
+                            "info": "There are ancient temples dedicated to Sekelcuse that are still operated today. Many of the students at the academy go here for worship, as well as a handful of farmers and craftsmen.\n\nThe most prominent worship are the temples to the green pantheon, due to the largest population of the town making up farmers who are hoping for green pastures and good weather."
+                        },
+                        {
+                            "title": "Military",
+                            "info": "Everyone who graduates from Stalkers Eye will be pulled into the Daborakian Forces. Depending on their job can lead them to many different paths and branches. Almost all of Daborak’s spies and assassins attended Stalkers Eye."
+                        },
+                        {
+                            "title": "Trade",
+                            "info": "Many caravans and couriers head to Stalkers Eye just to buy their masterwork locks and scroll cases. Due to the occasional traffic, and safe roads, buying common supplies is easy."
+                        },
+                        {
+                            "title": "Technology",
+                            "info": "Stalkers Eye is home to many complex and arithmetic locks. Many chests, handlocks, and scroll carriers originate from Stalkers Eye. Many craftsmen compete for having the most “Unbreakable lock” and there are competitions held every other year to put their locks to the test. There’s also a decent supply of spy gear at the academy, however there is limited knowledge of such devices, and it is only given to those agents."
+                        }
+                    ]
+                },
+                {
+                    "name": "Blackwheel",
+                    "motto": "",
+                    "type": "city",
+                    "coordinates": {"top": "46%", "left": "71.5%"},
+                    "desc": "As an experiment and proof of concept, the building of the water wheel was authorized and the settlement grew around the construction. It became a food production center for northern Daborak.",
+                    "categories": [
+                        {
+                            "title": "Demographic",
+                            "info": "The population of Blackwheel consists mostly of humans with some halflings, elves, and dwarves."
+                        },
+                        {
+                            "title": "Government",
+                            "info": "Blackwheel uses the typical feudal lord government structure with additional oversight by a Daborak military commissar.\n\nIn the wake of the undead uprising and Kingvale’s defeat, the treasonous Lord Malfous was replaced by the war hero Branwyn. Branwyn’s rulings and actions are closely overseen and authorized by the commissar Lt. Johan Wilderburg of the Daborak Cavalry. Malfous loyalists may still be involved in lesser aspects of the government and some suggest that Branwyn is a sacrificial lamb put in place to draw out would be assassins."
+                        },
+                        {
+                            "title": "Religion",
+                            "info": "Most of the surrounding population follows the Green Pantheon, seasonally as appropriate. Green holidays and festivals occur at a small park where the aqueduct drains what is left from the system. The bias towards Silloway only exists because farmers can more readily participate when they bring their crops to market.\n\nThe Knights defending Blackwheel have their own Chapel to Glory in a confiscated manor of a treasonous lord. The goodwill of the people stems from their defense during the Undead Uprising. However, familiarity breeds contempt and the opinions have been moving more towards “What have you done for us lately?”\n\nIass is worshipped more openly by the rank and file of the military as well as Branwyn himself. They hold services when they can and in response to small victories. Services are held at a tavern which some claim is more of a pit fighting ring."
+                        },
+                        {
+                            "title": "Military",
+                            "info": "Branwyn is no slouch when it comes to combat, and definitely not one to let honor come between himself and victory. He leads about a hundred battle hardened veterans from the Uprising. The Commissar is in charge of a detail of 12 knights and their retinue as well."
+                        },
+                        {
+                            "title": "Trade",
+                            "info": "Foodstuffs, grain, farming, and cattle are all big industries of Blackwheel. It acts as a central processing location and shipping hub for the region."
+                        },
+                        {
+                            "title": "Technology",
+                            "info": "Blackwheel has some more advanced engineering regarding the use of the river as power and irrigation. This is largely taking advantage of the eponymous black water wheel built after the Reckoning and in conjunction with Ordean engineers.\n\nThe 60’ diameter water wheel drives the main shaft, which in turn powers the primary mill as well as several other small industries nearby as well. The wheel also raises water high to an Ordean style aqueduct.\n\nAlthough the aqueduct was originally intended to feed the surrounding farms, once it got to the lord’s manor, the project was deemed not financially feasible and construction stopped. The lord’s manor and buildings closer to the wheel do have indoor plumbing though.\n\nA secondary industry, formed after the Undead Uprising, has developed in spy craft. The commissar uses Blackwheel as a practical training ground for Daborakian military intelligence, primarily for sniffing out insurrectionists."
+                        }
+                    ]
+                },
+                {
+                    "name": "Steelfield",
+                    "motto": "",
+                    "type": "city",
+                    "coordinates": {"top": "52%", "left": "71%"},
+                    "desc": "A military academy for all manners of martial training, a prominent facility in which a small town has been constructed to support it.",
+                    "categories": [
+                        {
+                            "title": "History",
+                            "info": "Steelfield used to be a very minor power in the city-state era. While they still had the most feared cavalry, their numbers were their largest downfall. Many believe they would have been subjugated and forced into protectionism if it wasn’t for the horses barely shoving off threats.\n\nMany city-states eventually focused efforts on horse-raids and purposefully trying to preserve horses in battle, so they may have an efficient Calvary on their own. Little did they know that all the horses were signaled differently than other horses around the world. This made it nearly impossible for those trained otherwise to control the horses movements.\n\nDuring the later years, when the lizard folk were conquering lands, most of Steelfield was left in shambles, and almost non-existent. With no choice but to band together with other city-states, they were able to train a few others to use what little horses were left.\n\nWhen the lizard folk did not come back, there was a massive effort in funding Steelfield back to its former state. The government built a Calvary Academy, and for a while was funding the town constructed around it. It wasn’t long before they were able to breed their horses back to fruition."
+                        },
+                        {
+                            "title": "Demographic",
+                            "info": "Steelfield in the old days was largely Dwarves and Humans. However the largest standing population is currently Half-orcs, who make up roughly 30% of the population. Followed by Dragonborn and Dwarves."
+                        },
+                        {
+                            "title": "Government",
+                            "info": "Steelfield still makes many of it’s decisions in the old ways the previous tribes oversaw the settlement. Legislation can be put into review upon approval of 3 clans. At this stage, every clan will have to discuss internally if they are for or against the implementation. How each clan determines this has slight quirks and variances, but a general 60% agreement within a clans members will assure the clans yay or nay in the matter. "
+                        },
+                        {
+                            "title": "Religion",
+                            "info": "Glory is the most popular deity and there are two small temples to him in Steelfield, one on the Academy grounds and one in the town around it. There is additionally one temple to Iass, The Seven, and a man-made channel devoted entirely to Astaroth."
+                        },
+                        {
+                            "title": "Military",
+                            "info": "Most of Daborak’s best horses come from Steelfield. Their Dragoons are the most respected Verum-wide, and most say there’s no better horse than one from Daborak. Their horses have been bred for years, and many Dragoons are trained in the old Steelfield ways of riding horses."
+                        },
+                        {
+                            "title": "Trade",
+                            "info": "While Horses make up the largest export in Steelfield, barley and cattle food supplies are still a massive export(about 40% of export earnings), also making up nearly 20% of the labor force. The economy has been under a massive boost for quite some time and it is expected that the animal husbandry market is going to continue growing in the future.\n\nDuring the pre-unification of all city-states. Horse-trading was illegal in Steelfield, and normal punishment resulted in confiscation of your cattle and/or horses, however this rule has since then been repealed.\n\nDespite the existence of horse trading, around 45% of the population are opposed to allowing trade of Steelfield-bred horses. There have been some locals who avoid businesses of those who trade with outsiders, but it’s unknown how much business is deterred."
+                        },
+                        {
+                            "title": "Technology",
+                            "info": "Steelfield has some of the fastest horses in Kalkatesh. The large tracts of grasslands and open fields have allowed for not only natural breeding grounds for stray horses, but also the most suited environment for training them as well.\n\nYou can find many different breeds and famous trainers locally in Steelfield. Some of the highest-quality saddles and mounted armor also originate from Steelfield and are primarily only sourced here too. Though it should be noted all mounted equipment is primarily for Equine and Equine-like animals."
+                        }
+                    ]
+                },
+                {
+                    "name": "Gordand",
+                    "motto": "",
+                    "type": "city",
+                    "coordinates": {"top": "58%", "left": "74%"},
+                    "desc": "The settlement Gordand is within a large open grassy plain found in the center of Daborak, with many large dirt roads leading in and out of the city.",
+                    "categories": [
+                        {
+                            "title": "History",
+                            "info": "The history of Gordand can be expressed with the representation, respect, and celebration of centaurs within the settlement. It is said that at the creation of Gordand, the founder met with centaurs of Khao during which they both decided to form the town."
+                        },
+                        {
+                            "title": "Demographic",
+                            "info": "The demographics of Gordand are mostly even with all beings, but has the largest number of centaurs within Kalkatesh. The total population of the settlement of Gordand is 8,000."
+                        },
+                        {
+                            "title": "Government",
+                            "info": "The Government of Gordand is split into multiple divisions. These divisions are: protection, economy, architecture, agriculture, professions, politics and festivals. Each of these divisions overlook and help guide the different functions of Gordand.\n\nThe Government of Gordand organizes festivals every month within the settlement. The festivals are filled with people who have worked very hard in their respective professions to help with each festival.\n\nActivities within the festivals showcase feats, the celebration of centaurs, and arts/crafts presentations. These festivals are events with which many people within Kalkatesh can join and have a nice time."
+                        },
+                        {
+                            "title": "Religion",
+                            "info": "There is mostly an even amount of representation of each pantheon with the settlement of Gordand, with the Green Pantheon specifically having a lot of recognition."
+                        },
+                        {
+                            "title": "Military",
+                            "info": "The Military of Gordand uses defensive positions and tactics. Placing archers/watchtowers on the nearby cliff side to overlook the settlement and making use of scouts to look for potential future dangers. In terms of magic defenses, the settlement of Gordand has hidden magic traps which specifically deal with distractions, misdirection, stealth, and illusions. "
+                        },
+                        {
+                            "title": "Trade",
+                            "info": "The settlement of Gordand has a decently wealthy economy within the settlement. Most resources and gold come from the festivals held within the settlement of Gordand."
+                        }
+                    ]
+                },
+                {
+                    "name": "Dark Gate",
+                    "motto": "",
+                    "type": "city",
+                    "coordinates": {"top": "59%", "left": "71%"},
+                    "desc": "A massive fortress sitting atop the flat lands of Daborak right before the enigmatic forests of Dolten. Some artificial changing of the landscape has been done to allow it to be as self-sustaining as possible.",
+                    "categories": [
+                        {
+                            "title": "History",
+                            "info": "Daborak and Dolten have engaged in a number of wars in their time, though they haven't had an actual skirmish in quite some time. More rivals than anything else, the two play a delicate game.\n\nThe forces of the Dark Gate take extra care in their role of customs officers for Daborak/Dolten exchanges—giving extra scrutiny towards those they suspect capable of witchcraft, may be transporting dangerous items, or might secretly be some creature from the Abhoreal trying to sneak past their defenses. In response, the council of witches consistently rotate sleeper agents to keep tabs on their neighbors to the east.\n\nAfter all, if Daborak is that worried about what Dolten is going to do, Dolten needs to be planning SOMETHING—right? Some of the leadership see this as a tense cold war, but others—well—it's just a fun way of keeping tradition alive."
+                        },
+                        {
+                            "title": "Demographic",
+                            "info": "Dark Gate has an estimated 4,000 residents. Consisting of mostly humans, with some half-elfs, half-orcs, and dwarfs."
+                        },
+                        {
+                            "title": "Government",
+                            "info": "The Dark Gate observes the laws and edicts of the country of Daborak, as it is first and foremost a military outpost. It also has some additional laws that function more like emergency protocols, in the event of attacks from the creatures (or witches) of Dolten. All who live at the Dark Gate, military or civilian, must know these to claim residence there."
+                        },
+                        {
+                            "title": "Religion",
+                            "info": "Dark Gate follows the usual deities of Daborak—Glory, Iass, Astaroth, Tilt, and the Seven. However, some of the spellcasters, secret plants sent by the council of witches—just in case—worship Wondox."
+                        },
+                        {
+                            "title": "Technology",
+                            "info": "The Dark Gate focuses much of its magical development on ferreting out the dark influences and travelers from Dolten before they step foot into Daborak. They specialize in detecting hexes and evil magic, as well as neutralizing and containing such things. There are also minor mages, fortune tellers, exorcists and charlatans that claim to be able to produce charms and trinkets to ward away foul sorcery.\n\nScientific development is much like base Daborak—focused heavily on warfare, siege weaponry, and animal husbandry. In regards to Dark Gate, these are focused towards these things that can—if needed—hold the line against Dolten—in both cases of war with the country or the forces of the land itself."
+                        }
+                    ]
+                }
             ]
         },
         {
             "name": "Dolten",
             "motto": "",
             "type": "country",
-            "coordinates": {"top": "57%", "left": "65%"},
+            "coordinates": {"top": "60%", "left": "63%"},
             "desc": "A temperate region, heavily forested with a swamp and a few large scattered rivers.\n\nThe southern tip is a barren land of shale rock and alchemical industry.",
             "categories": [
                 {
@@ -127,6 +389,88 @@
                 {
                     "title": "Technology",
                     "info":"Dolten is a sporadically advancing nation in terms of scientific advancement.\n\nParts still cling to the old tribal methods that they have practiced for centuries; this is especially true amongst the skinwalkers, some take to the full development of marble and stone and hope it will stand against the wrath of the forest.\n\nIn Bleak the advancements rival that of even Khao, while their advances in planar binding rival that of even the old mages guild."
+                }
+            ],
+            "points": [
+                {
+                    "name": "Abhorrent Arboreal",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "66%", "left": "63%"},
+                    "desc": "The great dark forest that is the home of all Doltenians and their doom.",
+                    "categories": []
+                },
+                {
+                    "name": "Fanged Hills",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "69%", "left": "60%"},
+                    "desc": "These dark hills are host to the vampires of Kalkatesh, an asylum from the sun and the closest thing to a home such creatures have.",
+                    "categories": []
+                },
+                {
+                    "name": "Grasping Thicket",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "55%", "left": "56%"},
+                    "desc": "The northwestern forest is infected with undead and their presence has tainted much of the land.",
+                    "categories": []
+                },
+                {
+                    "name": "Bleak Reaches",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "72%", "left": "61%"},
+                    "desc": "The southern tip of Dolten is a grey waste of shale and cold wind.",
+                    "categories": []
+                },
+                {
+                    "name": "Coin Copse",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "65%", "left": "69%"},
+                    "desc": "These woods are notorious for banditry and has hosted more than one army of beggars, thieves, and villains.",
+                    "categories": []
+                },
+                {
+                    "name": "Howling Hills",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "56%", "left": "65%"},
+                    "desc": "The werewolves have carved out in these hills a home for all skinwalkers, no matter what their affliction, here such creatures would find welcome.",
+                    "categories": []
+                },
+                {
+                    "name": "Feywood",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "49%", "left": "60%"},
+                    "desc": "The Fey have a few ways into Kalkatesh, the Feywood is one such place.",
+                    "categories": []
+                },
+                {
+                    "name": "Webwood",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "60%", "left": "61%"},
+                    "desc": "The center of the Abhorrent Arboreal is home to Dolten's most feared host, the Creeping Death.",
+                    "categories": []
+                },
+                {
+                    "name": "Pale Fields",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "60%", "left": "57%"},
+                    "desc": "Pale white grass that shines in the moonlight bejewels western Dolten, surrounding the Black River.",
+                    "categories": []
+                },
+                {
+                    "name": "The Mire",
+                    "motto": "",
+                    "type": "landmark",
+                    "coordinates": {"top": "60%", "left": "67%"},
+                    "desc": "The great swamp found in the east of Dolten.",
+                    "categories": []
                 }
             ]
         },
