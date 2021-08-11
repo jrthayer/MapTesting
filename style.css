@@ -485,6 +485,20 @@ header{
         border-radius: 50%;
         background: var(--color700);
     }
+
+    .point::before{
+        content: "";
+    background-color: var(--color400);
+    opacity: .08;
+    width: 50%;
+    height: 50%;
+    border-radius: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    transform: translate(-50%, -50%) rotate(-45deg) scaleX(0.5);
+    }
+
     .point:hover{
         cursor: pointer;
         z-index: 3;
