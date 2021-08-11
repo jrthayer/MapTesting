@@ -1,0 +1,83 @@
+{
+    "name": "Kalkatesh",
+    "mapSrc": "./kalkatesh_2200.png",
+    "wiki": "https://verum.fandom.com/wiki/Kalkatesh",
+    "minHeight": 400,
+    "maxHeight": 2200,
+    "scaleIncrement": 1.5,
+    "pointTypes":{
+            "":{
+                "color700": "#CCFF00",
+                "color400": "black",
+                "scale": 0.8
+            },
+            "landmark":{
+                "color700": "#000000",
+                "color400": "#424242",
+                "scale": 0.5
+            },
+            "city":{
+                "color700": "#0e0101",
+                "color400": "#630808",
+                "scale": 0.8
+            },
+            "country":{
+                "color700": "#01080e",
+                "color400": "#063665",
+                "scale": 1.1
+            },
+            "region":{
+                "color700": "#020e01",
+                "color400": "#0b5b06",
+                "scale": 1.1
+            },
+            "continent":{
+                "color700": "#100b19",
+                "color400": "#573c86",
+                "scale": 1.5
+            }      
+    },
+    "points": [
+        {
+            "name": "",
+            "motto": "",
+            "type": "",
+            "coordinates": {"top": "50%", "left": "50%"},
+            "desc": "",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": ""
+                },
+                {
+                    "title": "Demographic",
+                    "info": ""
+                },
+                {
+                    "title": "Government",
+                    "info": ""
+                },
+                {
+                    "title": "Religion",
+                    "info": ""
+                },
+                {
+                    "title": "Military",
+                    "info": ""
+                },
+                {
+                    "title": "Agriculture",
+                    "info": ""
+                },
+                {
+                    "title": "Trade",
+                    "info": ""
+                },
+                {
+                    "title": "Technology",
+                    "info": ""
+                }
+            ]
+        }
+    ]
+}

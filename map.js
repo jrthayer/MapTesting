@@ -364,6 +364,7 @@ function createPanel(info){
     topCategory.appendChild(desc);
     panel.appendChild(topCategory);
 
+    //currently requires a category array
     for(let x = 0; x < info.categories.length; x++){
         let divider = document.createElement('div');
         divider.classList.add('divider');
@@ -399,7 +400,10 @@ function createLegend(info){
 
     let header = document.createElement('h2');
     header.textContent = "Legend";
+    let note = document.createElement('h4');
+    note.textContent = "click groups to toggle on/off";
     topCategory.appendChild(header);
+    topCategory.appendChild(note);
 
     legend.appendChild(topCategory);
 

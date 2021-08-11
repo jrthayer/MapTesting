@@ -1699,47 +1699,6 @@
             "coordinates": {"top": "40%", "left": "79%"},
             "desc": "The Rift was once a swirling mass of wild magic, spells given sentience and a bestial hunger for magic. However, as the seals have been restored and stability returned to the inner planes. The Rift has begun to stabilize, revealing ruins long since thought abandoned.\n\nThose that have tried to live on its edge have found new lands to inhabit and the rampant magic has caused several changes within them during the process. The volatile and unstable nature of The Rift is seen etched onto their very flesh and burned into their minds.",
             "categories": []
-        },
-        {
-            "name": "",
-            "motto": "",
-            "type": "",
-            "coordinates": {"top": "50%", "left": "50%"},
-            "desc": "",
-            "categories": [
-                {
-                    "title": "History",
-                    "info": ""
-                },
-                {
-                    "title": "Demographic",
-                    "info": ""
-                },
-                {
-                    "title": "Government",
-                    "info": ""
-                },
-                {
-                    "title": "Religion",
-                    "info": ""
-                },
-                {
-                    "title": "Military",
-                    "info": ""
-                },
-                {
-                    "title": "Agriculture",
-                    "info": ""
-                },
-                {
-                    "title": "Trade",
-                    "info": ""
-                },
-                {
-                    "title": "Technology",
-                    "info": ""
-                }
-            ]
         }
     ]
 }
