@@ -489,7 +489,7 @@ header{
     .point::before{
         content: "";
     background-color: var(--color400);
-    opacity: .08;
+    opacity: .3;
     width: 50%;
     height: 50%;
     border-radius: 100%;

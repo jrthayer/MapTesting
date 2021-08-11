@@ -105,23 +105,13 @@ window.addEventListener('load', async function(){
             pointsContainer.classList.add('transition');
 
             generatePoints(pointsContainer, pointsData, pointTypes);
-            // for(let x = 0; x < pointsData.length; x++){
-            //     //create point
-            //     let newPoint = createPoint(pointsData[x], pointTypes);
-            //     let pointInfo = createPanel(pointsData[x]);
-            //     newPoint.addEventListener('click', () => populatePanel(newPoint, pointInfo));
-            //     pointsContainer.appendChild(newPoint);
-                
-            //     if('points' in pointsData[x]){
 
-            //         console.log(`This point has points: ${pointsData[x].name}`);
-            //     }
-
-                
-            // }
             htmlElements.pointsContainer = pointsContainer;
             htmlElements.pointsContainer.style.setProperty('--pointHeight',  mapInfo.map.minHeight/100 * 3);
             htmlElements.map.appendChild(pointsContainer);
+
+            //click first point, should be continent
+            pointsContainer.querySelector('.point').click();
         })
         .catch(function (error) {
             console.log(error);

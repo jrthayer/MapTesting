@@ -11,6 +11,16 @@
                 "color400": "black",
                 "scale": 0.8
             },
+            "landmark":{
+                "color700": "#000000",
+                "color400": "#424242",
+                "scale": 0.5
+            },
+            "city":{
+                "color700": "#0e0101",
+                "color400": "#630808",
+                "scale": 0.8
+            },
             "country":{
                 "color700": "#01080e",
                 "color400": "#063665",
@@ -21,58 +31,20 @@
                 "color400": "#0b5b06",
                 "scale": 1.1
             },
-            "city":{
-                "color700": "#0e0101",
-                "color400": "#630808",
-                "scale": 0.8
-            },
-            "landmark":{
-                "color700": "#000000",
-                "color400": "#424242",
-                "scale": 0.5
-            }
+            "continent":{
+                "color700": "#100b19",
+                "color400": "#573c86",
+                "scale": 1.5
+            }      
     },
     "points": [
         {
-            "name": "",
+            "name": "Kalkatesh",
             "motto": "",
-            "type": "",
-            "coordinates": {"top": "50%", "left": "50%"},
-            "desc": "",
-            "categories": [
-                {
-                    "title": "History",
-                    "info": ""
-                },
-                {
-                    "title": "Demographic",
-                    "info": ""
-                },
-                {
-                    "title": "Government",
-                    "info": ""
-                },
-                {
-                    "title": "Religion",
-                    "info": ""
-                },
-                {
-                    "title": "Military",
-                    "info": ""
-                },
-                {
-                    "title": "Agriculture",
-                    "info": ""
-                },
-                {
-                    "title": "Trade",
-                    "info": ""
-                },
-                {
-                    "title": "Technology",
-                    "info": ""
-                }
-            ]
+            "type": "continent",
+            "coordinates": {"top": "75%", "left": "75%"},
+            "desc": "The third largest continent of the planet Verum. It is a land that is steeped in a history of war and catastrophe, the greatest of which, The Reckoning, nearly destroyed all of creation, before the intervention of the Seven. A band of mortals that rose up and put a stop to the greatest threat creation had ever known.\n\nSixty-four years later, the land left behind struggles to recover from its wounds and old secrets begin to bubble to the surface, new struggles emerge and old threats return.\n\nKalkatesh has a population of 42,375,316.",
+            "categories": []
         },
         {
             "name": "Khao",
@@ -714,7 +686,7 @@
                 },
                 {
                     "title": "Giants",
-                    "info": "Giants are a commonplace occurrence in Steton, in fact many of them are citizens.\n\nThe many giants that instead roam the lands are hunted for their skin and the large hoards they tend to collect.\n\nMost are fought by the few Stetonians that wish to test themselves against the might of such cunning and organized creatures."
+                    "info": "Giants are a commonplace occurrence in Steton, in fact many of them are citizens.\n\nThe giants that instead roam the lands are hunted for their skin and the large hoards they tend to collect.\n\nMost are fought by the few Stetonians that wish to test themselves against the might of such cunning and organized creatures."
                 }
             ],
             "points":[
@@ -1727,6 +1699,47 @@
             "coordinates": {"top": "40%", "left": "79%"},
             "desc": "The Rift was once a swirling mass of wild magic, spells given sentience and a bestial hunger for magic. However, as the seals have been restored and stability returned to the inner planes. The Rift has begun to stabilize, revealing ruins long since thought abandoned.\n\nThose that have tried to live on its edge have found new lands to inhabit and the rampant magic has caused several changes within them during the process. The volatile and unstable nature of The Rift is seen etched onto their very flesh and burned into their minds.",
             "categories": []
+        },
+        {
+            "name": "",
+            "motto": "",
+            "type": "",
+            "coordinates": {"top": "50%", "left": "50%"},
+            "desc": "",
+            "categories": [
+                {
+                    "title": "History",
+                    "info": ""
+                },
+                {
+                    "title": "Demographic",
+                    "info": ""
+                },
+                {
+                    "title": "Government",
+                    "info": ""
+                },
+                {
+                    "title": "Religion",
+                    "info": ""
+                },
+                {
+                    "title": "Military",
+                    "info": ""
+                },
+                {
+                    "title": "Agriculture",
+                    "info": ""
+                },
+                {
+                    "title": "Trade",
+                    "info": ""
+                },
+                {
+                    "title": "Technology",
+                    "info": ""
+                }
+            ]
         }
     ]
 }
