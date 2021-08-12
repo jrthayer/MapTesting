@@ -41,6 +41,11 @@
                 "color400": "#2a6f25",
                 "scale": 1.1
             },
+            "event":{
+                "color700": "#0a020d",
+                "color400": "#490f62",
+                "scale": 0.8
+            },
             "continent":{
                 "color700": "#100b19",
                 "color400": "#573c86",
@@ -53,15 +58,15 @@
             "motto": "",
             "type": "continent",
             "coordinates": {"top": "15%", "left": "20%"},
-            "desc": "A continent to the east of Kalkatesh on the planet Verum. It's based on different asian cultures and is the main continent for the Phase 4 of Verum games. It is home to several native races that live organized in feudal states and clans separated into four groupings: the Northern Kingdoms, the Southern Kingdoms, the Western Kingdoms and the Eclipse.",
+            "desc": "A continent to the east of Kalkatesh on the planet Verum. It's based on different asian cultures and is the main continent for the Phase 4 of Verum games.\n\nIt is home to several native races that live organized in feudal states and clans separated into four groupings: the Northern Kingdoms, the Southern Kingdoms, the Western Kingdoms, and the Eclipse.",
             "categories": [
                 {
                     "title": "History",
-                    "info": "Some years before the Battle in the Sky, the Great Calamity of the Violet, a group of adventurers crossed the Abyssal Sea from Kalkatesh as part of the First Glies Expedition. Among those in the group were Alexander, a righteous paladin; and Lord Azolon, a powerful wizard from Kalkatesh's Mages Guild. During the Expedition they founded the western port city of Alexandria, named for Alexander after he died to the Stranger. The city is currently governed by Lord Azolon, who serves as the Archmage of the Mages Guild he established in Glies.\n\nIn the 50 years after the Calamity, Glies experienced two important historical events. The first one is the strange behavior of the Mists, a strange and dangerous phenomena that used to be limited to the surrounding environment of the Titan’s Eye, with its movement Westward. The second is the unification of the Eastern Kingdoms into the Eclipse, by warlord Otami Kurosai."
+                    "info": "Some years before the Battle in the Sky, the Great Calamity of the Violet, a group of adventurers crossed the Abyssal Sea from Kalkatesh as part of the First Glies Expedition. Among those in the group were Alexander, a righteous paladin; and Lord Azolon, a powerful wizard from Kalkatesh's Mages Guild.\n\nDuring the Expedition they founded the western port city of Alexandria, named for Alexander after he died to the Stranger. The city is currently governed by Lord Azolon, who serves as the Archmage of the Mages Guild he established in Glies.\n\nIn the 50 years after the Calamity, Glies experienced two important historical events. The first one is the strange behavior of the Mists, a strange and dangerous phenomena that used to be limited to the surrounding environment of the Titan’s Eye, with its movement Westward. The second is the unification of the Eastern Kingdoms into the Eclipse, by warlord Otami Kurosai."
                 },
                 {
                     "title": "Technology",
-                    "info": "Glies is one tech level below Kalkatesh, that means it doesn't have access to Alchemical Engines nor Renaissance-style technology. Even though Kalkateshian Airships are not common to Glies, the winds in Glies are so reliable that the main method of transportation is by Kite, both for personal use and for the creation of complete establishments sustained by Kites.\n\nEven with the lower technological level, Glies applies magic and relies on the Yokai for most of the comforts associated with higher levels. For example, even with a lack of electricity, cities and villages can be illuminated at night using magical means."
+                    "info": "Glies is one tech level below Kalkatesh, that means it doesn't have access to Alchemical Engines nor Renaissance-style technology.\n\nEven though Kalkateshian Airships are not common to Glies, the winds in Glies are so reliable that the main method of transportation is by Kite, both for personal use and for the creation of complete establishments sustained by Kites.\n\nEven with the lower technological level, Glies applies magic and relies on the Yokai for most of the comforts associated with higher levels. For example, even with a lack of electricity, cities and villages can be illuminated at night using magical means."
                 },
                 {
                     "title": "Religion",
@@ -89,7 +94,7 @@
                 },
                 {
                     "title": "Tearn",
-                    "info": "The Tearn are a race of people with bat characteristics, including bat-like ears and wings attached to their arms. Even though the wings don’t provide a reliable way of flying, they can take advantage of the reliable winds of Glies to do so, even if they lack a kite. Tearn value intelligence highly."
+                    "info": "The Tearn are a race of people with bat characteristics, including bat-like ears and wings attached to their arms. Even though the wings don’t provide a reliable way of flying, they can take advantage of the reliable winds of Glies to do so, even if they lack a kite.\n\nTearn value intelligence highly."
                 },
                 {
                     "title": "Yozai",
@@ -97,7 +102,7 @@
                 },
                 {
                     "title": "Ho'ask",
-                    "info": "The Ho’ask are a race of people with marked yak-styled characteristics, including distinctive horns, ears, and a bulky build. The general treatment, adorning, and even cutting, of the horns has a prominent place in their culture. Lying is also considered a mortal sin in their culture. Ho'ask represent about 20% of the Glien population."
+                    "info": "The Ho’ask are a race of people with marked yak-styled characteristics, including distinctive horns, ears, and a bulky build. The general treatment, adorning, and even cutting, of the horns has a prominent place in their culture.\n\nLying is also considered a mortal sin in their culture. Ho'ask represent about 20% of the Glien population."
                 }
             ]
         },
@@ -181,7 +186,7 @@
                     "motto": "",
                     "type": "city",
                     "coordinates": {"top": "42%", "left": "25.75%"},
-                    "desc": "Capital city of the Geckoi, as he Geckoi generally don't like staying in one place for too long, Black Hollow is akin to an enormous inn.",
+                    "desc": "Capital city of the Geckoi, as the Geckoi generally don't like staying in one place for too long, Black Hollow is akin to an enormous inn.",
                     "categories": [
                     ]
                 }
@@ -876,11 +881,38 @@
                     ]
                 },
                 {
-                    "name": "Kuzu",
+                    "name": "Chimeveld",
                     "motto": "",
                     "type": "village",
-                    "coordinates": {"top": "45%", "left": "37%"},
-                    "desc": "A small village on the eastern border of the Titan's Eye.",
+                    "coordinates": {"top": "59%", "left": "43%"},
+                    "desc": "Chimeveld is a small village near Bal'Lok. It is often described as a sleepy traveler's town. Most of the gold/jade generated in this town comes from travelers looking for lodging, food, and information while on their way to the city.\n\nRecently a wave of nightmares hit the villagers overnight, causing many of them to act aggressively and attack anything on sight. As a result, Chimeveld is now burning and cursed.",
+                    "categories": []
+                },
+                {
+                    "name": "Boof n' Brew",
+                    "motto": "",
+                    "type": "village",
+                    "coordinates": {"top": "52%", "left": "48%"},
+                    "desc": "Homestead of the Divine Wind.\n\nThis is where The Divine Wind group has settled down to raise the ho'ask child destined to be the next emperor of Glies.",
+                    "features": ["centered"],
+                    "categories": []
+                },
+                {
+                    "name": "Uyo",
+                    "motto": "",
+                    "type": "village",
+                    "coordinates": {"top": "49%", "left": "50%"},
+                    "desc": "Uyo is a small village along the Path of Prosperity near where a group of adventurers settled down to raise the infant Divine Emperor.",
+                    "features": ["centered"],
+                    "categories": []
+                },
+                {
+                    "name": "Dozo",
+                    "motto": "",
+                    "type": "village",
+                    "coordinates": {"top": "51%", "left": "53%"},
+                    "desc": "A small village led by the Dozo family located along the Path of Prosperity.\n\nRecently young women have been going missing in this area, rumors say that the local Daimyo is involved.",
+                    "features": ["centered"],
                     "categories": []
                 }
             ]
@@ -919,7 +951,7 @@
             "motto": "",
             "type": "kingdom",
             "coordinates": {"top": "49%", "left": "86%"},
-            "desc": "Formerly known as the Eastern Kingdoms, is now the country and geographical region that resulted from the unification of the eastern kingdoms by the warlord Otami Kurosai.\n\nIt is believed that the name of \"Eclipse\" signifies many different things. Some believe it is the eclipsing of the sun from Glies as the warriors of the night take their hold. Some believe it is simply a reference to a woman that was once loved by the Pale Emperor. Nobody really knows. There are many many stories as to what the name is.\n\n As of recently it appears as if the Eclipse wants to expand further into the west of Glies.",
+            "desc": "Formerly known as the Eastern Kingdoms, is now the country and geographical region that resulted from the unification of the eastern kingdoms by the warlord Otami Kurosai.\n\nIt is believed that the name of \"Eclipse\" signifies many different things. Some believe it is the eclipsing of the sun from Glies as the warriors of the night take their hold. Some believe it is simply a reference to a woman that was once loved by the Pale Emperor. Nobody really knows. There are many many stories as to what the name is.\n\n As of recently it appears as if the Eclipse wants to expand further into the rest of Glies.",
             "categories": [
             ],
             "points":[
@@ -933,6 +965,15 @@
                     "categories": [
                     ]
                 }
+            ]
+        },
+        {
+            "name": "Depthar Outbreak",
+            "motto": "",
+            "type": "event",
+            "coordinates": {"top": "45%", "left": "55%"},
+            "desc": "In an effort to save Dik'Cok from his captors, Eli Bloodbane and Machio Manis devised a plan to summon the favor of Crowley to aid with the rescue. After piling up corpses from a ruined village they were in, they created a shrine of corpses and blood.\n\nThrough their actions they inadvertently provided Crowley with enough divine sway in Glies to start a Dephtar infection event, infecting the Black Silver bandits raiding the village, turning them into fleshcrimes.",
+            "categories": [
             ]
         }
     ]
