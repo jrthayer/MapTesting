@@ -346,6 +346,14 @@ function createPoint(info, types){
 function createPanel(info){
     let panel = document.createElement('div');
     panel.id = "pointPanel";
+
+    //add special classes to panel html object
+    if("features" in info){
+        for(let key in info.features){
+            panel.classList.add(`panel-${info.features[key]}`);
+        }
+    }
+
     let topCategory = document.createElement('div');
     topCategory.classList.add('category');
 

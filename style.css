@@ -254,7 +254,7 @@ header{
 
         letter-spacing: 1px;
 
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.5rem;
         background-color: var(--textColor400);
         border-radius: .5rem;
     }
@@ -655,6 +655,14 @@ header{
         margin-left: -10px;
         width: 100%;
     }
+
+/* Panel features */
+.panel-centered{
+    text-align: center;
+}
+.panel-smallTitle h2{
+    font-size: 1.5em;
+}
 /* 
 //------------//------------
     5.1 Dark Mode

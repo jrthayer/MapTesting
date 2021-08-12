@@ -3,8 +3,8 @@
     "mapSrc": "./kalkatesh_2200.png",
     "wiki": "https://verum.fandom.com/wiki/Kalkatesh",
     "minHeight": 400,
-    "maxHeight": 2200,
-    "scaleIncrement": 1.5,
+    "maxHeight": 1200,
+    "scaleIncrement": 1,
     "pointTypes":{
             "":{
                 "color700": "#CCFF00",
@@ -27,8 +27,8 @@
                 "scale": 1.1
             },
             "region":{
-                "color700": "#020e01",
-                "color400": "#0b5b06",
+                "color700": "#040b04",
+                "color400": "#2a6f25",
                 "scale": 1.1
             },
             "continent":{
